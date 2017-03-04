@@ -10,18 +10,33 @@ head
 	link(href="https://fonts.googleapis.com/css?family=Raleway:300,500" rel="stylesheet")
 	//Jquery and UI
 	script(src="jquery-ui/external/jquery/jquery.js")
-	link(rel="stylesheet" href="jquery-ui/jquery-ui.min.js")
+	link(rel="stylesheet" href="jquery-ui/jquery-ui.min.css")
 	link(rel="stylesheet" href="jquery-ui/jquery-ui.structure.min.css")
 	link(rel="stylesheet" href="jquery-ui/jquery-ui.theme.min.css")
 	script(src="jquery-ui/jquery-ui.min.js")
-	//Our JS
+
+	//Slick Carousell
+	link(rel="stylesheet" type="text/css" href="tools/slick/slick.css")
+	// Add the new slick-theme.css if you want the default styling
+	link(rel="stylesheet" type="text/css" href="tools/slick/slick-theme.css")
+
 
 body
 	include jadeIncludes/menu.jade
 	include jadeIncludes/header.jade
 	
-	.content
-		.wrapper
+	.main
+		.content
+			.carousel
+				div
+					p content
+				div
+					p content
+				div
+				content
 
-			
+
+
 	include jadeIncludes/footer.jade
+
+	script(type="text/javascript" src="slick/slick.min.js")
