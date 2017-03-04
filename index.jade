@@ -2,16 +2,16 @@ doctype html
 
 html(lang="en")
 head
-  
-    meta(charset="utf-8")
-    title Tinde Utvikling
-    link(rel="stylesheet" href="css/frontpage.css")
-body
-    .menu
-        li
-            ul Hjem
-            ul Tomteområder
-            ul Tomtesøk
-    .header
+	meta(charset="utf-8")
+	title Tinde Utvikling
+	link(rel="stylesheet" href="css/frontpage.css")
 
-    .wrapper
+body
+	include partials/menu.jade
+	include partials/header.jade
+	
+	.content
+		.wrapper
+			.jonas jeg heter henrik
+			
+	include partials/footer.jade
