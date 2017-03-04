@@ -1,2 +1,14 @@
-@import "tools/_typography"
-@import "tools/_vars"
+@import "sassImports/_vars"
+@import "sassImports/_main"
+@import "sassImports/_header"
+@import "sassImports/_menu"
+@import "sassImports/_footer"
+
+body
+	margin: 0
+	padding: 0
+
+.menu
+	li
+		ul:nth-child(2)
+			font-weight: 500
