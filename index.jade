@@ -27,18 +27,19 @@ body
 	
 	.main
 		.content
-			img.frontImg(src="images/hytte.jpg" alt="hytte")
-			.carousel
+			//img.frontImg(src="images/hytte.jpg" alt="hytte")
+			section.regular.slider
 				div
-					p content
+					img(src="images/hytte.jpg")
 				div
-					p content
+					img(src="images/hytte.jpg")
 				div
-					p content
-
+					img(src="images/hytte.jpg")
+				div
+					img(src="images/hytte.jpg")
 	include jadeIncludes/footer.jade
 
-	script(type="text/javascript" src="//code.jquery.com/jquery-1.11.0.min.js")
-	script(type="text/javascript" src="//code.jquery.com/jquery-migrate-1.2.1.min.js")
-	script(type="text/javascript" src="tools/slick/slick.min.js")
+
+	script(src="https://code.jquery.com/jquery-2.2.0.min.js" type="text/javascript")
+	script(type="text/javascript" src="tools/slick/slick.js")
 	script(type="text/javascript" src="js/slick.js")
