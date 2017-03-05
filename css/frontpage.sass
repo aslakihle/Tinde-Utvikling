@@ -23,7 +23,6 @@ body
 	box-sizing: border-box
 	width: 100%
 	height: 100%
-	//background-color: gray
 
 .frontImg
 	width: 100%
@@ -63,40 +62,45 @@ h1
 //slider stuff
 .regular
 	width: 100%
+	margin-top: -150px
 .slider
 	width: 100%
-	//margin: 100px auto
-
+	
 .slick-slide
 	margin: 0 20px
 
 .slick-slide img
 	width: 100%
-	z-index: -10
 
-.slick-prev:before,
-.slick-next:before
-	color: green
-	width: 100px
-	font-size: 2em
-.listStyle
-	list-style: none
-
+.arrows
+	width: 100%
 
 .prev, .next
 	display: inline-block
-	width: 100px
-	height: 100px
+	width: 150px
+	height: 150px
+	position: relative
+	z-index: 100
+	top: 225px
 	svg
 		height: auto
 		width: 100%
-		fill: #000000
+		fill: rgba(255, 255, 255, 0.8)
+.prev:hover, .next:hover
+	cursor: pointer
+	
+.prev
+	margin-right: 34%
+	padding-left: 5px
+	
+.next
+	margin-left: 34%
+	
 
 
 	
 
 .navDots
 	width: 100px
-	color: red
-	margin-top: 6em
+	
 

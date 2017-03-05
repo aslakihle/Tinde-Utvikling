@@ -4,9 +4,9 @@ $(document).on('ready', function() {
 		infinite: true,
 		autoplay: true,
 		arrows: true,
-		appendDots: $(".navDots"),
 		slidesToShow: 1,
 		slidesToScroll: 1,
+		appendDots: $(".navDots"),
 		prevArrow: $(".prev"),
 		nextArrow: $(".next")
 	});
