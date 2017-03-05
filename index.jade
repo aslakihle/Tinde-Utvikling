@@ -17,7 +17,7 @@ head
 
 	//Slick Carousell
 	link(rel="stylesheet" type="text/css" href="tools/slick/slick.css")
-	// Add the new slick-theme.css if you want the default styling
+	//Add the new slick-theme.css if you want the default styling
 	link(rel="stylesheet" type="text/css" href="tools/slick/slick-theme.css")
 
 
@@ -35,14 +35,8 @@ body
 				div
 					p content
 
-
-
 	include jadeIncludes/footer.jade
-
-	script(type="text/javascript" src="slick/slick.min.js")
-	script.
-		$(document).ready(function() {
-			$('.carousel').slick({
-				setting-name: setting - value
-			});
-		});
+	script(type="text/javascript" src="//code.jquery.com/jquery-1.11.0.min.js")
+	script(type="text/javascript" src="//code.jquery.com/jquery-migrate-1.2.1.min.js")
+	script(type="text/javascript" src="tools/slick/slick.min.js")
+	script(type="text/javascript" src="js/slick.js")
