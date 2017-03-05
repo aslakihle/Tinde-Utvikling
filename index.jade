@@ -4,8 +4,7 @@ html(lang="en")
 head
 	meta(charset="utf-8")
 	title Tinde Utvikling
-	//Our Css
-	link(rel="stylesheet" href="css/frontpage.css")
+
 	//Font
 	link(href="https://fonts.googleapis.com/css?family=Raleway:300,500" rel="stylesheet")
 	//Jquery and UI
@@ -19,6 +18,9 @@ head
 	link(rel="stylesheet" type="text/css" href="tools/slick/slick.css")
 	//Add the new slick-theme.css if you want the default styling
 	link(rel="stylesheet" type="text/css" href="tools/slick/slick-theme.css")
+
+	//Our Css
+	link(rel="stylesheet" href="css/frontpage.css")
 
 
 body
@@ -37,6 +39,12 @@ body
 					img(src="images/hytte.jpg")
 				div
 					img(src="images/hytte.jpg")
+			.navDots
+			li
+				ul.prev
+				ul.next
+
+
 	include jadeIncludes/footer.jade
 
 
