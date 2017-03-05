@@ -57,21 +57,28 @@ h1
 	font-weight: 500
 	width: 100%
 	color: $primaryColor
-		
-		
-box-sizing: border-box;
-		
-			.slider
-				width: 50%;
-				margin: 100px auto;
-		
-			.slick-slide
-				margin: 0px 20px;
-		
-			.slick-slide img
-				width: 100%;
-		
-			.slick-prev:before,
-			.slick-next:before
-				color: black;
-		
+				
+//slider stuff
+.regular
+	width: 100%
+.slider
+	width: 100%
+	//margin: 100px auto
+
+.slick-slide
+	margin: 0 20px
+
+.slick-slide img
+	width: 100%
+	z-index: -10
+
+.slick-prev:before,
+.slick-next:before
+	color: green
+	width: 100px
+.prev, .next
+	color: blue
+	font-size: 4em
+	
+.navDots
+	width: 100px

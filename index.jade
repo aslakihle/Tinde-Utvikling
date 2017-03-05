@@ -4,10 +4,10 @@ html(lang="en")
 head
 	meta(charset="utf-8")
 	title Tinde Utvikling
-	//Our Css
-	link(rel="stylesheet" href="css/frontpage.css")
+
 	//Font
 	link(href="https://fonts.googleapis.com/css?family=Raleway:300,500" rel="stylesheet")
+	
 	//Jquery and UI
 	script(src="jquery-ui/external/jquery/jquery.js")
 	link(rel="stylesheet" href="jquery-ui/jquery-ui.min.css")
@@ -19,6 +19,9 @@ head
 	link(rel="stylesheet" type="text/css" href="tools/slick/slick.css")
 	//Add the new slick-theme.css if you want the default styling
 	link(rel="stylesheet" type="text/css" href="tools/slick/slick-theme.css")
+
+	//Our Css
+	link(rel="stylesheet" href="css/frontpage.css")
 
 
 body
@@ -37,9 +40,14 @@ body
 					img.frontImg(src="images/hytte.jpg")
 				div
 					img.frontImg(src="images/hytte.jpg")
+				.navDots
+				li.listStyle
+					ul.prev
+					ul.next
+					
 		.textBox
 			h1 Er hyttedrømmen i live hos deg?
-			div.textBox2 Vi i Tinde Utvikling vet at det finnet like mange tinder som det er mennesker. Derfor utvikler Tinde hvert år nye kvalitetsområder - alle med sine særtrekk og egenskaper. Vi gjør det lett å velge hytteområde med omhu: det er tross alt der du skal dyrke de gode opplevelsene i livet.
+			div.textBox2 Vi i Tinde Utvikling vet at det finnes like mange tinder som det er mennesker. Derfor utvikler Tinde hvert år nye kvalitetsområder - alle med sine særtrekk og egenskaper. Vi gjør det lett å velge hytteområde med omhu: det er tross alt der du skal dyrke de gode opplevelsene i livet.
 			
 		.seTomtomraderOgSok
 			.bildeBox
@@ -50,7 +58,7 @@ body
 			.bildeBox
 				.skalVareBilde
 			.sirkelText Tomtesøk
-			
+
 	include jadeIncludes/footer.jade
 
 
