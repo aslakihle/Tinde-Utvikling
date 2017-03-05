@@ -7,7 +7,7 @@ $(document).on('ready', function() {
 		appendDots: $(".navDots"),
 		slidesToShow: 1,
 		slidesToScroll: 1,
-		//prevArrow: $(".prev"),
+		prevArrow: $(".prev"),
 		nextArrow: $(".next")
 	});
 
