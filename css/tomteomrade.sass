@@ -4,35 +4,31 @@
 @import "sassImports/_menu"
 @import "sassImports/_footer"
 
-body
-	margin: 0
-	padding: 0
-
 .menu2
 	font-weight: 500
 
-.main
-	box-sizing: border-box
-	width: 100%
-	padding-left: 18%
-	padding-right: 18%
-	height: 1800px
-	margin-top: 4em
-
 .content
-	box-sizing: border-box
-	width: 100%
-	height: 100%
-	//background: blue
 
-.omradeBox
+	h1 
+		font-weight: 500
+		color: $primaryColor
+	a
+		margin: 0 0 1.7em 1.5em
+		width: 29%
+		border:  0.3em solid $primaryColor
+		display: inline-block
+		text-decoration: none
+	.a:nth-child(3n+1) /* Sier at 1 og så hvert 3. bilde ikke har margin til venstre*/
+	margin-left: 0px
+
+/*.omradeBox
 	margin: 0 0 1.7em 1.5em
 	width: 30%
 	border:  0.3em solid $primaryColor
 	display: inline-block
 
-.omradeBox:nth-child(3n+1) /* Sier at 1 og så hvert 3. bilde ikke har margin til venstre*/
-	margin-left: 0px
+/*.omradeBox:nth-child(3n+1) /* Sier at 1 og så hvert 3. bilde ikke har margin til venstre*/
+	/*margin-left: 0px
 
 .omradeImg
 	width: 100%
@@ -42,5 +38,26 @@ body
 	padding: 1em
 	margin-top: -1.5em
 	color: $primaryColor
+	h1
+		padding-left: 0
 
+hr
+	border: 0
+	height: 1px 
+	background-image: -webkit-linear-gradient(left, #f0f0f0, $primaryColor, #f0f0f0)
+	background-image: -moz-linear-gradient(left, #f0f0f0, $primaryColor, #f0f0f0)
+	background-image: -ms-linear-gradient(left, #f0f0f0, $primaryColor, #f0f0f0)
+	background-image: -o-linear-gradient(left, #f0f0f0, $primaryColor, #f0f0f0)
+	margin-bottom: 1.5em
+	margin-top: 1.5em
 
+#sort
+	border: 0.3em solid $primaryColor
+	border-left: 0
+	color: $primaryColor
+	position: fixed
+	width: 10%
+	padding: 1em
+
+.checkBox
+	float: right

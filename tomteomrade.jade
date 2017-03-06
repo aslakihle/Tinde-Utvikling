@@ -18,7 +18,24 @@ head
 body
 	include jadeIncludes/menu.jade
 	include jadeIncludes/header.jade
-
+	
+	#sort
+		h3 Filtreringsvalg
+		h4 Fylke
+		div Oslo
+			input.checkBox(type="checkbox")
+		div Finnmark
+			input.checkBox(type="checkbox")
+		div Oppland
+			input.checkBox(type="checkbox")
+		div Hedmark
+			input.checkBox(type="checkbox")
+		h4 Fasiliteter
+		div Alpint
+			input.checkBox(type="checkbox")
+		div Tursti
+			input.checkBox(type="checkbox")
+			
 	.main
 		.content
 			include jadeIncludes/omradeBoxer.jade
