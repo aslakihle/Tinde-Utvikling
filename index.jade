@@ -55,17 +55,92 @@ body
 					.slide
 						img(src="images/hytte.jpg")
 				//.navDots
+			
+			#velkommenBox
+				h1 Velkommen til Tinde utvikling
+				.textBox2 Vi i Tinde vet at det finnes like mange tinder som det er mennesker. Derfor har Tinde utviklet en lang rekke omteområder, alle med hver sine særtrekk og egenskaper. Slik blir din hyttetomt spesielt for deg og dine – et sted der du kan dyrke de gode opplevelsene i livet.
+				#buttons
+					a(href="tomteomrade.html")
+						.button Se tomteområder
+					a(href="kontakt.html").button Kontakt oss
+					
+			#sokBox
+				h2 FINN DIN DRØMMETOMT
+				.selectmeny
+					.fylke.selectDef 
+						span Fylke
+						br
+						select.dropdown(name="fylke")
+							option(value="0") Velg fylke
+							option(value="1") Olso
+							option(value="2") Hedemark
+					.tomteomrade.selectDef
+						span Tomteområde
+						br
+						select.dropdown(name="tomteomrade")
+							option(value="0") Velg tomteområde
+							option(value="1") 1
+							option(value="2") 2
+					.status.selectDef
+						span Status
+						br
+						select.dropdown(name="status")
+							option(value="0") Velg status
+							option(value="1") Solgt
+							option(value="2") Ikke solgt
+				hr(style="width: 50%;")
+				h3 Fasiliteter
+				.valgMeny
+					section.valg(title="vann")
+						span Vann
+						.checkBox
+							input(type="checkbox" value="none" id="vann" name="check")
+							label(for="vann")
+					section.valg(title="Strom")
+						span Strøm
+						.checkBox
+							input(type="checkbox" value="none" id="strom" name="check")
+							label(for="strom")
+					section.valg(title="Bilvei")
+						span Bilvei
+						.checkBox
+							input(type="checkbox" value="none" id="bilvei" name="check")
+							label(for="bilvei")
+					br
+					br
+					section.valg(title="Ski")
+						span Ski
+						.checkBox
+							input(type="checkbox" value="none" id="ski" name="check")
+							label(for="ski")
+					section.valg(title="Turer")
+						span Turer
+						.checkBox
+							input(type="checkbox" value="none" id="turer" name="check")
+							label(for="turer")
+					section.valg(title="Bading")
+						span Bading
+						.checkBox
+							input(type="checkbox" value="none" id="bading" name="check")
+							label(for="bading")
+					section.valg(title="Jakt")
+						span Jakt
+						.checkBox
+							input(type="checkbox" value="none" id="jakt" name="check")
+							label(for="jakt") 
+					section.valg(title="fiske")
+						span Fiske
+						.checkBox2
+							input(type="checkbox" value="none" id="fiske" name="check")
+							label(for="fiske") d
+				input.sok(type="submit" value="Søk")
 
-			.textBox
-				h1 Er hyttedrømmen i live hos deg?
-				.textBox2 Vi i Tinde Utvikling vet at det finnes like mange tinder som det er mennesker. Derfor utvikler Tinde hvert år nye kvalitetsområder - alle med sine særtrekk og egenskaper. Vi gjør det lett å velge hytteområde med omhu: det er tross alt der du skal dyrke de gode opplevelsene i livet.
-
-			.seTomtomraderOgSok
+			//.seTomtomraderOgSok
 				.bildeBox
 					.skalVareBilde
 				.sirkelText Se tomteområder
 
-			.seTomtomraderOgSok
+			//.seTomtomraderOgSok
 				.bildeBox
 					.skalVareBilde
 				.sirkelText Tomtesøk

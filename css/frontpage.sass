@@ -46,27 +46,193 @@
 .hytte2
 	position: absolute
 	width: 100%
-	text-align: center
-	margin-left: -18%
+	box-sizing: border-box
+	padding-right: 60%
+	padding-left: 16%
 	img
-		width: 30%
+		width: 100%
 .hytte3
 	position: absolute
 	width: 100%
 	text-align: center
-	margin-left: 18%
+	box-sizing: border-box
+	padding-right: 16%
+	padding-left: 60%
 	img
-		width: 30%
+		width: 100%
+//
 
-
-.textBox
-	color: $primaryColor
-	font-size: 2em
+#velkommenBox
+	background-color: #f6f6f6
+	box-sizing: border-box
+	padding: 2% 15% 6% 15%
+	font-size: 1.5em
 	width: 100%
-h1
-	font-weight: 500
-	color: $primaryColor
+	h1
+		text-align: center
+		font-size: 2.4em
+		font-family: $raleway
+		font-weight: $ralewaybold
 
+#buttons
+	margin-top: 5%
+	width: 100%
+	box-sizing: border-box
+	padding-left: 15%
+	padding-right: 15%
+	a
+		text-decoration: none
+		color: black
+	a:hover
+		color: #2385b2
+
+
+.button
+	font-weight: $osbold
+	text-align: center
+	border: solid 2px #2385b2
+	border-radius: 10em
+	display: inline-block
+	width: 45%
+	padding: 0.5%
+
+.button:nth-child(2)
+	float: right
+
+#sokBox
+	position: relative
+	margin-top: 5%
+	background-color: #e5e5e5
+	width: 100%
+	box-sizing: border-box
+	padding: 2%
+	h2
+	text-align: center
+	font-weight: $osbold
+
+.selectmeny
+	width: 100%
+
+.selectDef
+	width: 18%
+	display: inline-block
+	margin: 1%
+	span
+		float: left
+.dropdown
+	-webkit-appearance: button
+	-webkit-border-radius: 2px
+	-webkit-box-shadow: 0px 1px 3px rgba(0, 0, 0, 0.1)
+	-webkit-padding-end: 20px
+	-webkit-padding-start: 2px
+	-webkit-user-select: none
+	background-image: url(http://i62.tinypic.com/15xvbd5.png), -webkit-linear-gradient(#FAFAFA, #F4F4F4 40%, #E5E5E5)
+	background-position: 97% center
+	background-repeat: no-repeat
+	border: 1px solid #AAA;
+	color: #555
+	font-size: inherit
+	margin: 4%
+	overflow: hidden
+	padding: 4% 8%
+	text-overflow: ellipsis
+	white-space: nowrap
+	width: 100%
+	margin-left: 0
+	cursor: pointer
+.valgMeny
+	width: 100%
+
+.valg
+	width: 10%
+	display: inline-block
+
+.checkBox
+	width: 20px
+	position: relative
+	margin: 5% 0 0 40%
+	label
+		width: 20px
+		height: 20px
+		cursor: pointer
+		position: absolute
+		top: 0
+		left: 0
+		background: #fcfff4
+		background: linear-gradient(top, #fcfff4 0%, #dfe5d7 40%, #b3bead 100%)
+		border-radius: 4px
+		box-shadow: inset 0px 1px 1px white, 0px 1px 3px rgba(0,0,0,0.5)
+		&:after
+			content: ''
+			width: 9px
+			height: 5px
+			position: absolute
+			top: 4px
+			left: 4px
+			border: 3px solid #333
+			border-top: none
+			border-right: none
+			background: transparent
+			opacity: 0
+			transform: rotate(-45deg)
+
+		&:hover::after 
+			opacity: 0.5
+	input[type=checkbox]
+		visibility: hidden
+		&:checked  + label:after
+			opacity: 1
+//denne er en test bare for å prøve å lage runde checkboxer fikk ikke helt til
+.checkBox2
+	width: 50px
+	position: relative
+	color: white
+	margin: 5% 0 0 30%
+	label
+		width: 50px
+		height: 50px
+		cursor: pointer
+		position: absolute
+		top: 0
+		left: 0
+		background-color: #2385b2
+		background: linear-gradient(top, #fcfff4 0%, #dfe5d7 40%, #b3bead 100%)
+		border-radius: 100%
+		box-shadow: inset 0px 1px 1px white, 0px 1px 3px rgba(0,0,0,0.5)
+		&:after
+			content: ''
+			width: 9px
+			height: 5px
+			position: absolute
+			top: 4px
+			left: 4px
+			border: 3px solid #333
+			border-top: none
+			border-right: none
+			background: transparent
+			opacity: 0
+			transform: rotate(-45deg)
+
+		&:hover::after 
+			opacity: 0.5
+	input[type=checkbox]
+		visibility: hidden
+		&:checked  + label:after
+			background-color: red
+
+.sok
+	background-color: #2385b2
+	border: solid 1px #2385b2
+	border-radius: 10em
+	width: 10%
+	color: white
+	font-size: 1.3em
+	margin-left: 90%
+	box-sizing: border-box
+	padding: 0.4%
+	bottom: 4%
+	cursor: pointer
+		
 .seTomtomraderOgSok
 	width: 47%
 	height: 27em
@@ -88,7 +254,6 @@ h1
 	text-align: center
 	font-weight: 500
 	width: 100%
-	color: $primaryColor
 	
 		
 
