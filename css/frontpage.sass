@@ -45,9 +45,17 @@ h1
 		
 
 //slider stuff
+.sliderWrap
+	width: 100%
+	height: auto
+	background-color: blue
+	
+	
+	
 .regular
 	width: 100%
 	//margin-top: -150px denne kan ikke være her aslak viktig å fjerne denne
+
 .slider
 	width: 100%
 	
@@ -57,31 +65,33 @@ h1
 .slick-slide img
 	width: 100%
 
-.arrows
-	width: 100%
-
-
 .prev, .next
 	display: inline-block
-	width: 150px
-	height: 150px
+	width: 15%
+	height: auto
 	position: relative
-	z-index: 10
-	top: 15em // denne linja funker dårlig her, må bruke posistion relative eller noe, legg en div rundt arrows og slider, kall denn slidershow eller no og så mekk slik at position til arrows er relative tror det kan funke da, fordi for øyeblikket er bildet og pilene ikke helt funkende på min skjerm.
+	top: 250px // denne linja funker dårlig her, må bruke posistion relative eller noe, legg en div rundt arrows og slider, kall denn slidershow eller no og så mekk slik at position til arrows er relative tror det kan funke da, fordi for øyeblikket er bildet og pilene ikke helt funkende på min skjerm.
+	z-index: 30
+	text-align: center
 	svg
 		height: auto
-		width: 100%
+		width: 8em
 		fill: rgba(255, 255, 255, 0.8)
-
+		
 .prev:hover, .next:hover
 	cursor: pointer
+	svg
+		fill: rgba(230, 230, 230, 1)
 	
 .prev
 	margin-right: 34%
 	padding-left: 5px
 	
+	
 .next
+
 	margin-left: 34%
+	
 
 	
 
