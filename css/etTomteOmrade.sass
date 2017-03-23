@@ -48,14 +48,14 @@ body
 		padding-top: 0.2em
 		padding-bottom: 0.5em
 		text-align: center
-
+	
 	.headTextQuote
 		
 		font-weight: $osbold
 		text-align: left
 		font-size: 1.3em
 		padding: 6% 4% 4% 4%
-		
+	
 	.headText
 		
 		font-weight: $osreg
@@ -115,8 +115,8 @@ body
 	right: 2%
 	margin-left: 34%
 
-	
-	
+
+
 //TOMTEMAP
 	
 .tomtMapTitle
@@ -128,12 +128,12 @@ body
 	font-weight: $ralewaybold
 	font-size: 4em
 	margin-top: 1.4em
-	
+
 .tomtMapInfo1, .tomtMapInfo2
 	//background-color: red
 	width: 46%
 	display: inline-block
-	
+
 .tomtMapInfo1
 	margin-left: 3%
 
@@ -143,52 +143,140 @@ body
 	text-align: right
 	font-size: 2em
 	color: black
-	
+
 .ledigColor, .ledigText, .solgtColor, .solgtText
 	display: inline-block
-	
+
 .ledigColor, .solgtColor
 	width: 2em
 	height: 2em
-	
+
 .ledigColor
 	background-color: lightgray
 	border: 2px solid $blue
-	
+
 .solgtColor
 	background-color: $blue
-	
+
 .ledigText, .solgtText
 	position: relative
 	bottom: .4em
 	color: black
 	font-size: 1.4em
 	margin-right: 0.5em
-	
+
 .tomtMapWrap
 	width: 94%
 	margin: 0 3%
 	height: 30em
 	margin-top: .5em
 	background-color: gray
-	
-	
+
+
 //Map and Table
 
 .mapTableWrap
 	width: 94%
+	
 	margin: 0 3%
 	margin-top: 1.5em
-	.mapWrap
-		width: 59%
-		height: 30em
-		background-color: blue
-		display: inline-block
 	
+	//MAP
+	.mapWrap
+		width: 57.5%
+		display: inline-block
+		
+		#googleMap
+			width: 100%
+			height: 37em
+	
+	//TABLE
 	.tableWrap
 		width: 40%
-		height: 30em
-		background-color: red
+		//height: 30em
+		//background-color: red
 		display: inline-block
 		float: right
-	
+		table, tr, td
+			border: 1px solid black
+			color: black
+		table
+			border-collapse: collapse
+			width: 100%
+		table tr:nth-child(odd) td
+			background-color: rgba(220, 220, 220, 0.2)
+			
+		td
+			text-align: center
+			font-weight: $osreg
+			padding: .7em 0
+		.col1, .col2, .col3
+			font-weight: $osbold
+			
+		.col1
+			width: 20%
+		.col2
+			width: 45%
+		.col3
+			width: 35%
+		.prevTable, .nextTable
+			width: 48%
+			margin-top: .8em
+			display: inline-block
+			text-align: center
+			background-color: $blue
+			color: $bgc
+			padding: 1em 0
+			border-radius: .1em
+		.nextTable
+			float: right
+		
+.fileContactWrap
+	width: 94%
+	margin: 0 3%
+	margin-top: 3.5em
+	color: black
+	.contactWrap
+		width: 40%
+		display: inline-block
+		
+		//background-color: lightgray
+		
+		.contactTitle
+			font-size: 1.1em
+		.contactName
+			font-size: 1.5em
+			padding-top: .1em
+			font-weight: $osbold
+		.contactEmail, .contactPhone
+			font-size: 1.2em
+			display: inline-block
+		svg
+			fill: $blue
+			position: relative
+			top: .4em
+	.fileWrap
+		width: 57.5%
+		display: inline-block
+		float: right
+		
+		//background-color: lightgray
+		.fileTitle1, .fileTitle2
+			margin-left: 1%
+			font-size: 1.5em
+		.fileTitle2
+			margin-top: 1em
+		.btn1, .btn2, .btn3
+			display: inline-block
+			background-color: $blue
+			padding: .5em 0
+			text-align: center
+			color: $bgc
+		.btn1
+			width: 32%
+			margin-left: 1%
+		.btn2
+			width: 32%
+		
+		.btn3
+			width: 32%

@@ -66,12 +66,93 @@ body
 			.tomtMapWrap
 			.mapTableWrap
 				.mapWrap
+					#googleMap
 				.tableWrap
-
-	include ../../jadeIncludes/footer.jade
-
-
+					table
+						tr
+							td.col1 TOMT
+							td.col2 PRISANTYDNING
+							td.col3 AREAL
+						tr
+							td 1
+							td 373 000 NOK
+							td 1150 m
+								sup 2
+						tr
+							td 2
+							td 462 000 NOK
+							td 1920 m
+								sup 2
+						tr
+							td 3
+							td 217 000 NOK
+							td 1160 m
+								sup 2
+						tr
+							td 4
+							td 431 000 NOK
+							td 1240 m
+								sup 2
+						tr
+							td 5
+							td 312 000 NOK
+							td 1640 m
+								sup 2
+						tr
+							td 6
+							td 215 000 NOK
+							td 2102 m
+								sup 2
+						tr
+							td 7
+							td 325 000 NOK
+							td 1170 m
+								sup 2
+						tr
+							td 8
+							td 510 000 NOK
+							td 1370 m
+								sup 2
+						tr
+							td 9
+							td 320 000 NOK
+							td 1680 m
+								sup 2
+						tr
+							td 10
+							td 400 000 NOK
+							td 1600 m
+								sup 2
+					a(src="")
+						.prevTable Forrige
+					a(scr="")
+						.nextTable Neste
+			.fileContactWrap
+				.contactWrap
+					.contactTitle Kontaktperson:
+					.contactName Torbjørn Randen
+					include ../../images/svg/email.svg
+					.contactEmail tr@tindehytter.no
+					br
+					include ../../images/svg/phone.svg
+					.contactPhone 95030500
+				.fileWrap
+					.fileTitle1 Reguleringsplan:
+					.btn1 Last ned
+					.btn2 Åpne i nettleser
+					.btn3 Skriv ut
+					.fileTitle2 Reguleringskart:
+					.btn1 Last ned
+					.btn2 Åpne i nettleser
+					.btn3 Skriv ut
+include ../../jadeIncludes/footer.jade
+	//Google maps
+	script(src="https://maps.googleapis.com/maps/api/js?key=AIzaSyAv-n8dxD2LyiLpKr2qg4vCbmtJFqPJnI8&callback=myMap")
+	script(type="text/javascript" src="../../js/googleMap.js")
+	//Slick stuff
 	script(src="https://code.jquery.com/jquery-2.2.0.min.js" type="text/javascript")
 	script(type="text/javascript" src="../../tools/slick/slick.js")
 	script(type="text/javascript" src="../../js/slick.js")
+
+	//MenuStickScript
 	script(type="text/javascript" src="../../js/menuheader.js")
