@@ -22,7 +22,15 @@ head
 
 
 body
-	include jadeIncludes/menu.jade
+	.menu
+		ul
+			li
+				a.menu1(href="../../index.html") Hjem
+			li
+				a.menu2(href="../../tomteomrade.html") Tomteområder
+			li
+				a.menu3(href="../../kontakt.html") Kontakt
+	
 	.header
 		.banner
 			img(src="images/landscape.jpg")
@@ -39,31 +47,18 @@ body
 	
 	.main
 		.content
-			//.sliderWrap
-				.prev
-					include images/svg/arrowLeft.svg
-
-				.next
-					include images/svg/arrowRight.svg
-				section.regular.slider
-					.slide
-						img(src="images/hytte.jpg")
-					.slide
-						img(src="images/hytte.jpg")
-					.slide
-						img(src="images/hytte.jpg")
-					.slide
-						img(src="images/hytte.jpg")
-				//.navDots
 			
 			#velkommenBox
 				h1 Velkommen til Tinde utvikling
 				.textBox2 Vi i Tinde vet at det finnes like mange tinder som det er mennesker. Derfor har Tinde utviklet en lang rekke omteområder, alle med hver sine særtrekk og egenskaper. Slik blir din hyttetomt spesielt for deg og dine – et sted der du kan dyrke de gode opplevelsene i livet.
+				//knapper
 				#buttons
 					a(href="tomteomrade.html")
 						.button Se tomteområder
-					a(href="kontakt.html").button Kontakt oss
+					a(href="kontakt.html")
+						.button Kontakt oss
 					
+			//søkefelt		
 			#sokBox
 				h2 FINN DIN DRØMMETOMT
 				.selectmeny
@@ -134,7 +129,35 @@ body
 							input(type="checkbox" value="none" id="fiske" name="check")
 							label(for="fiske") d
 				input.sok(type="submit" value="Søk")
+				
+			//slider
+			.sliderWrap
+				.prev
+					include images/svg/arrowLeft.svg
 
+				.next
+					include images/svg/arrowRight.svg
+				
+				//BILDER HER MÅ HA AVLANGT UTSEENDE
+				section.regular.slider
+					.slide
+						img(src="images/hytte.jpg")
+						.stedsNavn 
+							div JOTUMHEIMEN
+					.slide
+						img(src="images/hytte3.jpg")
+						.stedsNavn 
+							div SOLSLAK
+					.slide
+						img(src="images/hytte4.jpg")
+						.stedsNavn 
+							div GUNNVIKA
+					.slide
+						img(src="images/hytte5.jpg")
+						.stedsNavn 
+							div SNILSEFJELL
+
+				//.navDots
 			//.seTomtomraderOgSok
 				.bildeBox
 					.skalVareBilde
