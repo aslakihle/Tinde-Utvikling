@@ -16,16 +16,19 @@ head
 
 body
 	include ../../jadeIncludes/menu.jade
-	//include ../../jadeIncludes/header.jade
+	.header
+	//meny funker ikke uten denne, har bare padding-top 20px, men må ha det for å funke
 	.main
 		.content
-			//a(href="javascript:history.back()")
+			a(href="javascript:history.back()")
 				div.backArrow &#x2190; Tilbake
-			//.headText
-				h1 Solhaugen
-				h3 Dovrefjell, Nordgubbrandsdal
-			
-			img.bigImg(src="../../images/hytte.jpg" alt="Bilde av X")
+			.headImgWrap
+				img(src="../../images/område1/main.jpg" alt="Bilde av X")
+			.headImgTitleWrap
+				.headImgPlace Dovrefjell, Nord-Gudbrandsdal
+				.headImgTitle Hjerkinnhø
+				.headTextQuote "Storslagen utsikt på snaufjellet!"
+				.headText Hjerkinnhø ligger i et område med historiske røtter. På hjerkinn lå en gammel skysstasjon(nå Hjerkinn fjellstue) med tradisjoner tilbake til midt på 1200-tallet. Pilegrimsleden og dne gamle kongeveien til Trondheim går like forbi hytteområdene og videre innover Dovrefjell. Her har du inngangen til snøhetta, villreinen og moskusens rike. Hjerkinn-Dovrefjell er hundesportens 'Mekka', med treningsfelt og jaktprøver for fuglehunder. Viewpoint Snøhetta er et attraktivt besøkspunkt og i nærområdet finner du mange natur- og aktivitetsmuligheter
 			
 	include ../../jadeIncludes/footer.jade
 
