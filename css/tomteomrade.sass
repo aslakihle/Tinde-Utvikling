@@ -8,24 +8,23 @@
 	font-weight: 700
 
 .content
-
+	margin-left: 20%
 	h1 
-		font-weight: 500
-		color: $primaryColor
+		font-family: $raleway
+		font-weight: $ralewaybold		
 	a
 		margin: 0 0 1.7em 1.5em
 		width: 29%
-		border:  0.3em solid $blue
+		border:  0.15em solid $blue
 		display: inline-block
 		text-decoration: none
-	.a:nth-child(3n+1) /* Sier at 1 og så hvert 3. bilde ikke har margin til venstre*/
-	margin-left: 0px
 
-/*.omradeBox
-	margin: 0 0 1.7em 1.5em
-	width: 30%
-	border:  0.3em solid $primaryColor
-	display: inline-block
+.nyttOmrade
+	a:nth-child(3n+1)
+		margin-left: 0
+
+.omradeBox
+	position: relative
 
 /*.omradeBox:nth-child(3n+1) /* Sier at 1 og så hvert 3. bilde ikke har margin til venstre*/
 	/*margin-left: 0px
@@ -34,31 +33,92 @@
 	width: 100%
 	height: 15em
 
+	z-index: 1
+
+
+.stedText
+	background-color: rgba(35, 133, 178, 0.7)
+	position: absolute
+	z-index: 30
+	top: 45%
+	right: 0
+	width: 85%
+	div
+		font-weight: 700
+		float: left
+		color: white
+		font-size: 2em
+		margin-left: 2%
+
 .omradeBoxText
 	padding: 1em
-	margin-top: -1.5em
-	color: $primaryColor
-	h1
-		padding-left: 0
+	margin-top: -0.8%
+	color: black
+	text-align: center
+	ul
+		text-align: left
+	div
+		font-weight: 700
 
 hr
 	border: 0
 	height: 1px 
-	background-image: -webkit-linear-gradient(left, #f0f0f0, $primaryColor, #f0f0f0)
-	background-image: -moz-linear-gradient(left, #f0f0f0, $primaryColor, #f0f0f0)
-	background-image: -ms-linear-gradient(left, #f0f0f0, $primaryColor, #f0f0f0)
-	background-image: -o-linear-gradient(left, #f0f0f0, $primaryColor, #f0f0f0)
+	background-image: -webkit-linear-gradient(left, #f0f0f0, $blue, #f0f0f0)
+	background-image: -moz-linear-gradient(left, #f0f0f0, $blue, #f0f0f0)
+	background-image: -ms-linear-gradient(left, #f0f0f0, $blue, #f0f0f0)
+	background-image: -o-linear-gradient(left, #f0f0f0, $blue, #f0f0f0)
 	margin-bottom: 1.5em
 	margin-top: 1.5em
 
 #sort
-	border: 0.3em solid $primaryColor
-	border-left: 0
-	color: $primaryColor
 	position: fixed
-	width: 10%
+	left: 1%
+	top: 8.4%
+	width: 20%
 	padding: 1em
-	background-color: $bgc
+	background-color: #e5e5e5
+	font-size: 1.5em
+	div
+		padding: 0.05% 0 0.05% 0
+
+		span
+			display: inline-block
+			//float: left
 
 .checkBox
-	float: right
+	//float: right
+	width: 20px
+	position: relative
+	display: inline-block
+	margin-top: 5%
+	label
+		width: 20px
+		height: 20px
+		cursor: pointer
+		position: absolute
+		top: 0
+		right: 0
+		background: #fcfff4
+		background: linear-gradient(top, #fcfff4 0%, #dfe5d7 40%, #b3bead 100%)
+		border-radius: 4px
+		box-shadow: inset 0px 1px 1px white, 0px 1px 3px rgba(0,0,0,0.5)
+		&:after
+			content: ''
+			width: 9px
+			height: 4px
+			position: absolute
+			top: 4px
+			left: 4px
+			border: 3px solid #333
+			border-top: none
+			border-right: none
+			background: transparent
+			opacity: 0
+			transform: rotate(-45deg)
+
+		&:hover::after 
+			opacity: 0.5
+	input[type=checkbox]
+		visibility: hidden
+		&:checked  + label:after
+			opacity: 1

@@ -18,17 +18,62 @@ body
 	//include jadeIncludes/header.jade
 	.header
 	//meny funker ikke uten denne, har bare padding-top 20px, men må ha det for å funke
+	
 	#sort
-		h3 Filtreringsvalg
-		h4 Fylke
-		div Oslo
-			input.checkBox(type="checkbox")
-		div Finnmark
-			input.checkBox(type="checkbox")
-		div Oppland
-			input.checkBox(type="checkbox")
-		div Hedmark
-			input.checkBox(type="checkbox")
+		div 
+			section.valg(title="ngbdal")
+				span Nord-Gulbrandsdal
+				.checkBox
+					input(type="checkbox" value="none" id="ngbdal" name="check")
+					label(for="ngbdal") 
+		div 
+			section.valg(title="midtgbdal")
+				span Midt-Gulbrandsdal
+				.checkBox
+					input(type="checkbox" value="none" id="midtgbdal" name="check")
+					label(for="midtgbdal") 
+		div 
+			section.valg(title="sgbdal")
+				span Sør-Gulbrandsdal
+				.checkBox
+					input(type="checkbox" value="none" id="sgbdal" name="check")
+					label(for="sgbdal") 
+		div 
+			section.valg(title="ringsaker")
+				span Ringsaker
+				.checkBox
+					input(type="checkbox" value="none" id="ringsaker" name="check")
+					label(for="ringsaker") 
+		div 
+			section.valg(title="valdres")
+				span Valdres
+				.checkBox
+					input(type="checkbox" value="none" id="valdres" name="check")
+					label(for="valdres") 
+		div 
+			section.valg(title="hallingdal")
+				span Hallingdal
+				.checkBox
+					input(type="checkbox" value="none" id="hallingdal" name="check")
+					label(for="hallingdal") 
+		div 
+			section.valg(title="noreFjell")
+				span NoreFjell
+				.checkBox
+					input(type="checkbox" value="none" id="noreFjell" name="check")
+					label(for="noreFjell") 
+		div
+			section.valg(title="hedmark")
+				span Hedmark
+				.checkBox
+					input(type="checkbox" value="none" id="hedmark" name="check")
+					label(for="hedmark") 
+		div
+			section.valg(title="hadeland")
+				span Hadeland
+				.checkBox
+					input(type="checkbox" value="none" id="hadeland" name="check")
+					label(for="hadeland") 
 		h4 Fasiliteter
 		div Alpint
 			input.checkBox(type="checkbox")
