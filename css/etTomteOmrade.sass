@@ -8,7 +8,7 @@ body
 	color: $primaryColor
 
 .menu2
-	font-weight: 700
+	font-weight: $osbold
 
 .content
 	position: relative
@@ -31,12 +31,12 @@ body
 .headImgTitleWrap
 	background-color: rgba(230, 230, 230, 0.5)
 	color: black
-	margin: 0 4%
+	margin: 0 3%
 	position: relative
 	bottom: 15em
 	margin-bottom: -15em
 	z-index: 50
-	width: 92%
+	width: 94%
 	.headImgPlace
 		font-size: 2em
 		padding-top: 1.3em
@@ -53,19 +53,142 @@ body
 		
 		font-weight: $osbold
 		text-align: left
-		padding: 3em 2em 2em 2em
+		font-size: 1.3em
+		padding: 6% 4% 4% 4%
 		
 	.headText
 		
 		font-weight: $osreg
 		text-align: left
-		padding: 0 2em 4em 2em
+		font-size: 1.3em
+		padding: 0 4% 8% 4%
 
 
 
 
-//.headTextWrap
-	background-color: rgba(230, 230, 230, 0.4)
+//slider stuf
+.sliderWrap
+	width: 100%
+	height: auto
+	position: relative
+	margin-top: 2%
+//background-color: blue
+
+.regular
+	width: 100%
+
+.slider
+	width: 100%
+
+//dette gjør at vi får vite kanter rundt slideren, basicly indents på siden, skal vi ha det?
+.slick-slide
+	margin: 0 1.8em
+
+.slick-slide img
+	width: 100%
+
+.prev, .next
+	display: inline-block
+	width: 15%
+	height: auto
+	top: 45%
+	position: absolute
+	z-index: 30
+	text-align: center
+	svg
+		height: auto
+		width: 8em
+		fill: rgba(255, 255, 255, 0.8)
+
+.prev:hover, .next:hover
+	cursor: pointer
+	svg
+		fill: $blue
+.prev
+	left: 2%
+	padding-left: 5px
+
+.slide
+	position: relative
+
+.next
+	right: 2%
+	margin-left: 34%
+
+	
+	
+//TOMTEMAP
+	
+.tomtMapTitle
+	width: 94%
+	margin: 0 3%
+	text-align: right
 	color: black
-	width: 92%
-	margin: 0 4%
+	font-family: $raleway
+	font-weight: $ralewaybold
+	font-size: 4em
+	margin-top: 1.4em
+	
+.tomtMapInfo1, .tomtMapInfo2
+	//background-color: red
+	width: 46%
+	display: inline-block
+	
+.tomtMapInfo1
+	margin-left: 3%
+
+
+.tomtMapInfo2
+	margin-right: 3%
+	text-align: right
+	font-size: 2em
+	color: black
+	
+.ledigColor, .ledigText, .solgtColor, .solgtText
+	display: inline-block
+	
+.ledigColor, .solgtColor
+	width: 2em
+	height: 2em
+	
+.ledigColor
+	background-color: lightgray
+	border: 2px solid $blue
+	
+.solgtColor
+	background-color: $blue
+	
+.ledigText, .solgtText
+	position: relative
+	bottom: .4em
+	color: black
+	font-size: 1.4em
+	margin-right: 0.5em
+	
+.tomtMapWrap
+	width: 94%
+	margin: 0 3%
+	height: 30em
+	margin-top: .5em
+	background-color: gray
+	
+	
+//Map and Table
+
+.mapTableWrap
+	width: 94%
+	margin: 0 3%
+	margin-top: 1.5em
+	.mapWrap
+		width: 59%
+		height: 30em
+		background-color: blue
+		display: inline-block
+	
+	.tableWrap
+		width: 40%
+		height: 30em
+		background-color: red
+		display: inline-block
+		float: right
+	

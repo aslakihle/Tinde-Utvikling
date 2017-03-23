@@ -11,6 +11,12 @@ head
 	link(rel="stylesheet" href="../..&jquery-ui/jquery-ui.structure.min.css")
 	link(rel="stylesheet" href="../../jquery-ui/jquery-ui.theme.min.css")
 	script(src="../../jquery-ui/jquery-ui.min.js")
+	//Slick Carousell
+	link(rel="stylesheet" type="text/css" href="../../tools/slick/slick.css")
+	//Add the new slick-theme.css if you want the default styling
+	link(rel="stylesheet" type="text/css" href="../../tools/slick/slick-theme.css")
+
+
 	//Our Css
 	link(rel="stylesheet" href="../../css/etTomteOmrade.css")
 
@@ -29,7 +35,43 @@ body
 				.headImgTitle Hjerkinnhø
 				.headTextQuote "Storslagen utsikt på snaufjellet!"
 				.headText Hjerkinnhø ligger i et område med historiske røtter. På hjerkinn lå en gammel skysstasjon(nå Hjerkinn fjellstue) med tradisjoner tilbake til midt på 1200-tallet. Pilegrimsleden og dne gamle kongeveien til Trondheim går like forbi hytteområdene og videre innover Dovrefjell. Her har du inngangen til snøhetta, villreinen og moskusens rike. Hjerkinn-Dovrefjell er hundesportens 'Mekka', med treningsfelt og jaktprøver for fuglehunder. Viewpoint Snøhetta er et attraktivt besøkspunkt og i nærområdet finner du mange natur- og aktivitetsmuligheter
-			
+
+			.sliderWrap
+				.prev
+					include ../../images/svg/arrowLeft.svg
+
+				.next
+					include ../../images/svg/arrowRight.svg
+
+				//BILDER HER MÅ HA AVLANGT UTSEENDE
+				section.regular.slider
+					.slide
+						img(src="../../images/hytte.jpg")
+
+					.slide
+						img(src="../../images/hytte3.jpg")
+
+					.slide
+						img(src="../../images/hytte4.jpg")
+
+					.slide
+						img(src="../../images/hytte5.jpg")
+			.tomtMapTitle Tomter
+			.tomtMapInfo1
+				.ledigColor
+				.ledigText Ledig tomt
+				.solgtColor
+				.solgtText Solgt tomt
+			.tomtMapInfo2 Klikk på tomt for mer info
+			.tomtMapWrap
+			.mapTableWrap
+				.mapWrap
+				.tableWrap
+
 	include ../../jadeIncludes/footer.jade
 
+
+	script(src="https://code.jquery.com/jquery-2.2.0.min.js" type="text/javascript")
+	script(type="text/javascript" src="../../tools/slick/slick.js")
+	script(type="text/javascript" src="../../js/slick.js")
 	script(type="text/javascript" src="../../js/menuheader.js")
