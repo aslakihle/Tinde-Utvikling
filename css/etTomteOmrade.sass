@@ -236,9 +236,11 @@ body
 	margin: 0 3%
 	margin-top: 3.5em
 	color: black
+	
 	.contactWrap
 		width: 40%
 		display: inline-block
+		
 		
 		//background-color: lightgray
 		
@@ -257,7 +259,7 @@ body
 			top: .4em
 	.fileWrap
 		width: 57.5%
-		display: inline-block
+		
 		float: right
 		
 		//background-color: lightgray
@@ -269,14 +271,35 @@ body
 		.btn1, .btn2, .btn3
 			display: inline-block
 			background-color: $blue
-			padding: .5em 0
+			padding: .7em
 			text-align: center
 			color: $bgc
+			border-radius: .1em
 		.btn1
-			width: 32%
 			margin-left: 1%
-		.btn2
-			width: 32%
 		
-		.btn3
-			width: 32%
+.socialWrap
+	width: 94%
+	margin: 0 3%
+	
+	margin-bottom: -2em
+	margin-top: 10em
+	text-align: center
+	.icon1, .icon2, .icon3
+		padding: .5em
+		
+		display: inline-block
+	.icon1:hover, .icon2:hover, .icon3:hover
+		cursor: pointer
+	svg
+		width: 58px
+		height: 58px
+.icon1
+	svg
+		fill: $facebook
+.icon2
+	svg
+		fill: $twitter
+.icon3
+	svg
+		fill: $instagram
