@@ -29,7 +29,7 @@ body
 			a(href="javascript:history.back()")
 				div.backArrow &#x2190; Tilbake
 			.headImgWrap
-				img(src="../../images/område1/main.jpg" alt="Bilde av X")
+				img(src="../../images/omrade1/main.jpg" alt="Bilde av X")
 			.headImgTitleWrap
 				.headImgPlace Dovrefjell, Nord-Gudbrandsdal
 				.headImgTitle Hjerkinnhø
@@ -64,6 +64,7 @@ body
 				.solgtText Solgt tomt
 			.tomtMapInfo2 Klikk på tomt for mer info
 			.tomtMapWrap
+				img(src="../../images/omrade1/tomtekart.png")
 			.mapTableWrap
 				.mapWrap
 					#googleMap
@@ -123,34 +124,36 @@ body
 							td 400 000 NOK
 							td 1600 m
 								sup 2
-					a(src="")
+					a(href="")
 						.prevTable Forrige
-					a(scr="")
+					a(href="")
 						.nextTable Neste
 			.fileContactWrap
 				.contactWrap
 					.contactTitle Kontaktperson:
 					.contactName Torbjørn Randen
-					include ../../images/svg/email.svg
-					.contactEmail tr@tindehytter.no
+					a.emailWrap(href="")
+						include ../../images/svg/email.svg
+						.contactEmail tr@tindehytter.no
 					br
-					include ../../images/svg/phone.svg
-					.contactPhone 95030500
+					a.phoneWrap(href="")
+						include ../../images/svg/phone.svg
+						.contactPhone 95030500
 				.fileWrap
 					.fileTitle1 Reguleringsplan:
-					.btn1 Last ned
-					.btn2 Åpne i nettleser
-					.btn3 Skriv ut
+					a.btn1(href="") Last ned
+					a.btn2(href="") Åpne i nettleser
+					a.btn3(href="") Skriv ut
 					.fileTitle2 Reguleringskart:
-					.btn1 Last ned
-					.btn2 Åpne i nettleser
-					.btn3 Skriv ut
+					a.btn1(href="") Last ned
+					a.btn2(href="") Åpne i nettleser
+					a.btn3(href="") Skriv ut
 			.socialWrap
-				a.icon1(src="")
+				a.icon1(href="")
 					include ../../images/svg/facebook.svg
-				a.icon2(src="")
+				a.icon2(href="")
 					include ../../images/svg/twitter.svg
-				a.icon3(src="")
+				a.icon3(href="")
 					include ../../images/svg/instagram.svg
 include ../../jadeIncludes/footer.jade
 	//Google maps
