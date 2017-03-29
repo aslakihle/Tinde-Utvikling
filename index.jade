@@ -3,26 +3,29 @@ doctype html
 html(lang="en")
 head
 	meta(charset="utf-8")
-	title Tinde Utvikling
-
 	//Jquery and UI
 	script(src="jquery-ui/external/jquery/jquery.js")
 	link(rel="stylesheet" href="jquery-ui/jquery-ui.min.css")
 	link(rel="stylesheet" href="jquery-ui/jquery-ui.structure.min.css")
 	link(rel="stylesheet" href="jquery-ui/jquery-ui.theme.min.css")
 	script(src="jquery-ui/jquery-ui.min.js")
-
+	//Tab icon
+	link(rel="icon" type="image/png" href="images/logo_tab.png")
+	link(rel="apple-touch-icon" sizes="180x180" href="images/favicon/apple-touch-icon.png")
+	link(rel="icon" type="image/png" href="images/favicon/favicon-32x32.png" sizes="32x32")
+	link(rel="icon" type="image/png" href="images/favicon/favicon-16x16.png" sizes="16x16")
+	link(rel="manifest" href="images/favicon/manifest.json")
+	link(rel="mask-icon" href="images/favicon/safari-pinned-tab.svg" color="#5bbad5")
+	meta(name="theme-color" content="#ffffff")
+	
+	title Tinde Utvikling
 	//Slick Carousell
 	link(rel="stylesheet" type="text/css" href="tools/slick/slick.css")
 	//Add the new slick-theme.css if you want the default styling
 	link(rel="stylesheet" type="text/css" href="tools/slick/slick-theme.css")
-
 	//Our Css
 	link(rel="stylesheet" href="css/frontpage.css")
 	
-	//Tab icon
-	link(rel="icon" type="image/svg" href="images/svg/tu-logo.svg")
-
 body
 	.menu(hidden)
 		ul
@@ -161,7 +164,10 @@ body
 							
 						#lastTFbutton.nextButtonPos
 							.tfButton NYTT SØK
-						
+			#sporsmalBox
+				h1 Spørsmål?
+				.sprsmBox Vi i Tinde vet at det finnes like mange tinder som det er mennesker. Derfor har Tinde utviklet en lang rekke omteområder, alle med hver sine særtrekk og egenskaper. Slik blir din hyttetomt spesielt for deg og dine – et sted der du kan dyrke de gode opplevelsene i livet.
+
 			//søkefelt		
 			//#sokBox
 				h2 FINN DIN DRØMMETOMT
