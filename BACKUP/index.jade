@@ -55,110 +55,18 @@ body
 	.main
 		.content
 			
-			#tomteFinner
-				#tFframe1
-					h1 Tomtefinner
-					.textBox2 Vi i Tinde vet at det finnes like mange tinder som det er mennesker. Derfor har Tinde utviklet en lang rekke omteområder, alle med hver sine særtrekk og egenskaper. Slik blir din hyttetomt spesielt for deg og dine – et sted der du kan dyrke de gode opplevelsene i livet.
+			#velkommenBox
+				h1 Velkommen til Tinde utvikling
+				.textBox2 Vi i Tinde vet at det finnes like mange tinder som det er mennesker. Derfor har Tinde utviklet en lang rekke omteområder, alle med hver sine særtrekk og egenskaper. Slik blir din hyttetomt spesielt for deg og dine – et sted der du kan dyrke de gode opplevelsene i livet.
+				//knapper
+				#buttons
+					a(href="tomteomrade.html")
+						.button Se tomteområder
+					a(href="kontakt.html")
+						.button Kontakt oss
 					
-					.tfImg
-						div BILDE SKAL HER ASS
-					#startTFbutton
-						.tfButton START
-					//knapper
-					//#buttons
-						a(href="tomteomrade.html")
-							.button Se tomteområder
-						a(href="kontakt.html")
-							.button Kontakt oss
-				#tFframe2(hidden)
-					h1 Finn din drømmetomt
-					.textBox2 Vi i Tinde vet at det finnes like mange tinder som det er mennesker. Derfor har Tinde utviklet en lang rekke omteområder, alle med hver sine særtrekk og egenskaper. Slik blir din hyttetomt spesielt for deg og dine – et sted der du kan dyrke de gode opplevelsene i livet.
-					
-					.tfBox
-						div.steps Steg 1/3
-						div.tfText Hvilke områder er du interessert i?
-						#tfOmradevalg
-							ul
-								li 
-									span#tfomvalgVL VESTLANDET 
-										div (5 områder)
-								li 
-									span#tfomvalgOL ØSTLANDET 
-										div (6 områder)
-								li 
-									span#tfomvalgSL SØRLANDET 
-										div (7områder)
-								li 
-									span#tfomvalgMN MIDT-NORGE 
-										div (0 områder)
-								li 
-									span#tfomvalgNN NORD-NORGE 
-										div (0 områder)
-						#tfOmradeKart
-							div kart her
-							
-						#secondTFbutton.nextButtonPos
-							.tfButton NESTE
-				
-				#tFframe3(hidden)
-					h1 Tomtefinner
-					.textBox2 Vi i Tinde vet at det finnes like mange tinder som det er mennesker. Derfor har Tinde utviklet en lang rekke omteområder, alle med hver sine særtrekk og egenskaper. Slik blir din hyttetomt spesielt for deg og dine – et sted der du kan dyrke de gode opplevelsene i livet.
-					
-					.tfBox
-						div.steps Steg 2/3
-						div.tfText Hvilke fasiliteter bør tomten ha?
-						#tfIconValg
-							div tilføy logoer her
-						//#tfOmradeKart
-							div kart her
-							
-						#thirdTFbutton.nextButtonPos
-							.tfButton NESTE
-				
-				#tFframe3(hidden)
-					h1 Tomtefinner
-					.textBox2 Vi i Tinde vet at det finnes like mange tinder som det er mennesker. Derfor har Tinde utviklet en lang rekke omteområder, alle med hver sine særtrekk og egenskaper. Slik blir din hyttetomt spesielt for deg og dine – et sted der du kan dyrke de gode opplevelsene i livet.
-					
-					.tfBox
-						div.steps Steg 3/3
-						div.tfText Hvor mye bør tomten koste?
-						#prisValg
-							div.prisText Jeg vil bruke maks
-							select.dropdown(name="prisValg")
-								option(value="0") Minpris-Maxpris
-								option(value="1") 1kr-10kr
-								option(value="2") 100kr-200kr
-						//#tfOmradeKart
-							div kart her
-							
-						#thirdTFbutton.nextButtonPos
-							.tfButton NESTE
-							
-				#tFframe4(hidden)
-					h1 Tomtefinner
-					.textBox2 Vi i Tinde vet at det finnes like mange tinder som det er mennesker. Derfor har Tinde utviklet en lang rekke omteområder, alle med hver sine særtrekk og egenskaper. Slik blir din hyttetomt spesielt for deg og dine – et sted der du kan dyrke de gode opplevelsene i livet.
-					
-					.tfBox
-						div.steps Resultat
-						div.tfText Dette er tomteområdene du bør se på:
-						#resultatTF
-							ol
-								li HJERKINHØ
-									div Treff på <span class="spanBlue">alle</span> søkekriterier.
-								li HJERKINLIA
-									div Treff på <span class="spanBlue">alle</span> søkekriterier.
-								li SOLLIA
-									div Treff på <span class="spanRed">noen</span> søkekriterier.
-								li HÅFJELLET
-									div Treff på <span class="spanRed">noen</span> søkekriterier.
-						//#tfOmradeKart
-							div kart her
-							
-						#lastTFbutton.nextButtonPos
-							.tfButton NYTT SØK
-						
 			//søkefelt		
-			//#sokBox
+			#sokBox
 				h2 FINN DIN DRØMMETOMT
 				.selectmeny
 					.fylke.selectDef 
@@ -230,7 +138,7 @@ body
 				input.sok(type="submit" value="Søk")
 				
 			//slider
-			//.sliderWrap
+			.sliderWrap
 				.prev
 					include images/svg/arrowLeft.svg
 
