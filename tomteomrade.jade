@@ -1,111 +1,97 @@
 doctype html
 
 html(lang="en")
-head
-	meta(charset="utf-8")
-	//Jquery and UI
-	script(src="jquery-ui/external/jquery/jquery.js")
-	link(rel="stylesheet" href="jquery-ui/jquery-ui.min.css")
-	link(rel="stylesheet" href="jquery-ui/jquery-ui.structure.min.css")
-	link(rel="stylesheet" href="jquery-ui/jquery-ui.theme.min.css")
-	script(src="jquery-ui/jquery-ui.min.js")
-	//Tab icon
-	link(rel="icon" type="image/png" href="images/logo_tab.png")
-	link(rel="apple-touch-icon" sizes="180x180" href="images/favicon/apple-touch-icon.png")
-	link(rel="icon" type="image/png" href="images/favicon/favicon-32x32.png" sizes="32x32")
-	link(rel="icon" type="image/png" href="images/favicon/favicon-16x16.png" sizes="16x16")
-	link(rel="manifest" href="images/favicon/manifest.json")
-	link(rel="mask-icon" href="images/favicon/safari-pinned-tab.svg" color="#5bbad5")
-	meta(name="theme-color" content="#ffffff")
-	
-	title Tinde Utvikling - TomteOmraade
-	//Our Css
-	link(rel="stylesheet" href="css/tomteomrade.css")
+	head
+		include jadeIncludes/head.jade
 
-body
-	include jadeIncludes/menu.jade
-	//include jadeIncludes/header.jade
-	.header
-	//meny funker ikke uten denne, har bare padding-top 20px, men må ha det for å funke
-	
-	#sort
-		div 
-			section.valg(title="ngbdal")
-				span Nord-Gulbrandsdal
-				.checkBox
-					input(type="checkbox" value="none" id="ngbdal" name="check")
-					label(for="ngbdal") 
-		div 
-			section.valg(title="midtgbdal")
-				span Midt-Gulbrandsdal
-				.checkBox
-					input(type="checkbox" value="none" id="midtgbdal" name="check")
-					label(for="midtgbdal") 
-		div 
-			section.valg(title="sgbdal")
-				span Sør-Gulbrandsdal
-				.checkBox
-					input(type="checkbox" value="none" id="sgbdal" name="check")
-					label(for="sgbdal") 
-		div 
-			section.valg(title="ringsaker")
-				span Ringsaker
-				.checkBox
-					input(type="checkbox" value="none" id="ringsaker" name="check")
-					label(for="ringsaker") 
-		div 
-			section.valg(title="valdres")
-				span Valdres
-				.checkBox
-					input(type="checkbox" value="none" id="valdres" name="check")
-					label(for="valdres") 
-		div 
-			section.valg(title="hallingdal")
-				span Hallingdal
-				.checkBox
-					input(type="checkbox" value="none" id="hallingdal" name="check")
-					label(for="hallingdal") 
-		div 
-			section.valg(title="noreFjell")
-				span NoreFjell
-				.checkBox
-					input(type="checkbox" value="none" id="noreFjell" name="check")
-					label(for="noreFjell") 
-		div
-			section.valg(title="hedmark")
-				span Hedmark
-				.checkBox
-					input(type="checkbox" value="none" id="hedmark" name="check")
-					label(for="hedmark") 
-		div
-			section.valg(title="hadeland")
-				span Hadeland
-				.checkBox
-					input(type="checkbox" value="none" id="hadeland" name="check")
-					label(for="hadeland") 
-		h4 Fasiliteter
-		//div.valgIcon Vann
-			include images/svg/icons/vannico_default.svg
-		//div.valgIcon Strøm
-			include images/svg/icons/stromico_default.svg
-		//div.valgIcon Vei
-			include images/svg/icons/bilico_default.svg
-		//div.valgIcon Alpint
-			include images/svg/icons/skiico_default.svg
-		//div.valgIcon Fiske
-			include images/svg/icons/fiskico_default.svg
-		//div.valgIcon Jakt
-			include images/svg/icons/jaktico_default.svg
-		//div.valgIcon Bade
-			include images/svg/icons/swimico_default.svg
-		//div.valgIcon Tur
-			include images/svg/icons/turico_default.svg
+		title Tinde Utvikling - TomteOmraade
+		//Our Css
+		link(rel="stylesheet" href="css/tomteomrade.css")
 
-			
-	.main
-		.content
-			include jadeIncludes/omradeBoxer.jade
-			
-	include jadeIncludes/footer.jade
+	body
+		include jadeIncludes/menu.jade
+		//include jadeIncludes/header.jade
+		.header
+		//meny funker ikke uten denne, har bare padding-top 20px, men må ha det for å funke
 
-	script(type="text/javascript" src="js/menuheader.js")
+		#sort
+			div 
+				section.valg(title="ngbdal")
+					span Nord-Gulbrandsdal
+					.checkBox
+						input(type="checkbox" value="none" id="ngbdal" name="check")
+						label(for="ngbdal") 
+			div 
+				section.valg(title="midtgbdal")
+					span Midt-Gulbrandsdal
+					.checkBox
+						input(type="checkbox" value="none" id="midtgbdal" name="check")
+						label(for="midtgbdal") 
+			div 
+				section.valg(title="sgbdal")
+					span Sør-Gulbrandsdal
+					.checkBox
+						input(type="checkbox" value="none" id="sgbdal" name="check")
+						label(for="sgbdal") 
+			div 
+				section.valg(title="ringsaker")
+					span Ringsaker
+					.checkBox
+						input(type="checkbox" value="none" id="ringsaker" name="check")
+						label(for="ringsaker") 
+			div 
+				section.valg(title="valdres")
+					span Valdres
+					.checkBox
+						input(type="checkbox" value="none" id="valdres" name="check")
+						label(for="valdres") 
+			div 
+				section.valg(title="hallingdal")
+					span Hallingdal
+					.checkBox
+						input(type="checkbox" value="none" id="hallingdal" name="check")
+						label(for="hallingdal") 
+			div 
+				section.valg(title="noreFjell")
+					span NoreFjell
+					.checkBox
+						input(type="checkbox" value="none" id="noreFjell" name="check")
+						label(for="noreFjell") 
+			div
+				section.valg(title="hedmark")
+					span Hedmark
+					.checkBox
+						input(type="checkbox" value="none" id="hedmark" name="check")
+						label(for="hedmark") 
+			div
+				section.valg(title="hadeland")
+					span Hadeland
+					.checkBox
+						input(type="checkbox" value="none" id="hadeland" name="check")
+						label(for="hadeland") 
+			h4 Fasiliteter
+			//div.valgIcon Vann
+				include images/svg/icons/vannico_default.svg
+			//div.valgIcon Strøm
+				include images/svg/icons/stromico_default.svg
+			//div.valgIcon Vei
+				include images/svg/icons/bilico_default.svg
+			//div.valgIcon Alpint
+				include images/svg/icons/skiico_default.svg
+			//div.valgIcon Fiske
+				include images/svg/icons/fiskico_default.svg
+			//div.valgIcon Jakt
+				include images/svg/icons/jaktico_default.svg
+			//div.valgIcon Bade
+				include images/svg/icons/swimico_default.svg
+			//div.valgIcon Tur
+				include images/svg/icons/turico_default.svg
+
+
+		.main
+			.content
+				include jadeIncludes/omradeBoxer.jade
+
+		include jadeIncludes/footer.jade
+
+		script(type="text/javascript" src="js/menuheader.js")
