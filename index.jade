@@ -24,8 +24,11 @@ head
 	link(rel="icon" type="image/svg" href="images/svg/tu-logo.svg")
 
 body
-	.menu
+	.menu(hidden)
 		ul
+			li#menuLogo
+				a(href="index.html")
+					include images/svg/tu-logo.svg
 			li
 				a.menu1(href="../../index.html") Hjem
 			li
@@ -38,11 +41,13 @@ body
 			img(src="images/landscape.jpg")
 		#logo
 			img(src="images/svg/tu-logo.svg")
-		.headerknapp
-			a(href="#sokBox")
-				.hButton Søk tomt
-			a(href="#velkommenBox")
-				.hButton Velkommen
+		#headerknapper
+			a(href="")
+				.hButton.b1 <u>HJEM</u>
+			a(href="../../tomteomrade.html")
+				.hButton TOMTEOMRÅDER
+			a(href="../../kontakt.html")
+				.hButton KONTAKT
 		.hytte1
 			img(src="images/svg/cabin.svg")
 		.hytte2.hyttepos
@@ -56,7 +61,7 @@ body
 		.content
 			
 			#tomteFinner
-				#tFframe1
+				#tfFrame1
 					h1 Tomtefinner
 					.textBox2 Vi i Tinde vet at det finnes like mange tinder som det er mennesker. Derfor har Tinde utviklet en lang rekke omteområder, alle med hver sine særtrekk og egenskaper. Slik blir din hyttetomt spesielt for deg og dine – et sted der du kan dyrke de gode opplevelsene i livet.
 					
@@ -70,7 +75,7 @@ body
 							.button Se tomteområder
 						a(href="kontakt.html")
 							.button Kontakt oss
-				#tFframe2(hidden)
+				#tfFrame2(hidden)
 					h1 Finn din drømmetomt
 					.textBox2 Vi i Tinde vet at det finnes like mange tinder som det er mennesker. Derfor har Tinde utviklet en lang rekke omteområder, alle med hver sine særtrekk og egenskaper. Slik blir din hyttetomt spesielt for deg og dine – et sted der du kan dyrke de gode opplevelsene i livet.
 					
@@ -79,20 +84,20 @@ body
 						div.tfText Hvilke områder er du interessert i?
 						#tfOmradevalg
 							ul
-								li 
-									span#tfomvalgVL VESTLANDET 
+								li#tfomvalgVL.omrValg
+									span VESTLANDET 
 										div (5 områder)
-								li 
-									span#tfomvalgOL ØSTLANDET 
+								li#tfomvalgOL.omrValg
+									span ØSTLANDET 
 										div (6 områder)
-								li 
-									span#tfomvalgSL SØRLANDET 
+								li#tfomvalgSL.omrValg
+									span SØRLANDET
 										div (7områder)
-								li 
-									span#tfomvalgMN MIDT-NORGE 
+								li#tfomvalgMN.omrValg
+									span MIDT-NORGE 
 										div (0 områder)
-								li 
-									span#tfomvalgNN NORD-NORGE 
+								li#tfomvalgNN.omrValg
+									span NORD-NORGE 
 										div (0 områder)
 						#tfOmradeKart
 							div kart her
@@ -100,7 +105,7 @@ body
 						#secondTFbutton.nextButtonPos
 							.tfButton NESTE
 				
-				#tFframe3(hidden)
+				#tfFrame3(hidden)
 					h1 Tomtefinner
 					.textBox2 Vi i Tinde vet at det finnes like mange tinder som det er mennesker. Derfor har Tinde utviklet en lang rekke omteområder, alle med hver sine særtrekk og egenskaper. Slik blir din hyttetomt spesielt for deg og dine – et sted der du kan dyrke de gode opplevelsene i livet.
 					
@@ -115,7 +120,7 @@ body
 						#thirdTFbutton.nextButtonPos
 							.tfButton NESTE
 				
-				#tFframe3(hidden)
+				#tfFrame4(hidden)
 					h1 Tomtefinner
 					.textBox2 Vi i Tinde vet at det finnes like mange tinder som det er mennesker. Derfor har Tinde utviklet en lang rekke omteområder, alle med hver sine særtrekk og egenskaper. Slik blir din hyttetomt spesielt for deg og dine – et sted der du kan dyrke de gode opplevelsene i livet.
 					
@@ -131,10 +136,10 @@ body
 						//#tfOmradeKart
 							div kart her
 							
-						#thirdTFbutton.nextButtonPos
+						#fourthTFbutton.nextButtonPos
 							.tfButton NESTE
 							
-				#tFframe4(hidden)
+				#tfFrame5(hidden)
 					h1 Tomtefinner
 					.textBox2 Vi i Tinde vet at det finnes like mange tinder som det er mennesker. Derfor har Tinde utviklet en lang rekke omteområder, alle med hver sine særtrekk og egenskaper. Slik blir din hyttetomt spesielt for deg og dine – et sted der du kan dyrke de gode opplevelsene i livet.
 					
@@ -273,4 +278,7 @@ body
 	script(src="https://code.jquery.com/jquery-2.2.0.min.js" type="text/javascript")
 	script(type="text/javascript" src="tools/slick/slick.js")
 	script(type="text/javascript" src="js/slick.js")
-	script(type="text/javascript" src="js/menuheader.js")
+	script(type="text/javascript" src="js/forsideMenuHeader.js")
+	script(type="text/javascript" src="js/tomtefinner.js")
+	
+	

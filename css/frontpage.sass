@@ -1,8 +1,9 @@
 @import "sassImports/_vars"
 @import "sassImports/_main"
+@import "sassImports/_menu"
 @import "sassImports/_footer"
 
-.menu
+//.menu
 	width: 100%
 	height: 3em
 	position: fixed
@@ -52,21 +53,32 @@
 	//padding-left: 18% //Change this to make it wider
 	//padding-right: 18% //Change this to make it wider
 	img
-		margin-top: -15em
+		margin-top: -10em
 		width: 100%
-.headerknapp
+
+#headerknapper
 	position: absolute
-	width: 25%
-	top: 29%
-	z-index: 100
-	padding: 1%
-	right: 36.8%
+	width: 60%
+	top: 25%
+	z-index: 3
+	box-sizing: border-box
+	padding: 2%
+	left: 26%
 	a
+		color: black
 		text-decoration: none
-		color: white
+		.hButton
+			font-weight: $osreg
+			font-size: 3em
+			display: inline
+			
+		.b1
+			font-decoration: underline
+			font-weight: $osbold
+	a:nth-child(2)
+		margin: 0 7.5% 0 8%
 
-
-.hButton
+//.hButton
 	font-weight: $osbold
 	background-color: $blue
 	display: inline-block
@@ -74,12 +86,13 @@
 	box-sizing: border-box
 	padding: 0 40% 0 40%
 
-.hButton:nth-child(2)
+//.hButton:nth-child(2)
 	float: right
 
 .hButton:hover
-	background-color: $blue
-	color: white
+	color: $blue
+.hButton:active
+	color: lightblue
 		
 #logo
 	position: absolute
@@ -116,7 +129,9 @@
 	padding-left: 60%
 	img
 		width: 100%
-//
+
+
+//TOMTEFINNERRRRRRR
 
 #tomteFinner
 	//background-color: #f6f6f6
@@ -132,6 +147,7 @@
 .tfImg
 	width: 100%
 	height: 15em
+	margin-top: 1%
 	background-color: lightgrey
 
 #startTFbutton
@@ -185,11 +201,15 @@
 	font-size: 2em
 	width: 50%
 
-#tFframe3
+#tfFrame3
 	.tfBox
 		.tfText
 			width: 100%
-#tFframe4
+#tfFrame4
+	.tfBox
+		.tfText
+			width: 100%
+#tfFrame5
 	.tfBox
 		.tfText
 			width: 100%
@@ -210,10 +230,15 @@
 				div
 					font-size: 0.7em
 					display: inline
+		.liKlikk
+			background-color: $blue
+			color: white
 		li:hover
 			background-color: $blue
 			color: lightblue
+			cursor: pointer
 
+			
 
 #tfOmradeKart
 	width: 50%
@@ -270,7 +295,7 @@
 	//background-color: gray
 	//height: 40em
 	box-sizing: border-box
-	padding: 0 20% 0 20%
+	padding: 0 30% 0 10%
 	width: 100%
 	div
 		margin-left: 4%
