@@ -25,6 +25,7 @@ $('#fourthTFbutton').click(function(){
 $('#lastTFbutton').click(function(){
 	$('#tfFrame5').hide();
 	$('#tfFrame1').show();
+	$('.omrValg').removeClass('liKlikk');
 });
 
 
