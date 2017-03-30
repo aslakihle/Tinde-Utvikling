@@ -80,90 +80,116 @@ body
 						.tomtInfoText Tomtene i dette feltet kan ikke bygges på før juni 2017.
 						a.tomtBtn SEND HENVENDELSE
 
-			.mapTableWrap
+			//.mapTableWrap
 				.mapWrap
 					#googleMap
-				.tableWrap
-					table
-						tr
-							td.col1 TOMT
-							td.col2 PRISANTYDNING
-							td.col3 AREAL
-						tr
-							td 1
-							td 373 000 NOK
-							td 1150 m
-								sup 2
-						tr
-							td 2
-							td 462 000 NOK
-							td 1920 m
-								sup 2
-						tr
-							td 3
-							td 217 000 NOK
-							td 1160 m
-								sup 2
-						tr
-							td 4
-							td 431 000 NOK
-							td 1240 m
-								sup 2
-						tr
-							td 5
-							td 312 000 NOK
-							td 1640 m
-								sup 2
-						tr
-							td 6
-							td 215 000 NOK
-							td 2102 m
-								sup 2
-						tr
-							td 7
-							td 325 000 NOK
-							td 1170 m
-								sup 2
-						tr
-							td 8
-							td 510 000 NOK
-							td 1370 m
-								sup 2
-						tr
-							td 9
-							td 320 000 NOK
-							td 1680 m
-								sup 2
-						tr
-							td 10
-							td 400 000 NOK
-							td 1600 m
-								sup 2
-					a(href="")
-						.prevTable Forrige
-					a(href="")
-						.nextTable Neste
-			.fileContactWrap
-				.contactWrap
-					.contactTitle Kontaktperson:
-					.contactName Torbjørn Randen
-					a.emailWrap(href="")
-						include ../../images/svg/email.svg
-						.contactEmail tr@tindehytter.no
-					br
-					a.phoneWrap(href="")
-						include ../../images/svg/phone.svg
-						.contactPhone 95030500
-				.fileWrap
-					.fileTitle1 Reguleringsplan:
-					a.btn1(href="") Last ned
-					a.btn2(href="") Åpne i nettleser
-					a.btn3(href="") Skriv ut
-					.fileTitle2 Reguleringskart:
-					a.btn1(href="") Last ned
-					a.btn2(href="") Åpne i nettleser
-					a.btn3(href="") Skriv ut
-			.socialWrap
+			.tableWrap
+				a.arrow(href="")
+					include ../../images/svg/arrowLeft.svg
+				table
+					tr
+						td.col TOMT
+						td.col PRISANTYDNING
+						td.col AREAL
+						td.col STATUS
+					tr
+						td 1
+						td 373 000 NOK
+						td 1150 m
+							sup 2
+						td Ledig
+					tr
+						td 2
+						td 462 000 NOK
+						td 1920 m
+							sup 2
+						td Ledig
+					tr
+						td 3
+						td 217 000 NOK
+						td 1160 m
+							sup 2
+						td Ledig
+					tr
+						td 4
+						td 431 000 NOK
+						td 1240 m
+							sup 2
+						td Solgt
+					tr
+						td 5
+						td 312 000 NOK
+						td 1640 m
+							sup 2
+						td Solgt
+					tr
+						td 6
+						td 215 000 NOK
+						td 2102 m
+							sup 2
+						td Ledig
+
+					tr
+						td 7
+						td 325 000 NOK
+						td 1170 m
+							sup 2
+						td Ledig
+
+					tr
+						td 8
+						td 510 000 NOK
+						td 1370 m
+							sup 2
+						td Solgt
+
+					tr
+						td 9
+						td 320 000 NOK
+						td 1680 m
+							sup 2
+						td Ledig
+
+					tr
+						td 10
+						td 400 000 NOK
+						td 1600 m
+							sup 2
+						td Ledig
+
+				a.arrow(href="")
+					include ../../images/svg/arrowRight.svg
+			.fileWrap
+				a.oneFileWrap(href="")
+					include ../../images/svg/download.svg
+					| REGULERINGSPLAN
+				a.oneFileWrap(href="")
+					include ../../images/svg/download.svg
+					| REGULERINGSKART
+				a.oneFileWrap(href="")
+					include ../../images/svg/print.svg
+					| SKRIV UT OMRÅDE
+			.ansattWrap
+				.title Kontaktpersoner
+				.oneAnsattWrap
+					img(src="http://placehold.it/350x350")
+					.ansattName NAVN HER SOMERLITTLANGTjkfsdhkjgshdfjgkh
+					.ansattAnsvar Ansvarsområde
+					.ansattPhone 123 12 123
+					.ansattEmail epostsomerlittlang@tinde.no
+				.oneAnsattWrap
+					img(src="http://placehold.it/350x350")
+					.ansattName NAAAVN HER
+					.ansattAnsvar Ansvarsområde
+					.ansattPhone 123 12 123
+					.ansattEmail epostsomerlittlang@tinde.no
+				.oneAnsattWrap
+					img(src="http://placehold.it/350x350")
+					.ansattName NAVN HER
+					.ansattAnsvar Ansvarsområde
+					.ansattPhone 123 12 123
+					.ansattEmail epostsomerlittlang@tinde.no
+			//.socialWrap
 				a.icon1(href="")
 					include ../../images/svg/facebook.svg
 				a.icon2(href="")
@@ -173,8 +199,8 @@ body
 include ../../jadeIncludes/footer.jade
 
 	//Google maps
-	script(src="https://maps.googleapis.com/maps/api/js?key=AIzaSyAv-n8dxD2LyiLpKr2qg4vCbmtJFqPJnI8&callback=myMap")
-	script(type="text/javascript" src="../../js/googleMap.js")
+	//script(src="https://maps.googleapis.com/maps/api/js?key=AIzaSyAv-n8dxD2LyiLpKr2qg4vCbmtJFqPJnI8&callback=myMap")
+	//script(type="text/javascript" src="../../js/googleMap.js")
 	//Slick stuff
 	script(src="https://code.jquery.com/jquery-2.2.0.min.js" type="text/javascript")
 	script(type="text/javascript" src="../../tools/slick/slick.js")

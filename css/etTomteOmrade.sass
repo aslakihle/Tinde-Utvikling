@@ -103,7 +103,7 @@ body
 		
 		height: auto
 		width: 8em
-		fill: $blue
+		fill: $blueLight
 		
 
 .prev:hover, .next:hover
@@ -241,120 +241,114 @@ body
 					width: 100%
 					height: 100%
 					
-//Map and Table
+//Table
 
-.mapTableWrap
+.tableWrap
 	width: 94%
-	
 	margin: 0 3%
 	margin-top: 1.5em
-	
-	//MAP
-	.mapWrap
-		width: 57.5%
-		display: inline-block
+	display: inline-flex
+
+	table, tr, td
+		border: 5px solid $bgc
+		color: black
+	table
+		width: 80%
+		border-collapse: collapse
+	table tr:nth-child(even) td
+		background-color: lightgray
+		color: black
+	td
+		text-align: center
+		font-weight: $osreg
+		padding: .7em 0
+		background-color: $blueLight
+		color: $bgc
+	.col
+		font-family: $raleway
+		font-weight: $raleway-bold
+		background-color: $blue
+.arrow
+	width: 10%
+	margin: auto
+
+	svg
+		width: 100%
+		height: auto
+		fill: $blueLight
 		
-		#googleMap
-			width: 100%
-			height: 37em
-	
-	//TABLE
-	.tableWrap
-		width: 40%
-		//height: 30em
-		//background-color: red
-		display: inline-block
-		float: right
-		table, tr, td
-			border: 1px solid black
-			color: black
-		table
-			border-collapse: collapse
-			width: 100%
-		table tr:nth-child(odd) td
-			background-color: rgba(220, 220, 220, 0.2)
-			
-		td
-			text-align: center
-			font-weight: $osreg
-			padding: .7em 0
-		.col1, .col2, .col3
-			font-weight: $osbold
-			
-		.col1
-			width: 20%
-		.col2
-			width: 45%
-		.col3
-			width: 35%
-		.prevTable, .nextTable
-			width: 48%
-			margin-top: .8em
-			display: inline-block
-			text-align: center
-			background-color: $blue
-			color: $bgc
-			padding: 1em 0
-			border-radius: .1em
-		.nextTable
-			float: right
-		
-.fileContactWrap
+.fileWrap
 	width: 94%
 	margin: 0 3%
-	margin-top: 3.5em
+	margin-top: 5em
 	color: black
-	
-	.contactWrap
-		width: 40%
+	text-align: center
+	//background-color: green
+	.oneFileWrap
+		//background-color: red
+		width: 20%
 		display: inline-block
-		text-decoration: none
-		a
-			color: black
-		//background-color: lightgray
-		
-		.contactTitle
-			font-size: 1.1em
-		.contactName
-			font-size: 1.5em
-			padding-top: .1em
-			font-weight: $osbold
-		.contactEmail, .contactPhone
-			font-size: 1.2em
-			display: inline-block
+		font-family: $raleway
+		font-weight: $raleway-bold
+		font-size: 1em
+		color: black
+			
 		svg
+			width: 100%
+			height: 7em
 			fill: $blue
-			position: relative
-			top: .4em
-	.fileWrap
-		width: 57.5%
+			margin-bottom: 1em
+
+.ansattWrap
+	width: 94%
+	height: auto
+	margin: 0 3%
+	margin-top: 5em
+	text-align: center
+	background-color: lightgray
+	color: black
+	padding: 2em 0
+	.title
+		text-align: center
+		width: 100%
+		font-family: $raleway
+		font-weight: $ralewaybold
+		font-size: 2em
+		margin-bottom: .5em
+		//background-color: green
+	.oneAnsattWrap
+		//background-color: red
+		width: 32%
 		
-		float: right
-		
-		//background-color: lightgray
-		.fileTitle1, .fileTitle2
-			margin-left: 1%
-			font-size: 1.5em
-		.fileTitle2
-			margin-top: 1em
-		.btn1, .btn2, .btn3
-			display: inline-block
-			background-color: $blue
-			padding: .7em
-			text-align: center
-			color: $bgc
-			border-radius: .1em
-		.btn1
-			margin-left: 1%
-		.btn2
-			margin: 0 2%
-		
+		height: auto
+		display: inline-block
+		text-align: center
+		img
+			
+			border: 2px solid black
+			width: 69%
+			margin: 0 15%
+		.ansattName
+			font-weight: $osbold
+		.ansattEmail
+			font-size: .8em
+	
+
+
+
+
+
+
+
+
+
 .socialWrap
 	width: 94%
 	margin: 0 3%
 	
-	margin-bottom: -2em
-	margin-top: 10em
+	
+	margin-top: 5em
+	margin-bottom: 2.5em
 	text-align: center
 	.icon1, .icon2, .icon3
 		padding: .5em
