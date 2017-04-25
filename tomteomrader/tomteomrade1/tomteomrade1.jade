@@ -161,34 +161,39 @@ body
 					include ../../images/svg/arrowRight.svg
 			.fileWrap
 				a.oneFileWrap(href="")
-					include ../../images/svg/download.svg
+					include ../../images/svg/downloadTest.svg
 					| REGULERINGSPLAN
 				a.oneFileWrap(href="")
-					include ../../images/svg/download.svg
+					include ../../images/svg/downloadTest.svg
 					| REGULERINGSKART
 				a.oneFileWrap(href="")
-					include ../../images/svg/print.svg
+					include ../../images/svg/printTest.svg
 					| SKRIV UT OMRÅDE
 			.ansattWrap
 				.title Kontaktpersoner
-				.oneAnsattWrap
-					img(src="http://placehold.it/350x350")
-					.ansattName NAVN HER SOMERLITTLANGTjkfsdhkjgshdfjgkh
-					.ansattAnsvar Ansvarsområde
-					.ansattPhone 123 12 123
-					.ansattEmail epostsomerlittlang@tinde.no
-				.oneAnsattWrap
-					img(src="http://placehold.it/350x350")
-					.ansattName NAAAVN HER
-					.ansattAnsvar Ansvarsområde
-					.ansattPhone 123 12 123
-					.ansattEmail epostsomerlittlang@tinde.no
-				.oneAnsattWrap
-					img(src="http://placehold.it/350x350")
-					.ansattName NAVN HER
-					.ansattAnsvar Ansvarsområde
-					.ansattPhone 123 12 123
-					.ansattEmail epostsomerlittlang@tinde.no
+				#ansattImgWrap
+					.oneAnsattImg
+						img(src="http://placehold.it/350x350")
+					.oneAnsattImg
+						img(src="http://placehold.it/350x350")
+					.oneAnsattImg
+						img(src="http://placehold.it/350x350")
+				#ansattInfoWrap
+					.oneAnsattInfo
+						.ansattName NAVN HER SOMERSÅ LANGT AT DETKOMMERPÅTOLINJER
+						.ansattAnsvar Ansvarsområde
+						.ansattPhone 123 12 123
+						.ansattEmail epostsomerlittlang@tinde.no
+					.oneAnsattInfo
+						.ansattName NAAAVN HER
+						.ansattAnsvar Ansvarsområde
+						.ansattPhone 123 12 123
+						.ansattEmail epostsomerlittlang@tinde.no
+					.oneAnsattInfo
+						.ansattName NAVN HER
+						.ansattAnsvar Ansvarsområde
+						.ansattPhone 123 12 123
+						.ansattEmail epostsomerlittlang@tinde.no
 			//.socialWrap
 				a.icon1(href="")
 					include ../../images/svg/facebook.svg

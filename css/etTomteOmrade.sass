@@ -287,9 +287,10 @@ body
 	.oneFileWrap
 		//background-color: red
 		width: 20%
+		margin: 0 2%
 		display: inline-block
-		font-family: $raleway
-		font-weight: $raleway-bold
+		font-family: $opensans
+		font-weight: $osbold
 		font-size: 1em
 		color: black
 			
@@ -308,32 +309,43 @@ body
 	background-color: lightgray
 	color: black
 	padding: 2em 0
+	margin-bottom: 4em
 	.title
 		text-align: center
 		width: 100%
-		font-family: $raleway
-		font-weight: $ralewaybold
+		font-family: $opensans
+		font-weight: $osbold
 		font-size: 2em
 		margin-bottom: .5em
 		//background-color: green
-	.oneAnsattWrap
-		//background-color: red
-		width: 32%
-		
-		height: auto
-		display: inline-block
-		text-align: center
-		img
+	#ansattImgWrap
+		width: 100%
+		padding: 0
+		margin: 0
+		.oneAnsattImg
+			width: 32%
 			
-			border: 2px solid black
-			width: 69%
-			margin: 0 15%
-		.ansattName
-			font-weight: $osbold
-		.ansattEmail
-			font-size: .8em
+			display: inline-block
+			text-align: center
+			img
+				
+				border: 2px solid black
+				width: 59%
+				margin: 0 20%
+	#ansattInfoWrap
+		width: 100%
+		height: auto
+		.oneAnsattInfo
+			width: 32%
+			vertical-align: top
+			display: inline-block
+			text-align: center
+			.ansattName
+				font-weight: $osbold
+			.ansattEmail
+				font-size: .8em
+		
 	
-
 
 
 
