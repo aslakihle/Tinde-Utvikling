@@ -147,7 +147,7 @@
         <div class="content">
             <h1 class="firstH1class">NORD-GULBRANDSDAL</h1>
             <div class="nyttOmrade">
-                <a href="tomteomrader/tomteomrade1/tomteomrade1.html">
+                <a href="tomteomrader/tomteomrade1/tomteomrade1.php">
                     <div class="omradeBox"><img class="omradeImg" src="images/hytte.jpg" alt="hytte">
                         <div class="stedText">
                             <div>Solhaugen</div>
