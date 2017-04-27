@@ -19,7 +19,7 @@ require_once 'connect.php';
     <link rel="manifest" href="images/favicon/manifest.json">
     <link rel="mask-icon" href="images/favicon/safari-pinned-tab.svg" color="#5bbad5">
     <meta name="theme-color" content="#ffffff">
-    <title>Tinde Utvikling - TomteOmraade</title>
+    <title>Tinde Utvikling - TomteOmråde</title>
     <!--Our Css-->
     <link rel="stylesheet" href="css/tomteomrade.css">
 </head>
@@ -53,131 +53,7 @@ require_once 'connect.php';
     </div>
     <div class="header"></div>
     <!--meny funker ikke uten denne, har bare padding-top 20px, men må ha det for å funke-->
-    
-    <!-- SORTERINGS MENYEN-->
-    <div id="sort">
-		
-		<form method="post">
-		<?php
-		$stmt = $db->prepare("
-			SELECT *
-			FROM fylke
-			ORDER BY fylke DESC;");
-		$stmt->execute();
-			
-		while ($row = $stmt->fetch(PDO::FETCH_ASSOC)){
-			echo ' 
-			<div>
-				<section class="valg" title="'.$row['fylke'].'">
-					<span>'.strtoupper($row['fylke']).'</span>
-					<div class="checkBox">
-						<input type="checkbox" value="'.$row['fylke'].'" id="'.$row['fylke'].'" name="'.$row['fylke'].'">
-						<label for="'.$row['fylke'].'"> </label>
-					</div>
-				</section>
-			</div>';
-			
-			if(isset($_POST[$row['fylke']])){
-				echo 'hey '.$row['fylke'];
-			}
-		}
-		?>
- 		</form>
-  		<!--
-        <div>
-            <section class="valg" title="ngbdal"><span>Nord-Gulbrandsdal</span>
-                <div class="checkBox">
-                    <input type="checkbox" value="none" id="ngbdal" name="check">
-                    <label for="ngbdal"> </label>
-                </div>
-            </section>
-        </div>
-        <div>
-            <section class="valg" title="midtgbdal"><span>Midt-Gulbrandsdal</span>
-                <div class="checkBox">
-                    <input type="checkbox" value="none" id="midtgbdal" name="check">
-                    <label for="midtgbdal"> </label>
-                </div>
-            </section>
-        </div>
-        <div>
-            <section class="valg" title="sgbdal"><span>Sør-Gulbrandsdal</span>
-                <div class="checkBox">
-                    <input type="checkbox" value="none" id="sgbdal" name="check">
-                    <label for="sgbdal"> </label>
-                </div>
-            </section>
-        </div>
-        <div>
-            <section class="valg" title="ringsaker"><span>Ringsaker</span>
-                <div class="checkBox">
-                    <input type="checkbox" value="none" id="ringsaker" name="check">
-                    <label for="ringsaker"> </label>
-                </div>
-            </section>
-        </div>
-        <div>
-            <section class="valg" title="valdres"><span>Valdres</span>
-                <div class="checkBox">
-                    <input type="checkbox" value="none" id="valdres" name="check">
-                    <label for="valdres"> </label>
-                </div>
-            </section>
-        </div>
-        <div>
-            <section class="valg" title="hallingdal"><span>Hallingdal</span>
-                <div class="checkBox">
-                    <input type="checkbox" value="none" id="hallingdal" name="check">
-                    <label for="hallingdal"> </label>
-                </div>
-            </section>
-        </div>
-        <div>
-            <section class="valg" title="noreFjell"><span>NoreFjell</span>
-                <div class="checkBox">
-                    <input type="checkbox" value="none" id="noreFjell" name="check">
-                    <label for="noreFjell"> </label>
-                </div>
-            </section>
-        </div>
-        <div>
-            <section class="valg" title="hedmark"><span>Hedmark</span>
-                <div class="checkBox">
-                    <input type="checkbox" value="none" id="hedmark" name="check">
-                    <label for="hedmark"> </label>
-                </div>
-            </section>
-        </div>
-        <div>
-            <section class="valg" title="hadeland"><span>Hadeland</span>
-                <div class="checkBox">
-                    <input type="checkbox" value="none" id="hadeland" name="check">
-                    <label for="hadeland"> </label>
-                </div>
-            </section>
-        </div>-->
-        <h4>Fasiliteter</h4>
-        <!--.valgIcon Vanninclude images/svg/icons/vannico_default.svg
-        -->
-        <!--.valgIcon Strøminclude images/svg/icons/stromico_default.svg
-        -->
-        <!--.valgIcon Veiinclude images/svg/icons/bilico_default.svg
-        -->
-        <!--.valgIcon Alpintinclude images/svg/icons/skiico_default.svg
-        -->
-        <!--.valgIcon Fiskeinclude images/svg/icons/fiskico_default.svg
-        -->
-        <!--.valgIcon Jaktinclude images/svg/icons/jaktico_default.svg
-        -->
-        <!--.valgIcon Badeinclude images/svg/icons/swimico_default.svg
-        -->
-        <!--.valgIcon Tur
-        include images/svg/icons/turico_default.svg
-
-
-        -->
-    </div>
-    
+   
     <!--main-->
     <div class="main">
         <div class="content">
@@ -199,8 +75,9 @@ require_once 'connect.php';
 				}else{
 					//goes through db to find all tomteomrader within the fylke
 					while ($row = $stmt->fetch(PDO::FETCH_ASSOC)){
+						echo '<div id="'.$row['fylke'].'">';
 						echo '<h1>'.strtoupper($row['fylke']).'</h1>';
-						echo '<div class="nyttOmrade">';
+						
 						$tstmt = $db->prepare("
 						SELECT *
 						FROM tomteomrade t
@@ -211,7 +88,7 @@ require_once 'connect.php';
 						$tstmt->bindParam(':fylke', $row['fylke']);
 						$tstmt->execute();
 						
-						//prints out all the tomteomrader within a fylke
+						//prints out all the tomteområder within a fylke
 						while($tRow = $tstmt->fetch(PDO::FETCH_ASSOC)){
 							/*
 							//to find bilde
@@ -224,8 +101,9 @@ require_once 'connect.php';
 							$bstmt->bindParam(':id', $tRow['omradeID']);
 							$bstmt->execute();
 							$bstmt->fetch(PDO::FETCH_ASSOC);*/
+							echo '<div class="nyttOmrade" id="tomteomrade'.$tRow['omradeID'].'">';
 							echo '
-							<a href="tomteomrader/tomteomrade'.$tRow['omradeID'].'/tomteomrade'.$tRow['omradeID'].'.php">
+							<a href="tomteomrader/tomteomrade'.$tRow['omradeID'].'/tomteomrade'.$tRow['omradeID'].'.php" >
 							<div class="omradeBox">
 								<img class="omradeImg" src="images/hytte'.$tRow['omradeID'].'.jpg" alt="hytte">
 									<div class="stedText">
@@ -240,186 +118,219 @@ require_once 'connect.php';
 									</div>
 								</div>
 							</a>';
+							echo '</div>';
 						};
-						echo '</div>';
+						
 						echo '<hr>';
+						echo '</div>';
 					};
 				};
 			?>
-           
-           <!-- <h1 class="firstH1class">NORD-GULBRANDSDAL</h1>
-            <div class="nyttOmrade">
-                <a href="tomteomrader/tomteomrade1/tomteomrade1.php">
-                    <div class="omradeBox"><img class="omradeImg" src="images/hytte.jpg" alt="hytte">
-                        <div class="stedText">
-                            <div>Solhaugen</div>
-                        </div>
-                        <div class="omradeBoxText">
-                            <div>"One-liner her. Or something." </div>
-                            <ul>
-                                <li><b>Pris:</b> 1.5m <b>-</b> 2m</li>
-                                <li><b>Areal:</b> 400km^2 <b>-</b> 1000km^2</li>
-                            </ul>
-                        </div>
-                    </div>
-                </a>
-                <a href="tomteomrader/tomteomrade2/tomteomrade2.html">
-                    <div class="omradeBox"><img class="omradeImg" src="images/hytte2.jpg" alt="hytte">
-                        <div class="stedText">
-                            <div>Stedet</div>
-                        </div>
-                        <div class="omradeBoxText">
-                            <div>"One-liner her. Or something." </div>
-                            <ul>
-                                <li><b>Pris:</b> 1.5m <b>-</b> 2m</li>
-                                <li><b>Areal:</b> 400km^2 <b>-</b> 1000km^2</li>
-                            </ul>
-                        </div>
-                    </div>
-                </a>
-                <a href="tomteomrader/tomteomrade3/tomteomrade3.html">
-                    <div class="omradeBox"><img class="omradeImg" src="images/hytte3.jpg" alt="hytte">
-                        <div class="stedText">
-                            <div>Hjalmarseta</div>
-                        </div>
-                        <div class="omradeBoxText">
-                            <div>"One-liner her. Or something." </div>
-                            <ul>
-                                <li><b>Pris:</b> 1.5m <b>-</b> 2m</li>
-                                <li><b>Areal:</b> 400km^2 <b>-</b> 1000km^2</li>
-                            </ul>
-                        </div>
-                    </div>
-                </a>
-            </div>
-            <hr>
-            <h1>Midt-Gulbrandsdal</h1>
-            <div class="nyttOmrade"><a href="tomteomrader/tomteomrade4/tomteomrade4.html">
-                <div class="omradeBox"><img class="omradeImg" src="images/hytte4.jpg" alt="hytte">
-                    <div class="stedText">
-                        <div>Vibbefjelle</div>
-                    </div>
-                    <div class="omradeBoxText">
-                        <div>"One-liner her. Or something." </div>
-                        <ul>
-                        <li><b>Pris:</b> 1.5m <b>-</b> 2m</li>
-                        <li><b>Areal:</b> 400km^2 <b>-</b> 1000km^2</li>
-                        </ul>
-                    </div>
-                </div>
-                </a>
-                <a href="tomteomrader/tomteomrade5/tomteomrade5.html">
-                    <div class="omradeBox"><img class="omradeImg" src="images/hytte6.jpg" alt="hytte">
-                        <div class="stedText">
-                            <div>Kollirud</div>
-                        </div>
-                        <div class="omradeBoxText">
-                            <div>"One-liner her. Or something." </div>
-                            <ul>
-                                <li><b>Pris:</b> 1.5m <b>-</b> 2m</li>
-                                <li><b>Areal:</b> 400km^2 <b>-</b> 1000km^2</li>
-                            </ul>
-                        </div>
-                    </div>
-                </a>
-            </div>
-            <hr>
-            <h1>Sør-Gulbrandsdal</h1>
-            <div class="nyttOmrade">
-                <a href="tomteomrader/tomteomrade6/tomteomrade6.html">
-                    <div class="omradeBox"><img class="omradeImg" src="images/hytte6.jpg" alt="hytte">
-                        <div class="stedText">
-                            <div>Torkelsetra</div>
-                        </div>
-                        <div class="omradeBoxText">
-                            <div>"One-liner her. Or something." </div>
-                            <ul>
-                                <li><b>Pris:</b> 1.5m <b>-</b> 2m</li>
-                                <li><b>Areal:</b> 400km^2 <b>-</b> 1000km^2</li>
-                            </ul>
-                        </div>
-                    </div>
-                </a>
-                <a href="tomteomrader/tomteomrade7/tomteomrade7.html">
-                    <div class="omradeBox"><img class="omradeImg" src="images/hytte.jpg" alt="hytte">
-                        <div class="stedText">
-                            <div>Brukslia</div>
-                        </div>
-                        <div class="omradeBoxText">
-                            <div>"One-liner her. Or something." </div>
-                            <ul>
-                                <li><b>Pris:</b> 1.5m <b>-</b> 2m</li>
-                                <li><b>Areal:</b> 400km^2 <b>-</b> 1000km^2</li>
-                            </ul>
-                        </div>
-                    </div>
-                </a>
-                <a href="tomteomrader/tomteomrade8/tomteomrade8.html">
-                    <div class="omradeBox"><img class="omradeImg" src="images/hytte2.jpg" alt="hytte">
-                        <div class="stedText">
-                            <div>Englevannet</div>
-                        </div>
-                        <div class="omradeBoxText">
-                            <div>"One-liner her. Or something." </div>
-                            <ul>
-                                <li><b>Pris:</b> 1.5m <b>-</b> 2m</li>
-                                <li><b>Areal:</b> 400km^2 <b>-</b> 1000km^2</li>
-                            </ul>
-                        </div>
-                    </div>
-                </a>
-                <a href="tomteomrader/tomteomrade9/tomteomrade9.html">
-                    <div class="omradeBox"><img class="omradeImg" src="images/hytte3.jpg" alt="hytte">
-                        <div class="stedText">
-                            <div>Storbjørka</div>
-                        </div>
-                        <div class="omradeBoxText">
-                            <div>"One-liner her. Or something." </div>
-                            <ul>
-                                <li><b>Pris:</b> 1.5m <b>-</b> 2m</li>
-                                <li><b>Areal:</b> 400km^2 <b>-</b> 1000km^2</li>
-                            </ul>
-                        </div>
-                    </div>
-                </a>
-            </div>
-            <hr>
-            <h1>Ringsaker</h1>
-            <div class="nyttOmrade">
-                <a href="tomteomrader/tomteomrade10/tomteomrade10.html">
-                    <div class="omradeBox"><img class="omradeImg" src="images/hytte4.jpg" alt="hytte">
-                        <div class="stedText">
-                            <div>Fruktmarka</div>
-                        </div>
-                        <div class="omradeBoxText">
-                            <div>"One-liner her. Or something." </div>
-                            <ul>
-                                <li><b>Pris:</b> 1.5m <b>-</b> 2m</li>
-                                <li><b>Areal:</b> 400km^2 <b>-</b> 1000km^2</li>
-                            </ul>
-                        </div>
-                    </div>
-                </a>
-                <a href="tomteomrader/tomteomrade11/tomteomrade11.html">
-                    <div class="omradeBox"><img class="omradeImg" src="images/hytte3.jpg" alt="hytte">
-                        <div class="stedText">
-                            <div>Lilleaslak</div>
-                        </div>
-                        <div class="omradeBoxText">
-                            <div>"One-liner her. Or something." </div>
-                            <ul>
-                                <li><b>Pris:</b> 1.5m <b>-</b> 2m</li>
-                                <li><b>Areal:</b> 400km^2 <b>-</b> 1000km^2</li>
-                            </ul>
-                        </div>
-                    </div>
-                </a>
-            </div>-->
         </div>
+    </div>
+    
+	<!-- SORTERINGS MENYEN-->
+    <div id="sort">
+		
+		<form method="post">
+			<?php
+			$stmt = $db->prepare("
+				SELECT *
+				FROM fylke
+				ORDER BY fylke DESC;");
+			$stmt->execute();
+
+			while ($row = $stmt->fetch(PDO::FETCH_ASSOC)){
+				//skriver ut alle fylke valgene
+				echo ' 
+				<div>
+					<section class="valg" title="'.$row['fylke'].'">
+						<span>'.strtoupper($row['fylke']).'</span>
+						<div class="checkBox">
+							<input type="checkbox" value="'.$row['fylke'].'" id="'.$row['fylke'].'checkbox" name="'.$row['fylke'].'" checked>
+							<label for="'.$row['fylke'].'checkbox"> </label>
+						</div>
+					</section>
+				</div>';
+				
+				//checks which checkboxes wasnt clicked and then hides them
+				if(!isset($_POST[$row['fylke']])){
+					echo '
+						<script>
+							$("#'.$row['fylke'].'").css("display", "none");
+							$("#'.$row['fylke'].'checkbox").removeProp("checked");
+						</script>';
+				};
+				
+				//shows the checkboxes clicked and adds checked to the box
+				if(isset($_POST[$row['fylke']])){
+					echo '
+						<script>
+							$("#'.$row['fylke'].'").css("display", "block");
+							$("#'.$row['fylke'].'checkbox").prop("checked", true);
+						</script>';
+				};
+			};
+				
+			?>
+
+			<h4>Fasiliteter</h4>
+			
+			<div>
+				<section class="valg" title="Vann">
+					<span>Vann</span>
+					<div class="checkBox">
+						<input type="checkbox" value="Vann" id="vanncheckbox" name="vann" checked>
+						<label for="vanncheckbox"> </label>
+					</div>
+				</section>
+			</div>
+			
+			<div>
+				<section class="valg" title="Strøm">
+					<span>Strøm</span>
+					<div class="checkBox">
+						<input type="checkbox" value="Strøm" id="stromcheckbox" name="strom" checked>
+						<label for="stromcheckbox"> </label>
+					</div>
+				</section>
+			</div>
+			
+			<div>
+				<section class="valg" title="Vei">
+					<span>Vei</span>
+					<div class="checkBox">
+						<input type="checkbox" value="Vei" id="veicheckbox" name="vei" checked>
+						<label for="veicheckbox"> </label>
+					</div>
+				</section>
+			</div>
+			
+			<?php
+			
+			//Function to check if a button isnt checked
+			function notChecked ($name, $sql1, $sql2){
+				
+				if(!isset($_POST[$name])){
+					echo  '<script>';
+
+					//removes all tomteområder that have $name
+					while ($harDet = $sql1->fetch(PDO::FETCH_ASSOC)){
+						echo '$("#tomteomrade'.$harDet['omradeID'].'").css("display", "none");';
+					};
+
+					//shows all tomteområder that dont have $name
+					while ($harIkke = $sql2->fetch(PDO::FETCH_ASSOC)){
+						echo '$("#tomteomrade'.$harIkke['omradeID'].'").css("display", "block");';
+					};
+					echo '$("#'.$name.'checkbox").removeProp("checked");</script>';
+				};
+			};
+			
+			//Function to check if a button is checked
+			function checked ($name, $sql1, $sql2){
+				
+				if(isset($_POST[$name])){
+					echo  '<script>';
+
+					//shows all tomteområder that got $name
+					while ($harDet = $sql1->fetch(PDO::FETCH_ASSOC)){
+						echo '$("#tomteomrade'.$harDet['omradeID'].'").css("display", "block");';
+					};
+
+					//hides all tomteområder that dont have $name
+					while ($harIkke = $sql2->fetch(PDO::FETCH_ASSOC)){
+						echo '$("#tomteomrade'.$harIkke['omradeID'].'").css("display", "none");';
+					};
+					echo '$("#'.$name.'checkbox").prop("checked", true);</script>';
+				};
+			};	
+			
+			//SQL STATEMENTS FOR WATER
+			$vannstmt = $db->prepare("
+				SELECT *
+				FROM tomteomrade t
+				WHERE t.vann = 1
+				;");
+			$vannstmt->execute();
+
+			$novannstmt = $db->prepare("
+				SELECT *
+				FROM tomteomrade t
+				WHERE t.vann = 0
+				;");
+			$novannstmt->execute();
+			
+			//calling functions to check for vannclicks
+			checked('vann', $vannstmt, $novannstmt);
+			notChecked('vann', $vannstmt, $novannstmt);
+			
+			//SQLSTATEMENTS FOR STRØM
+			$nostromstmt = $db->prepare("
+				SELECT *
+				FROM tomteomrade t
+				WHERE t.strom = 0
+				;");
+			$nostromstmt->execute();
+			
+			$stromstmt = $db->prepare("
+				SELECT *
+				FROM tomteomrade t
+				WHERE t.strom = 1
+				;");
+			$stromstmt->execute();
+			
+			//calling functions to check for strømclicks
+			checked('strom', $stromstmt, $nostromstmt);
+			notChecked('strom', $stromstmt, $nostromstmt);
+			
+			//SQLSTATEMENTS FOR VEI
+			$noveistmt = $db->prepare("
+				SELECT *
+				FROM tomteomrade t
+				WHERE t.vei = 0
+				;");
+			$noveistmt->execute();
+			
+			$veistmt = $db->prepare("
+				SELECT *
+				FROM tomteomrade t
+				WHERE t.vei = 1
+				;");
+			$veistmt->execute();
+			
+			//calling functions to check for veiclicks
+			checked('vei', $veistmt, $noveistmt);
+			notChecked('vei', $veistmt, $noveistmt);
+			
+			?>
+			<!--.valgIcon Vanninclude images/svg/icons/vannico_default.svg
+			-->
+			<!--.valgIcon Strøminclude images/svg/icons/stromico_default.svg
+			-->
+			<!--.valgIcon Veiinclude images/svg/icons/bilico_default.svg
+			-->
+			<!--.valgIcon Alpintinclude images/svg/icons/skiico_default.svg
+			-->
+			<!--.valgIcon Fiskeinclude images/svg/icons/fiskico_default.svg
+			-->
+			<!--.valgIcon Jaktinclude images/svg/icons/jaktico_default.svg
+			-->
+			<!--.valgIcon Badeinclude images/svg/icons/swimico_default.svg
+			-->
+			<!--.valgIcon Tur
+			include images/svg/icons/turico_default.svg
+
+
+			-->
+        
+			<input type="submit" value="SØK">
+ 		</form>
     </div>
     <div class="footer">
         <div class="footerText">Innholdet er beskyttet etter åndsverksloven. Bruk av automatiserte tjenester (roboter, spidere, indeksering m.m.) samt andre fremgangsmåter for systematisk eller regelmessig bruk er ikke tillatt uten eksplisitt samtykke fra tinde.no. <br><br>©  2017 Tinde utvikling AS</div>
     </div>
     <script type="text/javascript" src="js/menuheader.js"></script>
+    
     </body>
 </html>
