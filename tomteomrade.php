@@ -145,7 +145,7 @@ require_once 'connect.php';
 				echo ' 
 				<div>
 					<section class="valg" title="'.$row['fylke'].'">
-						<span>'.strtoupper($row['fylke']).'</span>
+						<span>'.$row['fylke'].'</span>
 						<div class="checkBox">
 							<input type="checkbox" value="'.$row['fylke'].'" id="'.$row['fylke'].'checkbox" name="'.$row['fylke'].'" checked>
 							<label for="'.$row['fylke'].'checkbox"> </label>
