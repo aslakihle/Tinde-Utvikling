@@ -307,6 +307,8 @@ require_once 'connect.php';
 			checked('vann', $vannstmt, $novannstmt);
 			notChecked('vann', $vannstmt, $novannstmt);
 			
+			
+			
 			//SQLSTATEMENTS FOR STRØM
 			$nostromstmt = $db->prepare("
 				SELECT *
@@ -325,6 +327,8 @@ require_once 'connect.php';
 			//calling functions to check for strømclicks
 			checked('strom', $stromstmt, $nostromstmt);
 			notChecked('strom', $stromstmt, $nostromstmt);
+			
+			
 			
 			//SQLSTATEMENTS FOR VEI
 			$noveistmt = $db->prepare("
@@ -345,6 +349,8 @@ require_once 'connect.php';
 			checked('vei', $veistmt, $noveistmt);
 			notChecked('vei', $veistmt, $noveistmt);
 			
+			
+			
 			//SQLSTATEMENTS FOR Alpint
 			$noalpintstmt = $db->prepare("
 				SELECT *
@@ -363,6 +369,8 @@ require_once 'connect.php';
 			//calling functions to check for alpintlicks
 			checked('alpint', $alpintstmt, $noalpintstmt);
 			notChecked('alpint', $alpintstmt, $noalpintstmt);
+			
+			
 			
 			//SQLSTATEMENTS FOR Fiske
 			$nofiskestmt = $db->prepare("
@@ -383,6 +391,8 @@ require_once 'connect.php';
 			checked('fiske', $fiskestmt, $nofiskestmt);
 			notChecked('fiske', $fiskestmt, $nofiskestmt);
 			
+			
+			
 			//SQLSTATEMENTS FOR Jakt
 			$nojaktstmt = $db->prepare("
 				SELECT *
@@ -402,6 +412,8 @@ require_once 'connect.php';
 			checked('jakt', $jaktstmt, $nojaktstmt);
 			notChecked('jakt', $jaktstmt, $nojaktstmt);
 			
+			
+			
 			//SQLSTATEMENTS FOR Tur
 			$noturstmt = $db->prepare("
 				SELECT *
@@ -420,6 +432,9 @@ require_once 'connect.php';
 			//calling functions to check for turclicks
 			checked('tur', $turstmt, $noturstmt);
 			notChecked('tur', $turstmt, $noturstmt);
+			
+			//PROBLEMET HER ER AT TOMTEOMRÅDENE BLIR FJERNET OG VIST ETTER HVER SPØRRING, BURDE SKJE PÅ SLUTTEN EN GANG OM DET ER NOE SOM TREFFER, TENKER VI KANSKJE TRENGER EN TING SOM RETURNER TRUE, OG IF TRUE VIS BILDE, OG HVIS FALSE GJØR SJEKKER TIL DET IKKE FINNES OG DA IKKE VISE
+			
 			
 			?>
 			<!--.valgIcon Vanninclude images/svg/icons/vannico_default.svg
