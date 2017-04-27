@@ -29,7 +29,7 @@ require_once 'connect.php';
         <ul>
         	<!-- SVG LOGO-->
         	<li id="menuLogo">
-                <a href="../../index.html"><!-- Generator: Adobe Illustrator 21.0.0, SVG Export Plug-In . SVG Version: 6.00 Build 0)  -->
+                <a href="index.php"><!-- Generator: Adobe Illustrator 21.0.0, SVG Export Plug-In . SVG Version: 6.00 Build 0)  -->
                 <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 225.5 95.4"><style type="text/css">
                 .st0{fill:#FFFFFF;}
                 .st1{fill:#004B76;}
@@ -46,9 +46,9 @@ require_once 'connect.php';
                 </a>
             </li>
             <!-- RESTEN AV MENYEN -->
-            <li><a class="menu1" href="index.html">Hjem</a></li>
-            <li><a class="menu2" href="tomteomrade.html">Tomteområder</a></li>
-        	<li><a class="menu3" href="kontakt.html">Kontakt</a></li>
+            <li><a class="menu1" href="index.php">Hjem</a></li>
+            <li><a class="menu2" href="tomteomrade.php">Tomteområder</a></li>
+        	<li><a class="menu3" href="kontakt.php">Kontakt</a></li>
     	</ul>
     </div>
     <div class="header"></div>
@@ -176,6 +176,7 @@ require_once 'connect.php';
 
 			<h4>Fasiliteter</h4>
 			
+			<!--knapper for fasiliteter-->
 			<div>
 				<section class="valg" title="Vann">
 					<span>Vann</span>
@@ -206,6 +207,47 @@ require_once 'connect.php';
 				</section>
 			</div>
 			
+			<hr style="margin-top: 2%; margin-bottom: 2%;">
+			
+			<div>
+				<section class="valg" title="Alpint">
+					<span>Alpint</span>
+					<div class="checkBox">
+						<input type="checkbox" value="Alpint" id="alpintcheckbox" name="alpint" checked>
+						<label for="alpintcheckbox"> </label>
+					</div>
+				</section>
+			</div>
+			
+			<div>
+				<section class="valg" title="Fiske">
+					<span>Fiske</span>
+					<div class="checkBox">
+						<input type="checkbox" value="Fiske" id="fiskecheckbox" name="fiske" checked>
+						<label for="fiskecheckbox"> </label>
+					</div>
+				</section>
+			</div>
+			
+			<div>
+				<section class="valg" title="Jakt">
+					<span>Jakt</span>
+					<div class="checkBox">
+						<input type="checkbox" value="Jakt" id="jaktcheckbox" name="jakt" checked>
+						<label for="jaktcheckbox"> </label>
+					</div>
+				</section>
+			</div>
+			
+			<div>
+				<section class="valg" title="Tur">
+					<span>Tur</span>
+					<div class="checkBox">
+						<input type="checkbox" value="Tur" id="turcheckbox" name="tur" checked>
+						<label for="turcheckbox"> </label>
+					</div>
+				</section>
+			</div>
 			<?php
 			
 			//Function to check if a button isnt checked
@@ -221,7 +263,7 @@ require_once 'connect.php';
 
 					//shows all tomteområder that dont have $name
 					while ($harIkke = $sql2->fetch(PDO::FETCH_ASSOC)){
-						echo '$("#tomteomrade'.$harIkke['omradeID'].'").css("display", "block");';
+						echo '$("#tomteomrade'.$harIkke['omradeID'].'").css("display", "inline-block");';
 					};
 					echo '$("#'.$name.'checkbox").removeProp("checked");</script>';
 				};
@@ -235,7 +277,7 @@ require_once 'connect.php';
 
 					//shows all tomteområder that got $name
 					while ($harDet = $sql1->fetch(PDO::FETCH_ASSOC)){
-						echo '$("#tomteomrade'.$harDet['omradeID'].'").css("display", "block");';
+						echo '$("#tomteomrade'.$harDet['omradeID'].'").css("display", "inline-block");';
 					};
 
 					//hides all tomteområder that dont have $name
@@ -303,6 +345,82 @@ require_once 'connect.php';
 			checked('vei', $veistmt, $noveistmt);
 			notChecked('vei', $veistmt, $noveistmt);
 			
+			//SQLSTATEMENTS FOR Alpint
+			$noalpintstmt = $db->prepare("
+				SELECT *
+				FROM tomteomrade t
+				WHERE t.alpint = 0
+				;");
+			$noalpintstmt->execute();
+			
+			$alpintstmt = $db->prepare("
+				SELECT *
+				FROM tomteomrade t
+				WHERE t.alpint = 1
+				;");
+			$alpintstmt->execute();
+			
+			//calling functions to check for alpintlicks
+			checked('alpint', $alpintstmt, $noalpintstmt);
+			notChecked('alpint', $alpintstmt, $noalpintstmt);
+			
+			//SQLSTATEMENTS FOR Fiske
+			$nofiskestmt = $db->prepare("
+				SELECT *
+				FROM tomteomrade t
+				WHERE t.fiske = 0
+				;");
+			$nofiskestmt->execute();
+			
+			$fiskestmt = $db->prepare("
+				SELECT *
+				FROM tomteomrade t
+				WHERE t.fiske = 1
+				;");
+			$fiskestmt->execute();
+			
+			//calling functions to check for fiskelicks
+			checked('fiske', $fiskestmt, $nofiskestmt);
+			notChecked('fiske', $fiskestmt, $nofiskestmt);
+			
+			//SQLSTATEMENTS FOR Jakt
+			$nojaktstmt = $db->prepare("
+				SELECT *
+				FROM tomteomrade t
+				WHERE t.jakt = 0
+				;");
+			$nojaktstmt->execute();
+			
+			$jaktstmt = $db->prepare("
+				SELECT *
+				FROM tomteomrade t
+				WHERE t.jakt = 1
+				;");
+			$jaktstmt->execute();
+			
+			//calling functions to check for jaktclicks
+			checked('jakt', $jaktstmt, $nojaktstmt);
+			notChecked('jakt', $jaktstmt, $nojaktstmt);
+			
+			//SQLSTATEMENTS FOR Tur
+			$noturstmt = $db->prepare("
+				SELECT *
+				FROM tomteomrade t
+				WHERE t.tur = 0
+				;");
+			$noturstmt->execute();
+			
+			$turstmt = $db->prepare("
+				SELECT *
+				FROM tomteomrade t
+				WHERE t.tur = 1
+				;");
+			$turstmt->execute();
+			
+			//calling functions to check for turclicks
+			checked('tur', $turstmt, $noturstmt);
+			notChecked('tur', $turstmt, $noturstmt);
+			
 			?>
 			<!--.valgIcon Vanninclude images/svg/icons/vannico_default.svg
 			-->
@@ -323,10 +441,12 @@ require_once 'connect.php';
 
 
 			-->
-        
+        	
 			<input type="submit" value="SØK">
  		</form>
     </div>
+    
+    <!-- FOOTER -->
     <div class="footer">
         <div class="footerText">Innholdet er beskyttet etter åndsverksloven. Bruk av automatiserte tjenester (roboter, spidere, indeksering m.m.) samt andre fremgangsmåter for systematisk eller regelmessig bruk er ikke tillatt uten eksplisitt samtykke fra tinde.no. <br><br>©  2017 Tinde utvikling AS</div>
     </div>
