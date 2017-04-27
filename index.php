@@ -114,10 +114,10 @@
 			<a href="">
 				<div class="hButton b1"><u>HJEM</u></div>
 			</a>
-			<a href="../../tomteomrade.php">
+			<a href="tomteomrade.php">
 				<div class="hButton">TOMTEOMRÅDER</div>
 			</a>
-			<a href="../../kontakt.php">
+			<a href="kontakt.php">
 				<div class="hButton">KONTAKT</div>
 			</a>
 		</div>
