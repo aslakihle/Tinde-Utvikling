@@ -48,6 +48,13 @@ $query =
 		maplat varchar(50),
 		mapzoom varchar(3),
 		ansattID INT(3),
+		vann tinyint(1),
+		strom tinyint(1),
+		vei tinyint(1),
+		alpint tinyint(1),
+		fiske tinyint(1),
+		jakt tinyint(1),
+		tur tinyint(1),
 		
 		CONSTRAINT FK_annsatt FOREIGN KEY (ansattID)     
 		REFERENCES ansatt (ansattID)
@@ -100,14 +107,31 @@ if ($db->exec($query)===false){
 
 // DUMMY DATA
 $query = "
-	INSERT INTO ansatt (ansattnavn, tlf, epost, stilling)
-	VALUES ('Henrik', 94736274, 'henrik@henrik.henrik', 'Selger');
+	INSERT INTO ansatt (
+		ansattnavn,
+		tlf,
+		epost,
+		stilling
+	)
+	VALUES (
+		'Henrik',
+		94736274,
+		'henrik@henrik.henrik',
+		'Selger'
+	);
 	
 	INSERT INTO fylke
-	VALUE ('ROGALAND');
+	VALUE ('Rogaland');
+
+	INSERT INTO fylke
+	VALUE ('Jotunheimen');
 	
-	INSERT INTO tomteomrade (omradenavn,fylke,oneliner,longtekst,regulering,reguleringskart,skrivut,maplong,maplat,mapzoom,ansattID)
-		VALUES ('Aslakbukta', 'ROGALAND', 'Det er her det skjer', 'Longtekst', 'Regulering', 'reguleringsKART', 'SKRIV UT?!?!', '10', '102.4', '15', '1');
+	INSERT INTO tomteomrade (omradenavn,fylke,oneliner,longtekst,regulering,reguleringskart,skrivut,maplong,maplat,mapzoom,ansattID,vann,strom,vei,alpint,fiske,jakt,tur)
+		VALUES ('Aslakbukta', 'Rogaland', 'Det er her det skjer', 'Longtekst', 'Regulering', 'reguleringsKART', 'SKRIV UT?!?!', '10', '102.4', '15', '1', 
+		1, 1, 1, 1, 0, 0, 1);
+		
+	INSERT INTO tomteomrade (omradenavn,fylke,oneliner,longtekst,regulering,reguleringskart,skrivut,maplong,maplat,mapzoom,ansattID,vann,strom,vei,alpint,fiske,jakt,tur)
+		VALUES ('Gunnhilda', 'Jotunheimen', 'Det er her det skjer', 'Longtekst', 'Regulering', 'reguleringsKART', 'SKRIV UT?!?!', '10', '102.4', '15', '1', 0, 0, 1, 1, 1, 1, 1);
 		
 	INSERT INTO tomt (pris,areal,info,punkta,punktb,punktc,punktd,tomteomradeID)	
 		VALUES (1000000, 60, 'INFOOOOOOOO123', 1, 2, 3, 4, 1);
