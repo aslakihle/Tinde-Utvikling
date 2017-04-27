@@ -1,7 +1,10 @@
+<?php
+require_once 'connect.php';
+?>
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="utf-8">
+	<meta charset="utf-8">
     <!--Jquery and UI-->
     <script src="jquery-ui/external/jquery/jquery.js"></script>
     <link rel="stylesheet" href="jquery-ui/jquery-ui.min.css">
@@ -24,7 +27,7 @@
     <!--include images/svg/svgXML.svg-->
     <div class="menu">
         <ul>
-            <li id="menuLogo">
+        	<li id="menuLogo">
                 <a href="../../index.html"><!-- Generator: Adobe Illustrator 21.0.0, SVG Export Plug-In . SVG Version: 6.00 Build 0)  -->
                 <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 225.5 95.4"><style type="text/css">
                 .st0{fill:#FFFFFF;}
@@ -43,13 +46,37 @@
             </li>
             <li><a class="menu1" href="../../index.html">Hjem</a></li>
             <li><a class="menu2" href="../../tomteomrade.html">Tomteområder</a></li>
-            <li><a class="menu3" href="../../kontakt.html">Kontakt</a></li>
-        </ul>
+        	<li><a class="menu3" href="../../kontakt.html">Kontakt</a></li>
+    	</ul>
     </div>
     <!--include jadeIncludes/header.jade-->
     <div class="header"></div>
     <!--meny funker ikke uten denne, har bare padding-top 20px, men må ha det for å funke-->
     <div id="sort">
+		
+		<form method="post">
+		<?php
+		$stmt = $db->prepare("
+			SELECT *
+			FROM fylke
+			ORDER BY fylke DESC;");
+		$stmt->execute();
+			
+		while ($row = $stmt->fetch(PDO::FETCH_ASSOC)){
+			echo ' 
+			<div>
+				<section class="valg" title="'.$row['fylke'].'">
+					<span>'.strtoupper($row['fylke']).'</span>
+					<div class="checkBox">
+						<input type="checkbox" value="'.$row['fylke'].'" id="'.$row['fylke'].'" name="'.$row['fylke'].'">
+						<label for="'.$row['fylke'].'"> </label>
+					</div>
+				</section>
+			</div>';
+		}
+		?>
+ 		</form>
+  		<!--
         <div>
             <section class="valg" title="ngbdal"><span>Nord-Gulbrandsdal</span>
                 <div class="checkBox">
@@ -121,7 +148,7 @@
                     <label for="hadeland"> </label>
                 </div>
             </section>
-        </div>
+        </div>-->
         <h4>Fasiliteter</h4>
         <!--.valgIcon Vanninclude images/svg/icons/vannico_default.svg
         -->
@@ -143,9 +170,77 @@
 
         -->
     </div>
+    
+    <!--main-->
     <div class="main">
         <div class="content">
-            <h1 class="firstH1class">NORD-GULBRANDSDAL</h1>
+           
+           	<!--OUTPUT OF Tomteområder-->
+			<?php
+				
+				//statement to find all the fylker that TindeUtvikling owns
+				$stmt = $db->prepare("
+					SELECT *
+					FROM fylke
+					ORDER BY fylke DESC;");
+				$stmt->execute();
+				//Just to check if there are any fylker
+				$numRows = $stmt->rowCount();
+			
+				if($numRows == 0){
+					echo '<p style="text-align: center;">Ingen tomteområder enda!</p>';
+				}else{
+					//goes through db to find all tomteomrader within the fylke
+					while ($row = $stmt->fetch(PDO::FETCH_ASSOC)){
+						echo '<h1>'.strtoupper($row['fylke']).'</h1>';
+						echo '<div class="nyttOmrade">';
+						$tstmt = $db->prepare("
+						SELECT *
+						FROM tomteomrade t
+						INNER JOIN fylke f
+						ON t.fylke = f.fylke
+						WHERE t.fylke = :fylke
+						ORDER BY t.omradeID;");
+						$tstmt->bindParam(':fylke', $row['fylke']);
+						$tstmt->execute();
+						
+						//prints out all the tomteomrader within a fylke
+						while($tRow = $tstmt->fetch(PDO::FETCH_ASSOC)){
+							/*
+							//to find bilde
+							$bstmt = $db->prepare("
+							SELECT *
+							FROM bilder b
+							INNER JOIN tomteomrade t
+							ON b.omradeID = t.:id
+							WHERE b.bildetype = 'Header'");
+							$bstmt->bindParam(':id', $tRow['omradeID']);
+							$bstmt->execute();
+							$bstmt->fetch(PDO::FETCH_ASSOC);*/
+							echo '
+							<a href="tomteomrader/tomteomrade'.$tRow['omradeID'].'/tomteomrade'.$tRow['omradeID'].'.php">
+							<div class="omradeBox">
+								<img class="omradeImg" src="images/hytte'.$tRow['omradeID'].'.jpg" alt="hytte">
+									<div class="stedText">
+										<div>'.$tRow['omradenavn'].'</div>
+									</div>
+									<div class="omradeBoxText">
+										<div>"'.$tRow['oneliner'].'" </div>
+										<ul>
+											<li><b>Pris:</b> 1.5m <b>-</b> 2m</li>
+											<li><b>Areal:</b> 400km^2 <b>-</b> 1000km^2</li>
+										</ul>
+									</div>
+								</div>
+							</a>';
+						};
+						echo '</div>';
+						echo '<hr>';
+					};
+				};
+			?>
+           
+           <!-- <h1 class="firstH1class">NORD-GULBRANDSDAL</h1>
             <div class="nyttOmrade">
                 <a href="tomteomrader/tomteomrade1/tomteomrade1.php">
                     <div class="omradeBox"><img class="omradeImg" src="images/hytte.jpg" alt="hytte">
@@ -312,7 +407,7 @@
                         </div>
                     </div>
                 </a>
-            </div>
+            </div>-->
         </div>
     </div>
     <div class="footer">
