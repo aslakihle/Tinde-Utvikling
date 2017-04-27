@@ -46,9 +46,9 @@ require_once 'connect.php';
                 </a>
             </li>
             <!-- RESTEN AV MENYEN -->
-            <li><a class="menu1" href="../../index.html">Hjem</a></li>
-            <li><a class="menu2" href="../../tomteomrade.html">Tomteområder</a></li>
-        	<li><a class="menu3" href="../../kontakt.html">Kontakt</a></li>
+            <li><a class="menu1" href="index.html">Hjem</a></li>
+            <li><a class="menu2" href="tomteomrade.html">Tomteområder</a></li>
+        	<li><a class="menu3" href="kontakt.html">Kontakt</a></li>
     	</ul>
     </div>
     <div class="header"></div>
