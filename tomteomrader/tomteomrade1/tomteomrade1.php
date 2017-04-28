@@ -24,7 +24,7 @@ require_once '../../connect.php';
     <ul>
       <li id="menuLogo"><a href="../../index.php">
 
-<!--? xml version="1.0" encoding="utf-8"?-->
+<? xml version="1.0" encoding="utf-8"?>
 <!-- Generator: Adobe Illustrator 21.0.0, SVG Export Plug-In . SVG Version: 6.00 Build 0)  -->
 <svg version="1.1" id="Layer_1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px"
 	 viewBox="0 0 225.5 95.4" style="enable-background:new 0 0 225.5 95.4;" xml:space="preserve">
@@ -108,22 +108,8 @@ require_once '../../connect.php';
         <button>4</button>
 
         <div id="map"></div>
-        <?php
-		$stmt = $db->prepare("
-			SELECT punkta1,punkta2,punktb1,punktb2,punktc1,punktc2,punktd1,punktd2 
-			FROM tomt 
-			WHERE tomteomradeID = 1
-			");
-		$stmt->execute();
-        $plotArr = array();
-		while ($row = $stmt->fetch(PDO::FETCH_ASSOC)){
-			$plotArr[] = $row;
-		}
-		echo("<pre>");
-		print_r($plotArr);
-		echo("</pre>");
-        ?>
-		<?php$e = 0; ?>
+
+<!--
         <script>
 				function myMap() {
 					var mapProp= {
@@ -155,21 +141,65 @@ require_once '../../connect.php';
 					}
 
 
-                    i = 0;
-					while (i < <?php echo count($plotArr) ?>){
-						addPlot(<?php
-                             // Trenger en måte å få javascript sin i variable inn i php her :§
-                            echo implode(",",$plotArr[$e]);
-                            $e++
-                            ?>);
-						i++
-                    }
+
                 }
 					
-					
+	-->
 					
 
         </script>
+		<?php
+		$stmt = $db->prepare("
+			SELECT punkta1,punkta2,punktb1,punktb2,punktc1,punktc2,punktd1,punktd2 
+			FROM tomt 
+			WHERE tomteomradeID = 1
+			");
+		$stmt->execute();
+		$plotArr = array();
+
+		echo '<script>
+				function myMap() {
+					var mapProp= {
+						center:new google.maps.LatLng(62.251263, 9.681470),
+						zoom: 16,
+						mapTypeId: "terrain"
+					};
+					var map=new google.maps.Map(document.getElementById("map"),mapProp);
+					
+					
+					
+					function addPlot(a1, a2, b1, b2, c1, c2, d1, d2) {
+						var myCoordinates = [
+							new google.maps.LatLng(a1, a2),
+							new google.maps.LatLng(b1, b2),
+							new google.maps.LatLng(c1, c2),
+							new google.maps.LatLng(d1, d2)
+						];
+						var polyOptions = {
+							path: myCoordinates,
+							strokeColor: "#FF0000",
+							strokeOpacity: 0.8,
+							strokeWeight: 2,
+							fillColor: "#0000FF",
+							fillOpacity: 0.6
+						};
+						var it = new google.maps.Polygon(polyOptions);
+						it.setMap(map);
+					}
+
+
+
+                }';
+
+		while ($row = $stmt->fetch(PDO::FETCH_ASSOC)){
+			echo '
+                addPlot('.$row['punkta1'].','. $row['punkta2'].','. $row['punktb1'].','.$row['punktb2'].','. $row['punktc1'].','. $row['punktc2'].','. $row['punktd1'].','. $row['punktd2'] .');
+          
+			';
+
+		}
+		echo '</script>';
+		?>
         <style>
             #map {
                 width: 500px;
@@ -177,7 +207,7 @@ require_once '../../connect.php';
             }
 
         </style>
-        ?>
+
       <div class="headImgWrap"><img src="../../images/omrade1/main.jpg" alt="Bilde av X"></div>
       <div class="headImgTitleWrap">
         <div class="headImgPlace">Dovrefjell, Nord-Gudbrandsdal</div>

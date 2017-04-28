@@ -21,7 +21,7 @@ require_once 'connect.php';
     <meta name="theme-color" content="#ffffff">
     <title>Tinde Utvikling - TomteOmråde</title>
     <!--Our Css-->
-    <link rel="stylesheet" href="css/tomteomrade.css">
+    <link rel="stylesheet" href="css/tomteomrade.css?<?php echo time(); ?>">
 </head>
 <body>
     <!--include images/svg/svgXML.svg-->
@@ -135,7 +135,7 @@ require_once 'connect.php';
 		<form method="post">
 			<?php
 			$stmt = $db->prepare("
-				SELECT *
+				SELECT fylke
 				FROM fylke
 				ORDER BY fylke DESC;");
 			$stmt->execute();
@@ -147,29 +147,27 @@ require_once 'connect.php';
 					<section class="valg" title="'.$row['fylke'].'">
 						<span>'.$row['fylke'].'</span>
 						<div class="checkBox">
-							<input type="checkbox" value="'.$row['fylke'].'" id="'.$row['fylke'].'checkbox" name="'.$row['fylke'].'" >
+							<input type="checkbox" value="'.$row['fylke'].'" id="'.$row['fylke'].'checkbox" name="'.$row['fylke'].'" checked>
 							<label for="'.$row['fylke'].'checkbox"> </label>
 						</div>
 					</section>
 				</div>';
+
 				
-				//checks which checkboxes wasnt clicked and then hides them
-				if(!isset($_POST[$row['fylke']])){
-					echo '
-						<script>
-							$("#'.$row['fylke'].'").css("display", "none");
-							$("#'.$row['fylke'].'checkbox").removeProp("checked");
-						</script>';
-				};
-				
-				//shows the checkboxes clicked and adds checked to the box
+				//shows the fylkecheckboxes clicked and displays them, if not removes them
 				if(isset($_POST[$row['fylke']])){
 					echo '
 						<script>
 							$("#'.$row['fylke'].'").css("display", "block");
 							$("#'.$row['fylke'].'checkbox").prop("checked", true);
 						</script>';
-				};
+				} else {
+					echo '
+						<script>
+							$("#'.$row['fylke'].'").css("display", "none");
+							$("#'.$row['fylke'].'checkbox").removeProp("checked");
+						</script>';
+                }
 			};
 				
 			?>
@@ -280,10 +278,6 @@ require_once 'connect.php';
                 echo '</script>';
             };
 
-			/*//hides all tomteområder that dont have $name
-			while ($harIkke = $sql2->fetch(PDO::FETCH_ASSOC)){
-				echo '$("#tomteomrade'.$harIkke['omradeID'].'").css("display", "none");';
-			};*/
 
 			//creates an array to be filled with the names of the fasiliteter selected
 			$selected = array();
@@ -466,8 +460,38 @@ require_once 'connect.php';
 				checked($selected[5]);
 				checked($selected[6]);
 			}
-			
+
+            // Checks if nothing is checked and shows everything
+			if(!isset($_POST['vann']) && !isset($_POST['strom']) && !isset($_POST['vei']) && !isset($_POST['alpint']) && !isset($_POST['fiske']) && !isset($_POST['jakt']) && !isset($_POST['tur'])) {
+
+                $stmt = $db->prepare("
+                    SELECT omradeID
+                    FROM tomteomrade
+                    ;");
+                $stmt->execute();
+				echo '<script>';
+				//shows all tomteområder
+				while ($row = $stmt->fetch(PDO::FETCH_ASSOC)){
+					echo '$("#tomteomrade'.$row['omradeID'].'").css("display", "inline-block");';
+				};
+				echo '</script>';
+            }
+                //Checks if search button is not clicked, and shows all fylkeboxes
+			    if(!isset($_POST['sok'])) {
+					$stmt = $db->prepare("
+                    SELECT fylke
+                    FROM fylke
+                    ORDER BY fylke DESC;");
+					$stmt->execute();
+                    while ($row = $stmt->fetch(PDO::FETCH_ASSOC)){
+						echo '
+						<script>
+							$("#'.$row['fylke'].'").css("display", "block");
+						</script>';
+					}
+                }
 			?>
+
 			<!--.valgIcon Vanninclude images/svg/icons/vannico_default.svg
 			-->
 			<!--.valgIcon Strøminclude images/svg/icons/stromico_default.svg
@@ -488,7 +512,7 @@ require_once 'connect.php';
 
 			-->
         	
-			<input type="submit" value="SØK">
+			<input type="submit" value="SØK" name="sok">
  		</form>
     </div>
     
