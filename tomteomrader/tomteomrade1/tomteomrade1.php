@@ -6,7 +6,7 @@
   <!--Jquery and UI-->
   <script src="../../jquery-ui/external/jquery/jquery.js"></script>
   <link rel="stylesheet" href="../../jquery-ui/jquery-ui.min.css">
-  <link rel="stylesheet" href="../..&amp;jquery-ui/jquery-ui.structure.min.css">
+  <link rel="stylesheet" href="../../jquery-ui/jquery-ui.structure.min.css">
   <link rel="stylesheet" href="../../jquery-ui/jquery-ui.theme.min.css">
   <script src="../../jquery-ui/jquery-ui.min.js"></script>
   <!--Slick Carousell-->
@@ -19,7 +19,9 @@
 <body>
   <div class="menu">
     <ul>
-      <li id="menuLogo"><a href="../../index.php"><?xml version="1.0" encoding="utf-8"?>
+      <li id="menuLogo"><a href="../../index.php">
+
+<!--? xml version="1.0" encoding="utf-8"?-->
 <!-- Generator: Adobe Illustrator 21.0.0, SVG Export Plug-In . SVG Version: 6.00 Build 0)  -->
 <svg version="1.1" id="Layer_1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px"
 	 viewBox="0 0 225.5 95.4" style="enable-background:new 0 0 225.5 95.4;" xml:space="preserve">
@@ -101,9 +103,70 @@
         <button>2</button>
         <button>3</button>
         <button>4</button>
-        <?php
 
+        <div id="map"></div>
+        <?php
+		$stmt = $db->prepare("
+			SELECT punkta1,punkta2,punktb1,punktb2,punktc1,punktc2,punktd1,punktd2 
+			FROM tomt 
+			WHERE tomteomradeID = 1
+			");
+		$stmt->execute();
+        $plotArr = array();
+		while ($row = $stmt->fetch(PDO::FETCH_ASSOC)){
+			$plotArr[] = $row;
+		}
+		echo("<pre>");
+		print_r($plotArr);
+		echo("</pre>");
         ?>
+        <script>
+				function myMap() {
+					var mapProp= {
+						center:new google.maps.LatLng(62.251263, 9.681470),
+						zoom: 16,
+						mapTypeId: 'terrain'
+					};
+					var map=new google.maps.Map(document.getElementById("map"),mapProp);
+					
+					
+					
+					function addPlot(a1, a2, b1, b2, c1, c2, d1, d2) {
+						var myCoordinates = [
+							new google.maps.LatLng(a1, a2),
+							new google.maps.LatLng(b1, b2),
+							new google.maps.LatLng(c1, c2),
+							new google.maps.LatLng(d1, c2)
+						];
+						var polyOptions = {
+							path: myCoordinates,
+							strokeColor: "#FF0000",
+							strokeOpacity: 0.8,
+							strokeWeight: 2,
+							fillColor: "#0000FF",
+							fillOpacity: 0.6
+						};
+						var it = new google.maps.Polygon(polyOptions);
+						it.setMap(map);
+					}
+
+                    addPlot(62.251333,9.676380,62.250644,9.676294,62.250614,9.677668,62.251203,9.677517);
+                    addPlot(62.251203,9.677582,62.250634,9.677753,62.250644,9.678698,62.251163,9.678462)
+
+
+					}
+					
+					
+					
+
+        </script>
+        <style>
+            #map {
+                width: 500px;
+                height: 500px;
+            }
+
+        </style>
         ?>
       <div class="headImgWrap"><img src="../../images/omrade1/main.jpg" alt="Bilde av X"></div>
       <div class="headImgTitleWrap">
@@ -129,7 +192,7 @@
         </div>
         <!--BILDER HER MÅ HA AVLANGT UTSEENDE-->
         <section class="regular slider">
-          <div class="slide"><img src="../../images/hytte.jpg"></div>
+          <div class="slide"><img src="../../images/hytte1.jpg"></div>
           <div class="slide"><img src="../../images/hytte3.jpg"></div>
           <div class="slide"><img src="../../images/hytte4.jpg"></div>
           <div class="slide"><img src="../../images/hytte5.jpg"></div>
@@ -275,13 +338,18 @@
 <div class="footer">
   <div class="footerText">Innholdet er beskyttet etter åndsverksloven. Bruk av automatiserte tjenester (roboter, spidere, indeksering m.m.) samt andre fremgangsmåter for systematisk eller regelmessig bruk er ikke tillatt uten eksplisitt samtykke fra tinde.no. <br><br>©  2017 Tinde utvikling AS
     <!--Google maps-->
-    <!--script(src="https://maps.googleapis.com/maps/api/js?key=AIzaSyAv-n8dxD2LyiLpKr2qg4vCbmtJFqPJnI8&callback=myMap")-->
-    <!--script(type="text/javascript" src="../../js/googleMap.js")-->
+    <script async defer src="https://maps.googleapis.com/maps/api/js?key=AIzaSyAv-n8dxD2LyiLpKr2qg4vCbmtJFqPJnI8&callback=myMap"></script>
+
+      <!--script type="text/javascript" src="../../js/googleMap.js"></script-->
+
+
     <!--Slick stuff-->
     <script src="https://code.jquery.com/jquery-2.2.0.min.js" type="text/javascript"></script>
     <script type="text/javascript" src="../../tools/slick/slick.js"></script>
     <script type="text/javascript" src="../../js/slick.js"></script>
-    <!--MenuStickScript-->
+
+
+      <!--MenuStickScript-->
     <script type="text/javascript" src="../../js/menuheader.js"></script>
   </div>
 </div>

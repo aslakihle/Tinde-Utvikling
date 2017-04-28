@@ -70,10 +70,14 @@ $query =
 		pris INT(10),
 		areal INT(3),
 		info varchar(250),
-		punkta varchar(50),
-		punktb varchar(50),
-		punktc varchar(50),
-		punktd varchar(50),
+		punkta1 varchar(50),
+		punkta2 varchar(50),
+		punktb1 varchar(50),
+		punktb2 varchar(50),
+		punktc1 varchar(50),
+		punktc2 varchar(50),
+		punktd1 varchar(50),
+		punktd2 varchar(50),
 		tomteomradeID INT(3),
 		
 		CONSTRAINT FK_tomteomrade FOREIGN KEY (tomteomradeID)     
@@ -136,9 +140,12 @@ $query = "
 	INSERT INTO tomteomrade (omradenavn,fylke,oneliner,longtekst,regulering,reguleringskart,skrivut,maplong,maplat,mapzoom,ansattID,vann,strom,vei,alpint,fiske,jakt,tur)
 		VALUES ('Snilsefjell', 'Jotunheimen', 'Åløøøsåfett', 'Longtekst', 'Regulering', 'reguleringsKART', 'SKRIV UT?!?!', '10', '102.4', '15', '1', 1, 1, 0, 1, 0, 1, 1);
 		
-	INSERT INTO tomt (pris,areal,info,punkta,punktb,punktc,punktd,tomteomradeID)	
-		VALUES (1000000, 60, 'INFOOOOOOOO123', 1, 2, 3, 4, 1);
+	INSERT INTO tomt (pris,areal,info,punkta1,punkta2,punktb1,punktb2,punktc1,punktc2,punktd1,punktd2,tomteomradeID)	
+		VALUES (1000000, 60, 'INFOOOOOOOO123',62.251333,9.676380,62.250644,9.676294,62.250614,9.677668,62.251203,9.677517, 1);
 		
+	INSERT INTO tomt (pris,areal,info,punkta1,punkta2,punktb1,punktb2,punktc1,punktc2,punktd1,punktd2,tomteomradeID)	
+		VALUES (1000000, 60, 'INFOOOOOOOO123',62.251333,9.676380,62.250644,9.676294,62.250614,9.677668,62.251203,9.677517, 1);
+			
 	INSERT INTO bildetype
 	VALUE ('Header');
 	
