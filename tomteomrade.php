@@ -147,7 +147,7 @@ require_once 'connect.php';
 					<section class="valg" title="'.$row['fylke'].'">
 						<span>'.$row['fylke'].'</span>
 						<div class="checkBox">
-							<input type="checkbox" value="'.$row['fylke'].'" id="'.$row['fylke'].'checkbox" name="'.$row['fylke'].'" checked>
+							<input type="checkbox" value="'.$row['fylke'].'" id="'.$row['fylke'].'checkbox" name="'.$row['fylke'].'" >
 							<label for="'.$row['fylke'].'checkbox"> </label>
 						</div>
 					</section>
@@ -181,7 +181,7 @@ require_once 'connect.php';
 				<section class="valg" title="Vann">
 					<span>Vann</span>
 					<div class="checkBox">
-						<input type="checkbox" value="Vann" id="vanncheckbox" name="vann" checked>
+						<input type="checkbox" value="Vann" id="vanncheckbox" name="vann" >
 						<label for="vanncheckbox"> </label>
 					</div>
 				</section>
@@ -191,7 +191,7 @@ require_once 'connect.php';
 				<section class="valg" title="Strøm">
 					<span>Strøm</span>
 					<div class="checkBox">
-						<input type="checkbox" value="Strøm" id="stromcheckbox" name="strom" checked>
+						<input type="checkbox" value="Strøm" id="stromcheckbox" name="strom" >
 						<label for="stromcheckbox"> </label>
 					</div>
 				</section>
@@ -201,7 +201,7 @@ require_once 'connect.php';
 				<section class="valg" title="Vei">
 					<span>Vei</span>
 					<div class="checkBox">
-						<input type="checkbox" value="Vei" id="veicheckbox" name="vei" checked>
+						<input type="checkbox" value="Vei" id="veicheckbox" name="vei" >
 						<label for="veicheckbox"> </label>
 					</div>
 				</section>
@@ -213,7 +213,7 @@ require_once 'connect.php';
 				<section class="valg" title="Alpint">
 					<span>Alpint</span>
 					<div class="checkBox">
-						<input type="checkbox" value="Alpint" id="alpintcheckbox" name="alpint" checked>
+						<input type="checkbox" value="Alpint" id="alpintcheckbox" name="alpint" >
 						<label for="alpintcheckbox"> </label>
 					</div>
 				</section>
@@ -223,7 +223,7 @@ require_once 'connect.php';
 				<section class="valg" title="Fiske">
 					<span>Fiske</span>
 					<div class="checkBox">
-						<input type="checkbox" value="Fiske" id="fiskecheckbox" name="fiske" checked>
+						<input type="checkbox" value="Fiske" id="fiskecheckbox" name="fiske" >
 						<label for="fiskecheckbox"> </label>
 					</div>
 				</section>
@@ -233,7 +233,7 @@ require_once 'connect.php';
 				<section class="valg" title="Jakt">
 					<span>Jakt</span>
 					<div class="checkBox">
-						<input type="checkbox" value="Jakt" id="jaktcheckbox" name="jakt" checked>
+						<input type="checkbox" value="Jakt" id="jaktcheckbox" name="jakt" >
 						<label for="jaktcheckbox"> </label>
 					</div>
 				</section>
@@ -243,198 +243,229 @@ require_once 'connect.php';
 				<section class="valg" title="Tur">
 					<span>Tur</span>
 					<div class="checkBox">
-						<input type="checkbox" value="Tur" id="turcheckbox" name="tur" checked>
+						<input type="checkbox" value="Tur" id="turcheckbox" name="tur" >
 						<label for="turcheckbox"> </label>
 					</div>
 				</section>
 			</div>
 			<?php
-			
-			//Function to check if a button isnt checked
-			function notChecked ($name, $sql1, $sql2){
-				
-				if(!isset($_POST[$name])){
-					echo  '<script>';
 
-					//removes all tomteområder that have $name
-					while ($harDet = $sql1->fetch(PDO::FETCH_ASSOC)){
-						echo '$("#tomteomrade'.$harDet['omradeID'].'").css("display", "none");';
-					};
-
-					//shows all tomteområder that dont have $name
-					while ($harIkke = $sql2->fetch(PDO::FETCH_ASSOC)){
-						echo '$("#tomteomrade'.$harIkke['omradeID'].'").css("display", "inline-block");';
-					};
-					echo '$("#'.$name.'checkbox").removeProp("checked");</script>';
-				};
-			};
-			
 			//Function to check if a button is checked
-			function checked ($name, $sql1, $sql2){
+			function checked ($name){
 				
 				if(isset($_POST[$name])){
 					echo  '<script>';
-
-					//shows all tomteområder that got $name
-					while ($harDet = $sql1->fetch(PDO::FETCH_ASSOC)){
-						echo '$("#tomteomrade'.$harDet['omradeID'].'").css("display", "inline-block");';
-					};
-
-					//hides all tomteområder that dont have $name
-					while ($harIkke = $sql2->fetch(PDO::FETCH_ASSOC)){
-						echo '$("#tomteomrade'.$harIkke['omradeID'].'").css("display", "none");';
-					};
 					echo '$("#'.$name.'checkbox").prop("checked", true);</script>';
-				};
-			};	
-			
-			//SQL STATEMENTS FOR WATER
-			$vannstmt = $db->prepare("
-				SELECT *
-				FROM tomteomrade t
-				WHERE t.vann = 1
-				;");
-			$vannstmt->execute();
+				}else {
+					echo '<script>$("#'.$name.'checkbox").removeProp("checked");</script>';
+                }
+			};
 
-			$novannstmt = $db->prepare("
-				SELECT *
-				FROM tomteomrade t
-				WHERE t.vann = 0
+			$removestmt = $db->prepare("
+				SELECT omradeID
+				FROM tomteomrade
 				;");
-			$novannstmt->execute();
-			
-			//calling functions to check for vannclicks
-			checked('vann', $vannstmt, $novannstmt);
-			notChecked('vann', $vannstmt, $novannstmt);
-			
-			
-			
-			//SQLSTATEMENTS FOR STRØM
-			$nostromstmt = $db->prepare("
-				SELECT *
-				FROM tomteomrade t
-				WHERE t.strom = 0
+			$removestmt->execute();
+
+			//FUNCTION TO SHOW THE SELECTED TOMTEOMRÅDER WITH FASILITETER
+            function runSQL($sql, $removestmt){
+                echo '<script>';
+                while ($row1 = $removestmt->fetch(PDO::FETCH_ASSOC)){
+                    echo '$("#tomteomrade'.$row1['omradeID'].'").css("display", "none");';
+                };
+                //shows all tomteområder that got $name
+                while ($row = $sql->fetch(PDO::FETCH_ASSOC)){
+                    echo '$("#tomteomrade'.$row['omradeID'].'").css("display", "inline-block");';
+                };
+                echo '</script>';
+            };
+
+			/*//hides all tomteområder that dont have $name
+			while ($harIkke = $sql2->fetch(PDO::FETCH_ASSOC)){
+				echo '$("#tomteomrade'.$harIkke['omradeID'].'").css("display", "none");';
+			};*/
+
+			//creates an array to be filled with the names of the fasiliteter selected
+			$selected = array();
+
+			//if statements to fill the array with the selected checkbox
+			if(isset($_POST['vann'])){
+
+			    $selected[] = 'vann';
+			}
+			if(isset($_POST['strom'])){
+
+				$selected[] = 'strom';
+			}
+			if(isset($_POST['vei'])){
+
+				$selected[] = 'vei';
+			}
+			if(isset($_POST['alpint'])){
+
+				$selected[] = 'alpint';
+			}
+			if(isset($_POST['fiske'])){
+
+				$selected[] = 'fiske';
+			}
+			if(isset($_POST['jakt'])){
+
+				$selected[] = 'jakt';
+			}
+			if(isset($_POST['tur'])){
+
+				$selected[] = 'tur';
+			}
+
+            //checks the length of the array to see how many checkboxes were selected
+			$whichSQLtoUSE=count($selected);
+
+            //IF 1 checkbox is selected
+			if($whichSQLtoUSE == 1) {
+				//SQL STATEMENTS FOR WATER
+				$stmt = $db->prepare("
+				SELECT omradeID
+				FROM tomteomrade
+				WHERE {$selected[0]} = 1
 				;");
-			$nostromstmt->execute();
-			
-			$stromstmt = $db->prepare("
-				SELECT *
-				FROM tomteomrade t
-				WHERE t.strom = 1
+				$stmt->execute();
+
+				//calling functions
+				runSQL($stmt, $removestmt);
+				checked($selected[0]);
+			}
+
+			//IF 2 checkbox is selected
+			if($whichSQLtoUSE == 2) {
+				//SQL STATEMENTS FOR WATER
+				$stmt = $db->prepare("
+				SELECT omradeID
+				FROM tomteomrade
+				WHERE {$selected[0]} = 1
+				AND {$selected[1]} = 1
 				;");
-			$stromstmt->execute();
-			
-			//calling functions to check for strømclicks
-			checked('strom', $stromstmt, $nostromstmt);
-			notChecked('strom', $stromstmt, $nostromstmt);
-			
-			
-			
-			//SQLSTATEMENTS FOR VEI
-			$noveistmt = $db->prepare("
-				SELECT *
-				FROM tomteomrade t
-				WHERE t.vei = 0
+				$stmt->execute();
+
+				//calling functions
+				runSQL($stmt, $removestmt);
+				checked($selected[0]);
+				checked($selected[1]);
+			}
+
+			//IF 3 checkbox is selected
+			if($whichSQLtoUSE == 3) {
+				//SQL STATEMENTS FOR WATER
+				$stmt = $db->prepare("
+				SELECT omradeID
+				FROM tomteomrade
+				WHERE {$selected[0]} = 1
+				AND {$selected[1]} = 1
+				AND {$selected[2]} = 1
 				;");
-			$noveistmt->execute();
-			
-			$veistmt = $db->prepare("
-				SELECT *
-				FROM tomteomrade t
-				WHERE t.vei = 1
+				$stmt->execute();
+
+				//calling functions
+				runSQL($stmt, $removestmt);
+				checked($selected[0]);
+				checked($selected[1]);
+				checked($selected[2]);
+			}
+			//IF 4 checkbox is selected
+			if($whichSQLtoUSE == 4) {
+				//SQL STATEMENTS FOR WATER
+				$stmt = $db->prepare("
+				SELECT omradeID
+				FROM tomteomrade
+				WHERE {$selected[0]} = 1
+				AND {$selected[1]} = 1
+				AND {$selected[2]} = 1
+				AND {$selected[3]} = 1
 				;");
-			$veistmt->execute();
-			
-			//calling functions to check for veiclicks
-			checked('vei', $veistmt, $noveistmt);
-			notChecked('vei', $veistmt, $noveistmt);
-			
-			
-			
-			//SQLSTATEMENTS FOR Alpint
-			$noalpintstmt = $db->prepare("
-				SELECT *
-				FROM tomteomrade t
-				WHERE t.alpint = 0
+				$stmt->execute();
+
+				//calling functions
+				runSQL($stmt, $removestmt);
+				checked($selected[0]);
+				checked($selected[1]);
+				checked($selected[2]);
+				checked($selected[3]);
+			}
+
+			//IF 5 checkbox is selected
+			if($whichSQLtoUSE == 5) {
+				//SQL STATEMENTS FOR WATER
+				$stmt = $db->prepare("
+				SELECT omradeID
+				FROM tomteomrade
+				WHERE {$selected[0]} = 1
+				AND {$selected[1]} = 1
+				AND {$selected[2]} = 1
+				AND {$selected[3]} = 1
+				AND {$selected[4]} = 1
 				;");
-			$noalpintstmt->execute();
-			
-			$alpintstmt = $db->prepare("
-				SELECT *
-				FROM tomteomrade t
-				WHERE t.alpint = 1
+				$stmt->execute();
+
+				//calling functions
+				runSQL($stmt, $removestmt);
+				checked($selected[0]);
+				checked($selected[1]);
+				checked($selected[2]);
+				checked($selected[3]);
+				checked($selected[4]);
+			}
+
+			//IF 6 checkbox is selected
+			if($whichSQLtoUSE == 6) {
+				//SQL STATEMENTS FOR WATER
+				$stmt = $db->prepare("
+				SELECT omradeID
+				FROM tomteomrade
+				WHERE {$selected[0]} = 1
+				AND {$selected[1]} = 1
+				AND {$selected[2]} = 1
+				AND {$selected[3]} = 1
+				AND {$selected[4]} = 1
+				AND {$selected[5]} = 1
 				;");
-			$alpintstmt->execute();
-			
-			//calling functions to check for alpintlicks
-			checked('alpint', $alpintstmt, $noalpintstmt);
-			notChecked('alpint', $alpintstmt, $noalpintstmt);
-			
-			
-			
-			//SQLSTATEMENTS FOR Fiske
-			$nofiskestmt = $db->prepare("
-				SELECT *
-				FROM tomteomrade t
-				WHERE t.fiske = 0
+				$stmt->execute();
+
+				//calling functions
+				runSQL($stmt, $removestmt);
+				checked($selected[0]);
+				checked($selected[1]);
+				checked($selected[2]);
+				checked($selected[3]);
+				checked($selected[4]);
+				checked($selected[5]);
+			}
+
+			//IF 7 checkbox is selected
+			if($whichSQLtoUSE == 7) {
+				//SQL STATEMENTS FOR WATER
+				$stmt = $db->prepare("
+				SELECT omradeID
+				FROM tomteomrade
+				WHERE {$selected[0]} = 1
+				AND {$selected[1]} = 1
+				AND {$selected[2]} = 1
+				AND {$selected[3]} = 1
+				AND {$selected[4]} = 1
+				AND {$selected[5]} = 1
+				AND {$selected[6]} = 1
 				;");
-			$nofiskestmt->execute();
-			
-			$fiskestmt = $db->prepare("
-				SELECT *
-				FROM tomteomrade t
-				WHERE t.fiske = 1
-				;");
-			$fiskestmt->execute();
-			
-			//calling functions to check for fiskelicks
-			checked('fiske', $fiskestmt, $nofiskestmt);
-			notChecked('fiske', $fiskestmt, $nofiskestmt);
-			
-			
-			
-			//SQLSTATEMENTS FOR Jakt
-			$nojaktstmt = $db->prepare("
-				SELECT *
-				FROM tomteomrade t
-				WHERE t.jakt = 0
-				;");
-			$nojaktstmt->execute();
-			
-			$jaktstmt = $db->prepare("
-				SELECT *
-				FROM tomteomrade t
-				WHERE t.jakt = 1
-				;");
-			$jaktstmt->execute();
-			
-			//calling functions to check for jaktclicks
-			checked('jakt', $jaktstmt, $nojaktstmt);
-			notChecked('jakt', $jaktstmt, $nojaktstmt);
-			
-			
-			
-			//SQLSTATEMENTS FOR Tur
-			$noturstmt = $db->prepare("
-				SELECT *
-				FROM tomteomrade t
-				WHERE t.tur = 0
-				;");
-			$noturstmt->execute();
-			
-			$turstmt = $db->prepare("
-				SELECT *
-				FROM tomteomrade t
-				WHERE t.tur = 1
-				;");
-			$turstmt->execute();
-			
-			//calling functions to check for turclicks
-			checked('tur', $turstmt, $noturstmt);
-			notChecked('tur', $turstmt, $noturstmt);
-			
-			//PROBLEMET HER ER AT TOMTEOMRÅDENE BLIR FJERNET OG VIST ETTER HVER SPØRRING, BURDE SKJE PÅ SLUTTEN EN GANG OM DET ER NOE SOM TREFFER, TENKER VI KANSKJE TRENGER EN TING SOM RETURNER TRUE, OG IF TRUE VIS BILDE, OG HVIS FALSE GJØR SJEKKER TIL DET IKKE FINNES OG DA IKKE VISE
-			
+				$stmt->execute();
+
+				//calling functions
+				runSQL($stmt, $removestmt);
+				checked($selected[0]);
+				checked($selected[1]);
+				checked($selected[2]);
+				checked($selected[3]);
+				checked($selected[4]);
+				checked($selected[5]);
+				checked($selected[6]);
+			}
 			
 			?>
 			<!--.valgIcon Vanninclude images/svg/icons/vannico_default.svg

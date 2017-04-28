@@ -1,3 +1,6 @@
+<?php
+require_once '../../connect.php';
+?>
 <!DOCTYPE html>
 <html lang="en"></html>
 <head>
@@ -120,6 +123,7 @@
 		print_r($plotArr);
 		echo("</pre>");
         ?>
+		<?php$e = 0; ?>
         <script>
 				function myMap() {
 					var mapProp= {
@@ -136,7 +140,7 @@
 							new google.maps.LatLng(a1, a2),
 							new google.maps.LatLng(b1, b2),
 							new google.maps.LatLng(c1, c2),
-							new google.maps.LatLng(d1, c2)
+							new google.maps.LatLng(d1, d2)
 						];
 						var polyOptions = {
 							path: myCoordinates,
@@ -150,11 +154,17 @@
 						it.setMap(map);
 					}
 
-                    addPlot(62.251333,9.676380,62.250644,9.676294,62.250614,9.677668,62.251203,9.677517);
-                    addPlot(62.251203,9.677582,62.250634,9.677753,62.250644,9.678698,62.251163,9.678462)
 
-
-					}
+                    i = 0;
+					while (i < <?php echo count($plotArr) ?>){
+						addPlot(<?php
+                             // Trenger en måte å få javascript sin i variable inn i php her :§
+                            echo implode(",",$plotArr[$e]);
+                            $e++
+                            ?>);
+						i++
+                    }
+                }
 					
 					
 					
