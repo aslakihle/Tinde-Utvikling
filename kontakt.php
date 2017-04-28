@@ -23,7 +23,7 @@
   <body>
     <div class="menu">
       <ul>
-        <li id="menuLogo"><a href="../../index.html"><?xml version="1.0" encoding="utf-8"?>
+        <li id="menuLogo"><a href="index.php"><?xml version="1.0" encoding="utf-8"?>
 <!-- Generator: Adobe Illustrator 21.0.0, SVG Export Plug-In . SVG Version: 6.00 Build 0)  -->
 <svg version="1.1" id="Layer_1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px"
 	 viewBox="0 0 225.5 95.4" style="enable-background:new 0 0 225.5 95.4;" xml:space="preserve">
@@ -89,9 +89,9 @@
 </g>
 </svg>
 </a></li>
-        <li><a class="menu1" href="../../index.html">Hjem</a></li>
-        <li><a class="menu2" href="../../tomteomrade.html">Tomteområder</a></li>
-        <li><a class="menu3" href="../../kontakt.html">Kontakt</a></li>
+        <li><a class="menu1" href="index.php">Hjem</a></li>
+        <li><a class="menu2" href="tomteomrade.php">Tomteområder</a></li>
+        <li><a class="menu3" href="kontakt.php">Kontakt</a></li>
       </ul>
     </div>
     <div class="header"></div>

@@ -118,17 +118,50 @@ $query = "
 		stilling
 	)
 	VALUES (
-		'Henrik',
+		'Henrik Snilsberg',
 		94736274,
-		'henrik@henrik.henrik',
+		'henrik@tinde.no',
 		'Selger'
 	);
+	
+	INSERT INTO ansatt (
+		ansattnavn,
+		tlf,
+		epost,
+		stilling
+	)
+	VALUES (
+		'Aslak Ihle',
+		94736274,
+		'aslak@tinde.no',
+		'Selger'
+	);
+	
+	INSERT INTO ansatt (
+		ansattnavn,
+		tlf,
+		epost,
+		stilling
+	)
+	VALUES (
+		'Gunhild Ihle',
+		94736274,
+		'gunnhild@tinde.no',
+		'Selger'
+	);
+	
 	
 	INSERT INTO fylke
 	VALUE ('Rogaland');
 
 	INSERT INTO fylke
 	VALUE ('Jotunheimen');
+	
+	INSERT INTO fylke
+	VALUE ('Gulbrandslia');
+	
+	INSERT INTO fylke
+	VALUE ('Storehorn');
 	
 	INSERT INTO tomteomrade (omradenavn,fylke,oneliner,longtekst,regulering,reguleringskart,skrivut,maplong,maplat,mapzoom,ansattID,vann,strom,vei,alpint,fiske,jakt,tur)
 		VALUES ('Aslakbukta', 'Rogaland', 'Det er her det skjer', 'Longtekst', 'Regulering', 'reguleringsKART', 'SKRIV UT?!?!', '10', '102.4', '15', '1', 
@@ -140,8 +173,28 @@ $query = "
 	INSERT INTO tomteomrade (omradenavn,fylke,oneliner,longtekst,regulering,reguleringskart,skrivut,maplong,maplat,mapzoom,ansattID,vann,strom,vei,alpint,fiske,jakt,tur)
 		VALUES ('Snilsefjell', 'Jotunheimen', 'Åløøøsåfett', 'Longtekst', 'Regulering', 'reguleringsKART', 'SKRIV UT?!?!', '10', '102.4', '15', '1', 1, 1, 0, 1, 0, 1, 1);
 		
+	INSERT INTO tomteomrade (omradenavn,fylke,oneliner,longtekst,regulering,reguleringskart,skrivut,maplong,maplat,mapzoom,ansattID,vann,strom,vei,alpint,fiske,jakt,tur)
+		VALUES ('Brunnvika', 'Rogaland', 'Brunnvika er best!', 'Longtekst', 'Regulering', 'reguleringsKART', 'SKRIV UT?!?!', '10', '102.4', '15', '1', 1, 1, 0, 0, 0, 1, 1);
+		
+	INSERT INTO tomteomrade (omradenavn,fylke,oneliner,longtekst,regulering,reguleringskart,skrivut,maplong,maplat,mapzoom,ansattID,vann,strom,vei,alpint,fiske,jakt,tur)
+		VALUES ('Galhøspissland', 'Jotunheimen', 'Rett ved norges høyeste!', 'Longtekst', 'Regulering', 'reguleringsKART', 'SKRIV UT?!?!', '10', '102.4', '15', '1', 1, 1, 0, 0, 0, 1, 1);
+	
+	INSERT INTO tomteomrade (omradenavn,fylke,oneliner,longtekst,regulering,reguleringskart,skrivut,maplong,maplat,mapzoom,ansattID,vann,strom,vei,alpint,fiske,jakt,tur)
+		VALUES ('Solberget', 'Gulbrandslia', 'Sol hele dagen!', 'Longtekst', 'Regulering', 'reguleringsKART', 'SKRIV UT?!?!', '10', '102.4', '15', '1', 1, 1, 0, 0, 0, 1, 1);
+		
+	INSERT INTO tomteomrade (omradenavn,fylke,oneliner,longtekst,regulering,reguleringskart,skrivut,maplong,maplat,mapzoom,ansattID,vann,strom,vei,alpint,fiske,jakt,tur)
+		VALUES ('Nidavik', 'Storehorn', 'Heisanhoppsan!', 'Longtekst', 'Regulering', 'reguleringsKART', 'SKRIV UT?!?!', '10', '102.4', '15', '1', 1, 1, 0, 0, 0, 1, 1);	
+		
+	INSERT INTO tomteomrade (omradenavn,fylke,oneliner,longtekst,regulering,reguleringskart,skrivut,maplong,maplat,mapzoom,ansattID,vann,strom,vei,alpint,fiske,jakt,tur)
+		VALUES ('The place', 'Storehorn', 'rett og slett, stedet!', 'Longtekst', 'Regulering', 'reguleringsKART', 'SKRIV UT?!?!', '10', '102.4', '15', '1', 1, 1, 0, 0, 0, 1, 1);	
+		
+	INSERT INTO tomteomrade (omradenavn,fylke,oneliner,longtekst,regulering,reguleringskart,skrivut,maplong,maplat,mapzoom,ansattID,vann,strom,vei,alpint,fiske,jakt,tur)
+		VALUES ('Midnattsvika', 'Storehorn', 'Rett ved vannet!', 'Longtekst', 'Regulering', 'reguleringsKART', 'SKRIV UT?!?!', '10', '102.4', '15', '1', 0, 0, 0, 1, 1, 1, 1);		
+		
+	
 	INSERT INTO tomt (pris,areal,info,punkta1,punkta2,punktb1,punktb2,punktc1,punktc2,punktd1,punktd2,tomteomradeID)	
 		VALUES (1000000, 60, 'INFOOOOOOOO123',62.251333,9.676380,62.250644,9.676294,62.250614,9.677668,62.251203,9.677517, 1);
+
 		
 	INSERT INTO tomt (pris,areal,info,punkta1,punkta2,punktb1,punktb2,punktc1,punktc2,punktd1,punktd2,tomteomradeID)	
 		VALUES (1000000, 60, 'INFOOOOOOOO123',62.251333,9.676380,62.250644,9.676294,62.250614,9.677668,62.251203,9.677517, 1);
