@@ -317,7 +317,7 @@ require_once 'connect.php';
 
             //IF 1 checkbox is selected
 			if($whichSQLtoUSE == 1) {
-				//SQL STATEMENTS FOR WATER
+				//SQL STATEMENT that uses position in the $selected array to know what to display
 				$stmt = $db->prepare("
 				SELECT omradeID
 				FROM tomteomrade
@@ -332,7 +332,7 @@ require_once 'connect.php';
 
 			//IF 2 checkbox is selected
 			if($whichSQLtoUSE == 2) {
-				//SQL STATEMENTS FOR WATER
+				//SQL STATEMENT that uses position in the $selected array to know what to display
 				$stmt = $db->prepare("
 				SELECT omradeID
 				FROM tomteomrade
@@ -349,7 +349,7 @@ require_once 'connect.php';
 
 			//IF 3 checkbox is selected
 			if($whichSQLtoUSE == 3) {
-				//SQL STATEMENTS FOR WATER
+				//SQL STATEMENT that uses position in the $selected array to know what to display
 				$stmt = $db->prepare("
 				SELECT omradeID
 				FROM tomteomrade
@@ -367,7 +367,7 @@ require_once 'connect.php';
 			}
 			//IF 4 checkbox is selected
 			if($whichSQLtoUSE == 4) {
-				//SQL STATEMENTS FOR WATER
+				//SQL STATEMENT that uses position in the $selected array to know what to display
 				$stmt = $db->prepare("
 				SELECT omradeID
 				FROM tomteomrade
@@ -388,7 +388,7 @@ require_once 'connect.php';
 
 			//IF 5 checkbox is selected
 			if($whichSQLtoUSE == 5) {
-				//SQL STATEMENTS FOR WATER
+				//SQL STATEMENT that uses position in the $selected array to know what to display
 				$stmt = $db->prepare("
 				SELECT omradeID
 				FROM tomteomrade
@@ -411,7 +411,7 @@ require_once 'connect.php';
 
 			//IF 6 checkbox is selected
 			if($whichSQLtoUSE == 6) {
-				//SQL STATEMENTS FOR WATER
+				//SQL STATEMENT that uses position in the $selected array to know what to display
 				$stmt = $db->prepare("
 				SELECT omradeID
 				FROM tomteomrade
@@ -436,7 +436,7 @@ require_once 'connect.php';
 
 			//IF 7 checkbox is selected
 			if($whichSQLtoUSE == 7) {
-				//SQL STATEMENTS FOR WATER
+				//SQL STATEMENT that uses position in the $selected array to know what to display
 				$stmt = $db->prepare("
 				SELECT omradeID
 				FROM tomteomrade
