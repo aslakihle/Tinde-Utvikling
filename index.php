@@ -26,7 +26,7 @@
 	<link rel="stylesheet" type="text/css" href="tools/slick/slick-theme.css">
 
 	<!--Our Css-->
-	<link rel="stylesheet" href="css/frontpage.css">
+	<link rel="stylesheet" href="css/frontpage.css?<?php echo time(); ?>">
 </head>
 <body>
 	<!-- Menyen med SVG logo -->
@@ -133,6 +133,7 @@
 		<div class="content">
 		
 			<!-- Tomtefinner -->
+
 			<div id="tomteFinner">
 				<!-- start -->
 				<div id="tfFrame1">
@@ -276,7 +277,7 @@
 					</div>
 				</div>
 			</div>
-			
+
 			<!--Spørsmålbox -->
 			<div id="sporsmalBox">
 				<h1>Spørsmål?</h1>
@@ -433,6 +434,7 @@
 	
 	<!--FOOTER-->
 	<div class="footer">
+        <img src="/images/footerbilde.png" alt="FooterIMG">
 		<div class="footerText">Innholdet er beskyttet etter åndsverksloven. Bruk av automatiserte tjenester (roboter, spidere, indeksering m.m.) samt andre fremgangsmåter for systematisk eller regelmessig bruk er ikke tillatt uten eksplisitt samtykke fra tinde.no. <br><br>©  2017 Tinde utvikling AS</div>
 	</div>
 	
