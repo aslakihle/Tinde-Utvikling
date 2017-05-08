@@ -124,7 +124,7 @@ if (isset($_POST['create'])){
 					<label>Prisantydning</label>
 					<input type="number" placeholder="" max="10000000" min="1000000" name="pris" required>
 					<label>Merknad/Info om tomten</label>
-					<textarea form="newTomtForm" rows="4" placeholder="" name="merknad" required></textarea>
+					<textarea form="newTomtForm" rows="4" placeholder="" name="merknad"></textarea>
 				</div>
 				<input type="submit" name="create" value="LAGRE TOMT" id="createKnapp">
 			</form>

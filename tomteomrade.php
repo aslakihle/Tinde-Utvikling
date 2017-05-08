@@ -512,7 +512,7 @@ require_once 'connect.php';
 
 			-->
         	
-			<input type="submit" value="SØK" name="sok">
+			<input type="submit" value="SØK" name="sok" id="sokeKnapp">
  		</form>
     </div>
     
