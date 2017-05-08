@@ -16,6 +16,10 @@ if(isset($_POST['newOmrade'])){
 if (isset($_POST['endre'])){
 	redirect('endreOmrade.php?omradeID='.intval($_POST['endre']));
 };
+
+if (isset($_POST['nyTomt'])){
+	redirect('leggTilTomt.php?omradeID='.intval($_POST['nyTomt']));
+};
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -122,6 +126,10 @@ if (isset($_POST['endre'])){
 								<input class="endreKnapp" type="hidden" name="endre" value="'.intval($row['omradeID']).'">
 								<input type="submit" value="ENDRE" class="endreKnapp">
 							</form>
+							<form method="post" class="tomtForm">
+								<input class="endreKnapp" type="hidden" name="nyTomt" value="'.intval($row['omradeID']).'">
+								<input type="submit" value="LEGG TIL TOMT" class="endreKnapp">
+							</form>
 						';
 					if ($status > 2){
 						echo '<div class="noLedige status">
@@ -139,7 +147,7 @@ if (isset($_POST['endre'])){
 							<div>
 								Prisklasse: 1.2 - 4.3 mill
 								<br>
-								Areal: 25km2 - 30 km2
+								Areal: 25km&sup2; - 30 km&sup2;
 								<br>
 							</div>
 							<!-- FYLKE -->

@@ -61,8 +61,20 @@ form
 	cursor: pointer
 	font-size: 2em
 
-#createKnapp:hover
+.nyTomtKnapp
+	background-color: $blue
+	color: white
+	border: 0
+	width: 100%
+	box-sizing: border-box
+	padding: 1em
+	cursor: pointer
+
+#createKnapp:hover, .nyTomtKnapp:hover
 	background-color: $blueDark
+
+#createKnapp:active, .nyTomtKnapp:active
+	background-color: $blueLight
 
 .redColor
 	color:#e04747
@@ -101,3 +113,47 @@ form
 	border: 1px solid $blue
 	padding: 2em
 	
+.fileUp
+	border: 1px solid #bababa
+
+#allTomts
+	text-align: center
+	position: absolute
+	top: 9em
+	right: 15%
+
+#tomtliste
+	border: 1px solid $blue
+	box-sizing: border-box
+	padding: 0 2em 2em 2em
+	a
+		display: list-item
+		background-color: $blue
+		width: 100%
+		box-sizing: border-box
+		padding: 0.5em
+		//margin: 0.25em 0 0.25em 0
+		border-top: 1px solid $blueLight
+		border-bottom: 1px solid $blueDark
+		text-decoration: none
+		color: white
+	a:hover
+		background-color: $blueDark
+		border-top: 1px solid $blueDark
+		border-bottom: 1px solid $blueLight
+	a:active
+		background-color: $blueLight
+
+.ledig
+	background-color: #49b749
+	
+.solgt
+	background-color: #e04747
+	
+.span
+	float: right
+	width: 1em
+	height: 1em
+	margin-top: 2%
+	border: 0.5px solid $blueDark
+	margin-left: 2em
