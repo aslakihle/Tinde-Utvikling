@@ -14,11 +14,6 @@ if(isset($_POST['newOmrade'])){
 	redirect("nyttOmrade.php");
 }
 
-//Checks if the "hidden"-endre butten is clicked if it is clicked then goes to that editpage
-if (isset($_POST['endre'])){
-	redirect('endreOmrade.php?omrade='.intval($_POST['endre']));
-};
-
 //LAGING av nytt område
 if (isset($_POST['create'])){
 	echo $_POST['fylke'];

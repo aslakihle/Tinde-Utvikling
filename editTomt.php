@@ -17,6 +17,7 @@ if (isset($_POST['nyTomt'])){
 	redirect("leggTilTomt.php?omradeID=".$_GET['omradeID']);
 };
 
+
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -88,27 +89,20 @@ if (isset($_POST['nyTomt'])){
    
     <!--main-->
     <div class="main">
-        <div class="content">
-			<h1 class="topH1alternativ">OPPDATER TOMTEOMRÅDE</h1>
+    	<div class="content">
+			<h1 class="topH1">OPPDATER TOMT</h1>
 			
 			<?php
 			
 			//UPdatering av område
 			if (isset($_POST['update'])){
 				$stmt = $db->prepare("
-				UPDATE tomteomrade
-				SET omradenavn = '".htmlentities($_POST['navn'])."',
-					fylke = '".htmlentities($_POST['fylke'])."',
-					oneliner = '".htmlentities($_POST['shortText'])."',
-					longtekst = '".htmlentities($_POST['longText'])."',
-					vann = ".htmlentities($_POST['vann']).", 
-					strom = ".htmlentities($_POST['strom']).", 
-					vei = ".htmlentities($_POST['vei']).", 
-					alpint = ".htmlentities($_POST['alpint']).", 
-					fiske = ".htmlentities($_POST['fiske']).", 
-					jakt = ".htmlentities($_POST['jakt']).", 
-					tur = ".htmlentities($_POST['tur'])."
-				WHERE omradeID = ".htmlentities($_GET['omradeID'])."
+				UPDATE tomt
+				SET adresse = '".htmlentities($_POST['adresse'])."',
+					areal = '".htmlentities($_POST['areal'])."',
+					pris = '".htmlentities($_POST['pris'])."',
+					info = '".htmlentities($_POST['merknad'])."'
+				WHERE tomtID = ".htmlentities($_GET['tomtID'])."
 					;
 				");
 				$stmt->execute();
@@ -123,172 +117,42 @@ if (isset($_POST['nyTomt'])){
 
 			
 			?>
-			<form method="post" id="newOmradeForm" >
-			<div class="borderdiv">
-				<?php
-				$stmt = $db->prepare("
-					SELECT *
-					FROM tomteomrade
-					WHERE omradeID = ".htmlentities($_GET['omradeID'])."
-					;");
-				$stmt->execute();
+			
+			<form method="post" id="newTomtForm" >
+				<div class="borderdiv">
 				
-				while ($row = $stmt->fetch(PDO::FETCH_ASSOC)){
-					echo '<h3 class="topH3">'.$row['omradenavn'].'</h3>
-						<label>Navn på området</label>
-						<input type="text" name="navn" value="'.$row['omradenavn'].'" autofocus>
-						<label>Beskrivende setning(one-liner)</label>
-						<input type="text" value="'.$row['oneliner'].'" name="shortText" >
-						<label>Header bilde</label>
-						<input class="fileUp" type="file" placeholder="Header bilde..." name="headerPic">
-						<label>Karusell bilde</label>
-						<input class="fileUp" type="file" placeholder="Karusell bilde..." name="karusellPic">
-						<label>Fylke</label>
-						<select name="fylke" required>
-							<option value="0">Velg Fylke</option>';
+					<?php
+					$stmt = $db->prepare("
+						SELECT *
+						FROM tomt
+						WHERE tomtID = ".htmlentities($_GET['tomtID'])."
+						;");
+					$stmt->execute();
+				
+					while ($row = $stmt->fetch(PDO::FETCH_ASSOC)){
+						echo '
+							<h3 class="topH3">'.$row['adresse'].'</h3>
+							<label>Adresse</label>
+							<input type="text" placeholder="" name="adresse" value="'.$row['adresse'].'" required autofocus>
 							
-							//statement to find all the fylker that TindeUtvikling owns
-							$fstmt = $db->prepare("
-								SELECT fylke
-								FROM fylke;");
-							$fstmt->execute();
-
-							while ($frow = $fstmt->fetch(PDO::FETCH_ASSOC)){
-								if ($frow['fylke'] == $row['fylke']){
-									echo '<option value="'.$frow['fylke'].'" selected>'.$frow['fylke'].'</option>';
-								} else {
-									echo '<option value="'.$frow['fylke'].'">'.$frow['fylke'].'</option>';
-								}
-								
-							}
-					echo '	
-						</select>
-
-						<label>Beskrivelse av området (brødtext)</label>
-						<textarea form="newOmradeForm" rows="10" name="longText">'.$row['longtekst'].'</textarea>
-
-						<!--Checkboxes, uses hidden checkbox with value 0 to return if checkbox wasnt clicked -->
-					<h4 style="text-align:center;">Fasiliteter</h4>
-					<div id="failiteterBox">';
-					
-					if($row['vann'] == 1){
-						echo '<div class="fasiliteter mgLeft">
-							<label>Vann</label>
-							<input class="checkbox" type="hidden" name="vann" value="0">
-							<input class="checkbox" type="checkbox" name="vann" value="1" checked>
-						</div>';
-					} else {
-						echo '<div class="fasiliteter mgLeft">
-							<label>Vann</label>
-							<input class="checkbox" type="hidden" name="vann" value="0">
-							<input class="checkbox" type="checkbox" name="vann" value="1">
-						</div>';
+							<label>Areal (km&sup2;)</label>
+							<input type="number" placeholder="" name="areal" value="'.$row['areal'].'" required>
+							
+							<label>Prisantydning</label>
+							<input type="number" placeholder="" max="10000000" min="1000000" name="pris" value="'.$row['pris'].'" required>
+							
+							<label>Merknad/Info om tomten</label>
+							<textarea form="newTomtForm" rows="4" placeholder="" name="merknad">'.$row['info'].'</textarea>
+						';
 					}
-					
-					if($row['strom'] == 1){
-						echo '<div class="fasiliteter">
-							<label>Strøm</label>
-							<input class="checkbox" type="hidden" name="strom" value="0">
-							<input class="checkbox" type="checkbox" name="strom" value="1" checked>
-						</div>';
-					}else{
-						echo '<div class="fasiliteter">
-							<label>Strøm</label>
-							<input class="checkbox" type="hidden" name="strom" value="0">
-							<input class="checkbox" type="checkbox" name="strom" value="1">
-						</div>';
-					}
-					
-					if($row['vei'] == 1){
-						echo '<div class="fasiliteter">
-							<label>Vei</label>
-							<input class="checkbox" type="hidden" name="vei" value="0">
-							<input class="checkbox" type="checkbox" name="vei" value="1" checked>
-						</div>';
-					}else{
-						echo '<div class="fasiliteter">
-							<label>Vei</label>
-							<input class="checkbox" type="hidden" name="vei" value="0">
-							<input class="checkbox" type="checkbox" name="vei" value="1">
-						</div>';
-					}
-					
-					echo '<br>';
-					
-					if($row['alpint'] == 1){
-						echo '<div class="fasiliteter">
-							<label>Alpint</label>
-							<input class="checkbox" type="hidden" name="alpint" value="0">
-							<input class="checkbox" type="checkbox" name="alpint" value="1" checked>
-						</div>';
-					}else{
-						echo '<div class="fasiliteter">
-							<label>Alpint</label>
-							<input class="checkbox" type="hidden" name="alpint" value="0">
-							<input class="checkbox" type="checkbox" name="alpint" value="1">
-						</div>';
-					}
-					
-					if($row['alpint'] == 1){
-						echo '<div class="fasiliteter">
-							<label>Fiske</label>
-							<input class="checkbox" type="hidden" name="fiske" value="0">
-							<input class="checkbox" type="checkbox" name="fiske" value="1" checked>
-						</div>';
-					}else{
-						echo '<div class="fasiliteter">
-							<label>Fiske</label>
-							<input class="checkbox" type="hidden" name="fiske" value="0">
-							<input class="checkbox" type="checkbox" name="fiske" value="1">
-						</div>';
-					}
-					
-					if($row['jakt'] == 1){
-						echo '<div class="fasiliteter">
-							<label>Jakt</label>
-							<input class="checkbox" type="hidden" name="jakt" value="0">
-							<input class="checkbox" type="checkbox" name="jakt" value="1" checked>
-						</div>';
-					}else{
-						echo '<div class="fasiliteter">
-							<label>Jakt</label>
-							<input class="checkbox" type="hidden" name="jakt" value="0">
-							<input class="checkbox" type="checkbox" name="jakt" value="1">
-						</div>';
-					}
-					
-					if($row['tur'] == 1){
-						echo '<div class="fasiliteter">
-							<label>Tur</label>
-							<input class="checkbox" type="hidden" name="tur" value="0">
-							<input class="checkbox" type="checkbox" name="tur" value="1" checked>
-						</div>';
-					}else{
-						echo '<div class="fasiliteter">
-							<label>Tur</label>
-							<input class="checkbox" type="hidden" name="tur" value="0">
-							<input class="checkbox" type="checkbox" name="tur" value="1">
-						</div>';
-					}
-					echo '</div>';
 					?>
-				
-						<br>
-						<label>Reguleringsplan</label>
-						<input class="fileUp" type="file" name="regPlan">
-						<label>Reguleringskart</label>
-						<input class="fileUp" type="file" name="regKart">
-						<label>Utskriftsvennlig versjon</label>
-						<input class="fileUp" type="file" name="utskrift">
-						<?php
-						}
-						?>
-				
-				</div>
-				<input type="submit" name="update" value="OPPDATER" id="createKnapp">
+					
+				</div>	
+				<input type="submit" name="update" value="OPPDATER TOMT" id="createKnapp">
 			</form>
-		</div>
-        <div id="allTomts">
+			
+        </div>
+		<div id="allTomts">
         	<div id="tomtliste">
         		<h3>Tomteliste</h3>
 				<?php

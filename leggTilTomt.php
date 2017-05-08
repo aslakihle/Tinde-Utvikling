@@ -12,11 +12,6 @@ if(isset($_POST['newOmrade'])){
 	redirect("nyttOmrade.php");
 }
 
-//Checks if the "hidden"-endre butten is clicked if it is clicked then goes to that editpage
-if (isset($_POST['endre'])){
-	redirect('endreOmrade.php?omrade='.intval($_POST['endre']));
-};
-
 //LAGING av nytt område
 if (isset($_POST['create'])){
 	$stmt = $db->prepare("
@@ -29,8 +24,8 @@ if (isset($_POST['create'])){
 		tomteomradeID)
 	VALUES (
 		'".htmlentities($_POST['adresse'])."',
-		".htmlentities($_POST['areal']).",
 		".htmlentities($_POST['pris']).",
+		".htmlentities($_POST['areal']).",
 		'".htmlentities($_POST['merknad'])."',
 		0,
 		".htmlentities($_GET['omradeID'])."
@@ -134,21 +129,19 @@ if (isset($_POST['create'])){
         	<div id="tomtliste">
         		<h3>Tomteliste</h3>
 				<?php
-				
-				$omradeID = htmlentities($_GET['omradeID']);
 				//statement to find name of logged in ansatt
 				$stmt = $db->prepare("
-					SELECT adresse, status
+					SELECT tomtID, adresse, status
 					FROM tomt t
 					INNER JOIN tomteomrade tom
 					ON t.tomteomradeID = tom.omradeID
-					WHERE t.tomteomradeID = ".$omradeID."
+					WHERE t.tomteomradeID = ".htmlentities($_GET['omradeID'])."
 					;");
 				$stmt->execute();
 
 				//finds and prints logged in ansatt
 				while ($row = $stmt->fetch(PDO::FETCH_ASSOC)){
-					echo '<a class="" href="cmsDashboard.php">'.htmlentities($row['adresse']).' ';
+					echo '<a class="" href="editTomt.php?omradeID='.$_GET['omradeID'].'&tomtID='.$row['tomtID'].'">'.$row['adresse'].' ';
 						if($row['status']==0){
 							echo '<span class="span ledig" title="Ledig"></span>';
 						} else {
