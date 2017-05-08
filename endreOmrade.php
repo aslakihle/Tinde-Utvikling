@@ -124,6 +124,7 @@ if (isset($_POST['endre'])){
 			
 			?>
 			<form method="post" id="newOmradeForm" >
+			<div class="borderdiv">
 				<?php
 				$stmt = $db->prepare("
 					SELECT *
@@ -163,7 +164,8 @@ if (isset($_POST['endre'])){
 
 						<textarea form="newOmradeForm" rows="10" name="longText">'.$row['longtekst'].'</textarea>
 
-						<!--Checkboxes, uses hidden checkbox with value 0 to return if checkbox wasnt clicked -->';
+						<!--Checkboxes, uses hidden checkbox with value 0 to return if checkbox wasnt clicked -->
+					<div id="failiteterBox">';
 					
 					if($row['vann'] == 1){
 						echo '<div class="fasiliteter mgLeft">
@@ -264,7 +266,9 @@ if (isset($_POST['endre'])){
 							<input class="checkbox" type="checkbox" name="tur" value="1">
 						</div>';
 					}
+					echo '</div>';
 					?>
+				
 						<br>
 						<label>Reguleringsplan</label>
 						<input type="file" name="regPlan">
@@ -276,7 +280,7 @@ if (isset($_POST['endre'])){
 						}
 						?>
 				
-				
+				</div>
 				<input type="submit" name="update" value="OPPDATER" id="createKnapp">
 			</form>
 			

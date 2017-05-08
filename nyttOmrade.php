@@ -138,6 +138,7 @@ if (isset($_POST['create'])){
 			<h1 class="topH1">NYTT TOMTEOMRÅDE</h1>
 			
 			<form method="post" id="newOmradeForm" >
+				<div class="borderdiv">
 				
 				<input type="text" placeholder="Navn på område..." name="navn" required>
 				<input type="text" placeholder="Beskrivende setning..." name="shortText" required>
@@ -154,11 +155,9 @@ if (isset($_POST['create'])){
 						FROM fylke;");
 					$stmt->execute();
 					
-					$fylkeVal = 1;
-					
+					//goes through all fylkes and for each fylke prints a new optiontag, with value and name as fylkename
 					while ($row = $stmt->fetch(PDO::FETCH_ASSOC)){
 						echo '<option value="'.$row['fylke'].'">'.$row['fylke'].'</option>';
-						$fylkeVal ++;
 					}
 					?>
 				</select>
@@ -167,46 +166,48 @@ if (isset($_POST['create'])){
 				<textarea form="newOmradeForm" rows="10" placeholder="Beskriv området (brødtext)..." name="longText" required></textarea>
 				
 				<!--Checkboxes, uses hidden checkbox with value 0 to return if checkbox wasn't clicked -->
-				<div class="fasiliteter mgLeft">
-					<label>Vann</label>
-					<input class="checkbox" type="hidden" name="vann" value="0">
-					<input class="checkbox" type="checkbox" name="vann" value="1">
-				</div>
-				
-				<div class="fasiliteter">
-					<label>Strøm</label>
-					<input class="checkbox" type="hidden" name="strom" value="0">
-					<input class="checkbox" type="checkbox" name="strom" value="1">
-				</div>
-			
-				<div class="fasiliteter">
-					<label>Vei</label>
-					<input class="checkbox" type="hidden" name="vei" value="0">
-					<input class="checkbox" type="checkbox" name="vei" value="1">
-				</div>
-				<br>
-				<div class="fasiliteter">
-					<label>Alpint</label>
-					<input class="checkbox" type="hidden" name="alpint" value="0">
-					<input class="checkbox" type="checkbox" name="alpint" value="1">
-				</div>
-				
-				<div class="fasiliteter">
-					<label>Fiske</label>
-					<input class="checkbox" type="hidden" name="fiske" value="0">
-					<input class="checkbox" type="checkbox" name="fiske" value="1">
-				</div>
-				
-				<div class="fasiliteter">
-					<label>Jakt</label>
-					<input class="checkbox" type="hidden" name="jakt" value="0">
-					<input class="checkbox" type="checkbox" name="jakt" value="1">
-				</div>
-				
-				<div class="fasiliteter">
-					<label>Tur</label>
-					<input class="checkbox" type="hidden" name="tur" value="0">
-					<input class="checkbox" type="checkbox" name="tur" value="1">
+				<div id="failiteterBox">
+					<div class="fasiliteter">
+						<label>Vann</label>
+						<input class="checkbox" type="hidden" name="vann" value="0">
+						<input class="checkbox" type="checkbox" name="vann" value="1">
+					</div>
+
+					<div class="fasiliteter">
+						<label>Strøm</label>
+						<input class="checkbox" type="hidden" name="strom" value="0">
+						<input class="checkbox" type="checkbox" name="strom" value="1">
+					</div>
+
+					<div class="fasiliteter">
+						<label>Vei</label>
+						<input class="checkbox" type="hidden" name="vei" value="0">
+						<input class="checkbox" type="checkbox" name="vei" value="1">
+					</div>
+					<br>
+					<div class="fasiliteter">
+						<label>Alpint</label>
+						<input class="checkbox" type="hidden" name="alpint" value="0">
+						<input class="checkbox" type="checkbox" name="alpint" value="1">
+					</div>
+
+					<div class="fasiliteter">
+						<label>Fiske</label>
+						<input class="checkbox" type="hidden" name="fiske" value="0">
+						<input class="checkbox" type="checkbox" name="fiske" value="1">
+					</div>
+
+					<div class="fasiliteter">
+						<label>Jakt</label>
+						<input class="checkbox" type="hidden" name="jakt" value="0">
+						<input class="checkbox" type="checkbox" name="jakt" value="1">
+					</div>
+
+					<div class="fasiliteter">
+						<label>Tur</label>
+						<input class="checkbox" type="hidden" name="tur" value="0">
+						<input class="checkbox" type="checkbox" name="tur" value="1">
+					</div>
 				</div>
 				
 				<br>
@@ -216,7 +217,7 @@ if (isset($_POST['create'])){
 				<input type="file" name="regKart">
 				<label>Utskriftsvennlig versjon</label>
 				<input type="file" name="utskrift">
-				
+				</div>
 				<input type="submit" name="create" value="PUBLISER" id="createKnapp">
 			</form>
 			

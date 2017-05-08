@@ -93,6 +93,8 @@ if (isset($_POST['endre'])){
 			<form method="post" id="newOmrade">
 				<input type="submit" name="newOmrade" value="NYTT TOMTEOMRÅDE" id="newOmradeKnapp">
 			</form>
+			
+			<div id="allOmrader">
 			<!--OUTPUT OF Tomteområder-->
 			<?php
 			$stmt = $db->prepare("
@@ -148,6 +150,7 @@ if (isset($_POST['endre'])){
 				}
 			}
 			?>
+       		</div>
         </div>
     </div>
 	<!--FOOTER-->
