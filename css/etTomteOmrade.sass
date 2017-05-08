@@ -159,11 +159,12 @@ body
 	height: 2em
 
 .ledigColor
-	background-color: lightgray
-	border: 2px solid $blue
-
-.solgtColor
 	background-color: $blue
+	border: 2px solid $blue
+.solgtColor
+	
+	background-color: #e1ebef
+	border: 2px solid #6792a7
 
 .ledigText, .solgtText
 	position: relative
@@ -176,8 +177,9 @@ body
 		
 #mapWrap
 	width: 46%
-	background-color: blue
-	padding: 0 2%
+	//background-color: blue
+	padding: 0 3%
+	float: left
 	
 #map
 	width: 100%
@@ -185,25 +187,25 @@ body
 	
 		
 //Specific tomt
-
-
+.btn-group
+	margin-left: 3%
 .tomtPopup
-	
-	background-color: red
 	width: 46%
-	height: 90%
+	height: 375px
 	z-index: 100
 	display: inline-block
-	.tomtHead, .tomtAdress, .tomtDetails, .tomtInfoTitle, .tomtInfoText
+	
+	.tomtHead,	 .tomtDetails, .tomtInfoTitle, .tomtInfoText
 		color: black
 		width: 94%
 		margin: 0 3%
-	.tomtHead, .tomtAdress
-		text-align: center
+		
+	
 	.tomtHead
+		margin-top: 40px
 		font-weight: $osbold
 		font-size: 2em
-		margin-top: 0
+		
 	.tomtAdress
 		margin-top: -2%
 		margin-bottom: 3%
@@ -211,27 +213,27 @@ body
 		margin-top: 3%
 	.tomtBtn
 		display: block
-		float: right
+		width: auto
 		background-color: $blue
-		position: absolute
-		bottom: 0
-		right: 0
+		vertical-align: bottom
 		margin: 4%
 		padding: 1em
 		color: $bgc
 		border-radius: 3px
-	.esc
-		position: absolute
-		top: 0
-		right: 0
-		width: 2em
-		margin: 3%
-		padding: 0
+		text-align: center
+	.sold
+		vertical-align: bottom
 		
-		svg
-			width: 100%
-			height: 100%
-				
+		margin: 3%
+		color: black
+		font-size: 1.2em
+		border-radius: 3px
+		text-align: left
+		span
+			color: #e04747
+.showTomt
+	display: inline-block
+	//display: inline-block
 //Table
 
 .tableWrap
@@ -239,26 +241,28 @@ body
 	margin: 0 3%
 	margin-top: 1.5em
 	display: inline-flex
+	
 
 	table, tr, td
 		border: 5px solid $bgc
 		color: black
 	table
-		width: 80%
+		width: 100%
 		border-collapse: collapse
 	table tr:nth-child(even) td
-		background-color: lightgray
+		background-color: #dcdcdc
 		color: black
 	td
 		text-align: center
 		font-weight: $osreg
 		padding: .7em 0
-		background-color: $blueLight
-		color: $bgc
+		background-color: #bab9b9
+		color: black
 	.col
 		font-family: $raleway
 		font-weight: $raleway-bold
-		background-color: $blue
+		background-color: #6792a7
+		color: $bgc
 .arrow
 	width: 10%
 	margin: auto
@@ -266,7 +270,7 @@ body
 	svg
 		width: 100%
 		height: auto
-		fill: $blueLight
+		fill: #6792a7
 		
 .fileWrap
 	width: 94%
@@ -297,45 +301,48 @@ body
 	margin: 0 3%
 	margin-top: 5em
 	text-align: center
-	background-color: lightgray
+	//background-color:  #dcdcdc
 	color: black
 	padding: 2em 0
 	margin-bottom: 4em
 	.title
-		text-align: center
+		//text-align: center
 		width: 100%
 		font-family: $opensans
 		font-weight: $osbold
 		font-size: 2em
+		margin: 0 1%
 		margin-bottom: .5em
-		//background-color: green
-	#ansattImgWrap
-		width: 100%
-		padding: 0
-		margin: 0
-		.oneAnsattImg
-			width: 32%
-			
-			display: inline-block
-			text-align: center
-			img
-				
-				border: 2px solid black
-				width: 59%
-				margin: 0 20%
-	#ansattInfoWrap
-		width: 100%
-		height: auto
-		.oneAnsattInfo
-			width: 32%
-			vertical-align: top
-			display: inline-block
-			text-align: center
-			.ansattName
-				font-weight: $osbold
-			.ansattEmail
-				font-size: .8em
 		
+		//background-color: green
+	
+	.oneAnsattWrap
+		width: 41%
+		margin: 0 1%
+		min-height: 100px
+		padding: 3%
+		height: auto
+		font-size: 1.3em
+		text-align: left
+		background-color: #dcdcdc
+		border-radius: 2px
+		display: inline-block
+		
+		.ansattName
+			font-weight: $osbold
+		.ansattEmail
+			font-size: .9em
+			color: $blueDark
+		.kontaktBtn
+			display: block
+			border-radius: 3px
+			margin-top: .9em
+			text-align: center
+			padding: 1em 0
+			width: 100%
+			background-color: $blue
+			color: $bgc
+	
 	
 
 

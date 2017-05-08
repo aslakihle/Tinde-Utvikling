@@ -14,6 +14,9 @@ require_once '../../connect.php';
   <script src="../../jquery-ui/jquery-ui.min.js"></script>
   <!--Slick Carousell-->
   <link rel="stylesheet" type="text/css" href="../../tools/slick/slick.css">
+  <!-- Datatables (jQuery extension) -->
+  <link rel="stylesheet" href="https://cdn.datatables.net/1.10.15/css/jquery.dataTables.min.css">
+  <script></script>
   <!--Add the new slick-theme.css if you want the default styling-->
   <link rel="stylesheet" type="text/css" href="../../tools/slick/slick-theme.css">
   <!--Our Css-->
@@ -99,123 +102,48 @@ require_once '../../connect.php';
   <!--meny funker ikke uten denne, har bare padding-top 20px, men må ha det for å funke-->
   <div class="main">
     <div class="content">
+       <!--
         <a href="javascript:history.back()">
             <div class="backArrow">&#x2190; Tilbake</div>
         </a>
+        -->
         <?php
 		$currOmrade = $_GET['omrade'];
-		echo 'Current områdeID is: '.$currOmrade. '<br>';
+		//echo 'Current områdeID is: '.$currOmrade. '<br>';
 
 		if(isset($_GET['tomt']))
 		{
 			$currTomt = $_GET['tomt'];
-			echo 'Current tomtID is: '.$currTomt. '<br>';
+			//echo 'Current tomtID is: '.$currTomt. '<br>';
 		}
 
-        $currTomt = 1;
-        ?>
-        <!--
-        <button value="1" onclick="hue(1)">1</button>
-        <button value="2" onclick="hue(2)">2</button>
-        <button value="3" onclick="hue(3)">3</button>
-        <button value="4" onclick="hue(4)">4</button>
-
-
-        <script>
-            function hue(id){
-            	var currTomt = id;
-            	var url = "?id=" . id;
-                window.history.pushState(url, NULL, url);
-            }
-        </script>
--->
-        <!--
-        <script type="text/javascript">
-			function ChangeUrl(url) {
-				if (typeof (history.pushState) != "undefined") {
-					var obj = {Url: url };
-					history.pushState(obj, null, obj.Url);
-				} else {
-					alert("Browser does not support HTML5.");
-				}
-			}
-        </script>
-        -->
-        <?php
-        function editUrl($a) {
-            echo'
-            <script type="text/javascript">
-                if (typeof (history.pushState) != "undefined") {
-                    var obj = {Url: ' . $a . '};
-                    history.pushState(obj, null, obj.Url);
-                } else {
-                    alert("Browser does not support HTML5.");
-                }
-        </script>
-            ';
-        }
-        ?>
-
-
-        <input type="button" value="ID1" onclick="ChangeUrl('?omrade=<?php echo $currOmrade;?>&tomt=1');" />
-        <input type="button" value="ID2" onclick="ChangeUrl('?omrade=<?php echo $currOmrade;?>&tomt=2');" />
-        <input type="button" value="ID3" onclick="ChangeUrl('?omrade=<?php echo $currOmrade;?>&tomt=3');" />
-
-
-
-<!--
-        <script>
-				function myMap() {
-					var mapProp= {
-						center:new google.maps.LatLng(62.251263, 9.681470),
-						zoom: 16,
-						mapTypeId: 'terrain'
-					};
-					var map=new google.maps.Map(document.getElementById("map"),mapProp);
-					
-					
-					
-					function addPlot(a1, a2, b1, b2, c1, c2, d1, d2) {
-						var myCoordinates = [
-							new google.maps.LatLng(a1, a2),
-							new google.maps.LatLng(b1, b2),
-							new google.maps.LatLng(c1, c2),
-							new google.maps.LatLng(d1, d2)
-						];
-						var polyOptions = {
-							path: myCoordinates,
-							strokeColor: "#FF0000",
-							strokeOpacity: 0.8,
-							strokeWeight: 2,
-							fillColor: "#0000FF",
-							fillOpacity: 0.6
-						};
-						var it = new google.maps.Polygon(polyOptions);
-						it.setMap(map);
-					}
-
-
-
-                }
-					
-	-->
-					
-
-
-		<?php
 
 		$mStmt = $db->prepare("
 			SELECT punkta1,punkta2,punktb1,punktb2,punktc1,punktc2,punktd1,punktd2 
 			FROM tomt 
 			WHERE tomteomradeID = :current
+			AND status = 1
 			");
 		$mStmt->bindParam(':current', $currOmrade );
 		$mStmt->execute();
-		$plotMapArr = array();
+		$plotMapArrSold = array();
 
 		while ($row = $mStmt->fetch(PDO::FETCH_ASSOC)) {
-		    $plotMapArr[] = $row;
+		    $plotMapArrSold[] = $row;
         }
+		$mStmt = $db->prepare("
+			SELECT punkta1,punkta2,punktb1,punktb2,punktc1,punktc2,punktd1,punktd2 
+			FROM tomt 
+			WHERE tomteomradeID = :current
+			AND status = 0
+			");
+		$mStmt->bindParam(':current', $currOmrade );
+		$mStmt->execute();
+		$plotMapArrFree = array();
+
+		while ($row = $mStmt->fetch(PDO::FETCH_ASSOC)) {
+			$plotMapArrFree[] = $row;
+		}
 ?>
 		<script>
 
@@ -223,12 +151,13 @@ require_once '../../connect.php';
 					var mapProp= {
 						center:new google.maps.LatLng(62.251378, 9.680572),
 						zoom: 16,
-						mapTypeId: "terrain"
+						mapTypeId: "terrain",
+						disableDefaultUI: true
 					};
 					var map=new google.maps.Map(document.getElementById("map"),mapProp);
 
 
-					function addPlot(a1, a2, b1, b2, c1, c2, d1, d2) {
+					function addSold(a1, a2, b1, b2, c1, c2, d1, d2) {
 						var myCoordinates = [
 							new google.maps.LatLng(a1, a2),
 							new google.maps.LatLng(b1, b2),
@@ -237,10 +166,28 @@ require_once '../../connect.php';
 						];
 						var polyOptions = {
 							path: myCoordinates,
-							strokeColor: "#FF0000",
+							strokeColor: "#6792a7",
 							strokeOpacity: 0.8,
 							strokeWeight: 2,
-							fillColor: "#0000FF",
+							fillColor: "#e1ebef",
+							fillOpacity: 0.6
+						};
+						var it = new google.maps.Polygon(polyOptions);
+						it.setMap(map);
+					}
+					function addFree(a1, a2, b1, b2, c1, c2, d1, d2) {
+						var myCoordinates = [
+							new google.maps.LatLng(a1, a2),
+							new google.maps.LatLng(b1, b2),
+							new google.maps.LatLng(c1, c2),
+							new google.maps.LatLng(d1, d2)
+						];
+						var polyOptions = {
+							path: myCoordinates,
+							strokeColor: "#2385b2",
+							strokeOpacity: 0.8,
+							strokeWeight: 2,
+							fillColor: "#2385b2",
 							fillOpacity: 0.6
 						};
 						var it = new google.maps.Polygon(polyOptions);
@@ -248,57 +195,22 @@ require_once '../../connect.php';
 					}
 
 
-<?php
-                        /*
-					foreach ($plotMapArr as $row) {
-						echo '
-                        var myCoordinates = [
-                            new google.maps.LatLng(' . $row['punkta1'] . ', ' . $row['punkta2'] . '),
-                            new google.maps.LatLng(' . $row['punktb1'] . ', ' . $row['punktb2'] . '),
-                            new google.maps.LatLng(' . $row['punktc1'] . ', ' . $row['punktc2'] . '),
-                            new google.maps.LatLng(' . $row['punktd1'] . ', ' . $row['punktd2'] . ')
-                        ];
-                        var polyOptions = {
-                            path: myCoordinates,
-                            strokeColor: "#FF0000",
-                            strokeOpacity: 0.8,
-                            strokeWeight: 2,
-                            fillColor: "#0000FF",
-                            fillOpacity: 0.6
-                        };
-                        var it = new google.maps.Polygon(polyOptions);
-                        it.setMap(map);
-    
-    
-                        ';
 
-                        }
- */
-?>
 
 					<?php
 
 
 
-					foreach ($plotMapArr as $row) {
-						echo 'addPlot(' . $row['punkta1'] . ',' . $row['punkta2'] . ',' . $row['punktb1'] . ',' . $row['punktb2'] . ',' . $row['punktc1'] . ',' . $row['punktc2'] . ',' . $row['punktd1'] . ',' . $row['punktd2'] . ');';
+					foreach ($plotMapArrSold as $row) {
+						echo 'addSold(' . $row['punkta1'] . ',' . $row['punkta2'] . ',' . $row['punktb1'] . ',' . $row['punktb2'] . ',' . $row['punktc1'] . ',' . $row['punktc2'] . ',' . $row['punktd1'] . ',' . $row['punktd2'] . ');';
 
 					}
+					foreach ($plotMapArrFree as $row) {
+						echo 'addFree(' . $row['punkta1'] . ',' . $row['punkta2'] . ',' . $row['punktb1'] . ',' . $row['punktb2'] . ',' . $row['punktc1'] . ',' . $row['punktc2'] . ',' . $row['punktd1'] . ',' . $row['punktd2'] . ');';
 
-
-
-
+					}
 					?>
-
-
                 }
-
-
-
-
-
-
-
 
         </script>
 <?php
@@ -380,130 +292,177 @@ require_once '../../connect.php';
 		print_r($plotArr);
 		echo("</pre>");
         */
+
+        echo '<div class="btn-group" data-toggle="buttons-radio">';
 		$tomtCount = 1;
         foreach ($plotArr as $p) {
-			echo '<input type="button" value="' . $tomtCount . '" class="tomtBtns" id="' . $tomtCount . '" );" />';
+			echo '<button value="'.$tomtCount.'" class="tomtBtn" id="tomt'.$p['tomtID'].'" data-target="t'.$p['tomtID'].'" type="button" onclick="ChangeUrl(\'?omrade='.$currOmrade.'&tomt='.$p['tomtID'].'\');">'.$tomtCount.'</button>';
 			$tomtCount++;
         }
-
+        /*
+         * onclick="ChangeUrl(\'?omrade='.$currOmrade.'&tomt='.$p['tomtID'].'\');"
+         */
+        echo '</div>';
         ?>
+
         <div id="mapWrap">
             <div id="map"></div>
         </div>
-        <div class="tomtPopup">
-            <div class="esc"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"><path d="M24 20.188l-8.315-8.209 8.2-8.282-3.697-3.697-8.212 8.318-8.31-8.203-3.666 3.666 8.321 8.24-8.206 8.313 3.666 3.666 8.237-8.318 8.285 8.203z"/></svg></div>
-            <div class="tomtHead">Tomt 1</div>
-            <div class="tomtAdress">Hjerkinnhøvegen 1, hus 3</div>
-            <div class="tomtDetails">Areal: 150m<sup>2</sup></div>
-            <div class="tomtDetails">Pris: 500 000 NOK</div>
+
+
+        <?php
+
+$tomtCount = 1;
+foreach ($plotArr as $p) {
+	echo '
+        <div class="tomtPopup" id="t'.$p['tomtID'].'">
+            
+            <div class="tomtHead">Tomt '.$tomtCount.'</div>
+            <div class="tomtDetails">Areal: '.$p['areal'].'<sup>2</sup></div>
+            <div class="tomtDetails">Pris: '.$p['pris'].' NOK</div>
             <div class="tomtInfoTitle">Merk:</div>
-            <div class="tomtInfoText">Tomtene i dette feltet kan ikke bygges på før juni 2017.</div>
+            <div class="tomtInfoText">'.$p['info'].'</div>
+        ';
+        if ($p['status'] == 1){
+            echo '<div class="sold"> Denne tomten er <span>solgt</span></div>';
+        }
+        else {
+			echo'
             <a class="tomtBtn">SEND HENVENDELSE</a>
-        </div>
+       
+        ';
+
+        }
+        echo '</div>';
+
+	$tomtCount++;
+}
+
+
+echo'
+        <!-- Flytt dette scriptet på et punkt, til egen fil? -->
+        <script>
+            $(document).ready(function() {
+            
+            $(".tomtPopup").hide();
+            $(".btn-group button").click(function(){
+            
+            var target = "#" + $(this).data("target");
+            $(".tomtPopup").not(target).hide();
+            $(target).show();
+            
+            
+            });            
+';
+            if (!empty($currTomt)) {
+                echo '
+                 $("#t" + '.$currTomt.').show();
+                ';
+            }
+            echo '
+            });
+
+        </script>
+            ';
+            /*
+
+*/
+?>
+
+        <script type="text/javascript">
+            function ChangeUrl(url) {
+				if (typeof (history.pushState) != "undefined") {
+					var obj = {Url: url};
+					history.pushState(obj, null, obj.Url);
+				} else {
+					alert("Browser does not support HTML5.");
+				}
+			}
+        </script>
 
 
 
-        <div class="tableWrap"><a class="arrow" href=""><svg fill="#000000" height="24" viewBox="0 0 24 24" width="24" xmlns="http://www.w3.org/2000/svg">
+
+
+        <div class="tableWrap">
+            <!--
+            <a class="arrow" href=""><svg fill="#000000" height="24" viewBox="0 0 24 24" width="24" xmlns="http://www.w3.org/2000/svg">
         <path d="M15.41 16.09l-4.58-4.59 4.58-4.59L14 5.5l-6 6 6 6z"/>
         <path d="M0-.5h24v24H0z" fill="none"/>
         </svg></a>
-        <table>
+-->
+        <table id="tomtTable" class="display" cellspacing="0">
         <tr>
         <td class="col">TOMT</td>
         <td class="col">PRISANTYDNING</td>
         <td class="col">AREAL</td>
         <td class="col">STATUS</td>
         </tr>
-        <tr>
-        <td>1</td>
-        <td>373 000 NOK</td>
-        <td>1150 m<sup>2</sup></td>
-        <td>Ledig</td>
-        </tr>
-        <tr>
-        <td>2</td>
-        <td>462 000 NOK</td>
-        <td>1920 m<sup>2</sup></td>
-        <td>Ledig</td>
-        </tr>
-        <tr>
-        <td>3</td>
-        <td>217 000 NOK</td>
-        <td>1160 m<sup>2</sup></td>
-        <td>Ledig</td>
-        </tr>
-        <tr>
-        <td>4</td>
-        <td>431 000 NOK</td>
-        <td>1240 m<sup>2</sup></td>
-        <td>Solgt</td>
-        </tr>
-        <tr>
-        <td>5</td>
-        <td>312 000 NOK</td>
-        <td>1640 m<sup>2</sup></td>
-        <td>Solgt</td>
-        </tr>
-        <tr>
-        <td>6</td>
-        <td>215 000 NOK</td>
-        <td>2102 m<sup>2</sup></td>
-        <td>Ledig</td>
-        </tr>
-        <tr>
-        <td>7</td>
-        <td>325 000 NOK</td>
-        <td>1170 m<sup>2</sup></td>
-        <td>Ledig</td>
-        </tr>
-        <tr>
-        <td>8</td>
-        <td>510 000 NOK</td>
-        <td>1370 m<sup>2</sup></td>
-        <td>Solgt</td>
-        </tr>
-        <tr>
-        <td>9</td>
-        <td>320 000 NOK</td>
-        <td>1680 m<sup>2</sup></td>
-        <td>Ledig</td>
-        </tr>
-        <tr>
-        <td>10</td>
-        <td>400 000 NOK</td>
-        <td>1600 m<sup>2</sup></td>
-        <td>Ledig</td>
-        </tr>
-        </table><a class="arrow" href=""><svg fill="#000000" height="24" viewBox="0 0 24 24" width="24" xmlns="http://www.w3.org/2000/svg">
+            <?php
+			$tomtCount = 1;
+            foreach ($plotArr as $p) {
+				echo '
+                    <tr>
+                        <td>'.$tomtCount.'</td>
+                        <td>'.$p['pris'].',-</td>
+                        <td>'.$p['areal'].' m<sup>2</sup></td>
+                        ';
+                if ($p['status'] == 1) {
+                    echo '<td>Solgt</td>';
+                }
+                else{
+                    echo '<td>Ledig</td>';
+                }
+                echo'</tr>';
+				$tomtCount++;
+			};
+
+
+
+
+        ?>
+
+        </table>
+           <!--
+            <a class="arrow" href=""><svg fill="#000000" height="24" viewBox="0 0 24 24" width="24" xmlns="http://www.w3.org/2000/svg">
         <path d="M8.59 16.34l4.58-4.59-4.58-4.59L10 5.75l6 6-6 6z"/>
         <path d="M0-.25h24v24H0z" fill="none"/>
         </svg></a>
+        -->
+
         </div>
         <div class="fileWrap"><a class="oneFileWrap" href="">
         <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"><path d="M12 21l-8-9h6v-12h4v12h6l-8 9zm9-1v2h-18v-2h-2v4h22v-4h-2z"/></svg>REGULERINGSPLAN</a><a class="oneFileWrap" href="">
         <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"><path d="M12 21l-8-9h6v-12h4v12h6l-8 9zm9-1v2h-18v-2h-2v4h22v-4h-2z"/></svg>REGULERINGSKART</a><a class="oneFileWrap" href="">
         <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"><path d="M16 18h-8v-1h8v1zm-2 1h-6v1h6v-1zm10-14v13h-4v6h-16v-6h-4v-13h4v-5h16v5h4zm-18 0h12v-3h-12v3zm12 10h-12v7h12v-7zm4-8h-20v9h2v-3h16v3h2v-9zm-1.5 1c-.276 0-.5.224-.5.5s.224.5.5.5.5-.224.5-.5-.224-.5-.5-.5z"/></svg>SKRIV UT OMRÅDE</a></div>
         <div class="ansattWrap">
-        <div class="title">Kontaktpersoner</div>
-        <div class="oneAnsattWrap"><img src="http://placehold.it/350x350">
-        <div class="ansattName">NAVN HER SOMERLITTLANGTjkfsdhkjgshdfjgkh</div>
-        <div class="ansattAnsvar">Ansvarsområde</div>
-        <div class="ansattPhone">123 12 123</div>
-        <div class="ansattEmail">epostsomerlittlang@tinde.no</div>
-        </div>
-        <div class="oneAnsattWrap"><img src="http://placehold.it/350x350">
-        <div class="ansattName">NAAAVN HER</div>
-        <div class="ansattAnsvar">Ansvarsområde</div>
-        <div class="ansattPhone">123 12 123</div>
-        <div class="ansattEmail">epostsomerlittlang@tinde.no</div>
-        </div>
-        <div class="oneAnsattWrap"><img src="http://placehold.it/350x350">
-        <div class="ansattName">NAVN HER</div>
-        <div class="ansattAnsvar">Ansvarsområde</div>
-        <div class="ansattPhone">123 12 123</div>
-        <div class="ansattEmail">epostsomerlittlang@tinde.no</div>
-        </div>
-        </div>
+            <div class="title">Kontaktperson</div>
+<?php
+
+
+        $aStmt = $db->prepare("SELECT a.ansattID, a.ansattnavn, a.tlf, a.epost, a.stilling, t.omradeID, t.ansattID
+        FROM ansatt a
+        INNER JOIN tomteomrade t
+        ON a.ansattID = t.ansattID
+        WHERE  t.omradeID = ".$currOmrade.";");
+        $aStmt->execute();
+        while ($aRow = $aStmt->fetch(PDO::FETCH_ASSOC)) {
+            echo'
+                <div class="oneAnsattWrap">
+                    <div class="ansattName">'.$aRow['ansattnavn'].'</div>
+                    <div class="ansattAnsvar">'.$aRow['stilling'].'</div>
+                    <div class="ansattPhone">'.$aRow['tlf'].'</div>
+                    <div class="ansattEmail">'.$aRow['epost'].'</div>
+                    <a class="kontaktBtn" href="">KONTAKT</a>
+              </div>';
+        }
+?>
+
+
+
+
+
+
         <!--.socialWrap
         a.icon1(href="")
         include ../../images/svg/facebook.svg
@@ -514,13 +473,12 @@ require_once '../../connect.php';
         -->
         </div>
         </div>
-        </body>
+  </div>
         <div class="footer">
         <div class="footerText">Innholdet er beskyttet etter åndsverksloven. Bruk av automatiserte tjenester (roboter, spidere, indeksering m.m.) samt andre fremgangsmåter for systematisk eller regelmessig bruk er ikke tillatt uten eksplisitt samtykke fra tinde.no. <br><br>©  2017 Tinde utvikling AS
+</body>
         <!--Google maps-->
-
         <script async defer src="https://maps.googleapis.com/maps/api/js?key=AIzaSyAv-n8dxD2LyiLpKr2qg4vCbmtJFqPJnI8&callback=myMap"></script>
-
         <!--script type="text/javascript" src="../../js/googleMap.js"></script-->
 
 
@@ -529,8 +487,10 @@ require_once '../../connect.php';
         <script type="text/javascript" src="../../tools/slick/slick.js"></script>
         <script type="text/javascript" src="../../js/slick.js"></script>
 
+        <!-- Datatables (jQuery extension) -->
+        <script src="https://cdn.datatables.net/1.10.15/js/jquery.dataTables.min.js"></script>
 
         <!--MenuStickScript-->
         <script type="text/javascript" src="../../js/menuheader.js"></script>
-        </div>
+
         </div>
