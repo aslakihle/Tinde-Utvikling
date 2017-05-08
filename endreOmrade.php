@@ -14,8 +14,9 @@ if(isset($_POST['newOmrade'])){
 
 //Checks if the "hidden"-endre butten is clicked if it is clicked then goes to that editpage
 if (isset($_POST['endre'])){
-	redirect('endreOmrade.php?omradeID='.intval($_POST['endre']));
+	redirect('endreOmrade.php?omrade='.intval($_POST['endre']));
 };
+
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -37,7 +38,7 @@ if (isset($_POST['endre'])){
     <meta name="theme-color" content="#ffffff">
     <title>Tinde Utvikling - TomteOmråde</title>
     <!--Our Css-->
-    <link rel="stylesheet" href="css/dashboard.css?<?php echo time(); ?>">
+    <link rel="stylesheet" href="css/nyttOmrade.css?<?php echo time(); ?>">
 </head>
 <body>
     <!--include images/svg/svgXML.svg-->
@@ -88,66 +89,197 @@ if (isset($_POST['endre'])){
     <!--main-->
     <div class="main">
         <div class="content">
-			<h1 class="topH1">MINE TOMTEOMRÅDER</h1>
+			<h1 class="topH1alternativ">OPPDATER TOMTEOMRÅDE</h1>
 			
-			<form method="post" id="newOmrade">
-				<input type="submit" name="newOmrade" value="NYTT TOMTEOMRÅDE" id="newOmradeKnapp">
-			</form>
-			<!--OUTPUT OF Tomteområder-->
 			<?php
-			$stmt = $db->prepare("
-				SELECT *
-				FROM tomteomrade
-				WHERE ansattID = :ansattID
-				ORDER BY omradenavn ASC;");
-			$stmt->bindParam(':ansattID', $loggedInID);
-			$stmt->execute();
-			//counts how many rows, which is tomteområder registered to the ansatt
-			$numRows = $stmt->rowCount();
 			
-			//just a varable to update to make the status of tomteområder abit different
-			$status = 1;
-			//if the ansatt has no tomteområder, tells him so
-			if($numRows == 0){
-				echo '<p style="text-align: center;" class="redColor"><b>Du har ingen tomteområder enda!</b></p>';
-			}else{
-				while ($row = $stmt->fetch(PDO::FETCH_ASSOC)){
-					echo '
-						<div class="tomteomrade '.$row['omradenavn'].'">
-							<h2>'.$row['omradenavn'].'</h2>
-							<!-- Endreknapp -->
-							<form method="post" class="endreForm">
-								<input class="endreKnapp" type="hidden" name="endre" value="'.intval($row['omradeID']).'">
-								<input type="submit" value="ENDRE" class="endreKnapp">
-							</form>
-						';
-					if ($status > 2){
-						echo '<div class="noLedige status">
-						0/13 tomter ledige.
-						</div>';
-						$status ++;
-					} else {
-						echo '<div class="ledige status">
-						10/15 tomter ledige.
-						</div>';
-						$status ++;
-					}
-					echo '
-							<!-- INFO -->
-							<div>
-								Prisklasse: 1.2 - 4.3 mill
-								<br>
-								Areal: 25km2 - 30 km2
-								<br>
-							</div>
-							<!-- FYLKE -->
-							<div class="fylke">
-								Fylke: <b>'.$row['fylke'].'</b>
-							</div>
-						</div>';
-				}
-			}
+			//UPdatering av område
+			if (isset($_POST['update'])){
+				$stmt = $db->prepare("
+				UPDATE tomteomrade
+				SET omradenavn = '".$_POST['navn']."',
+					fylke = '".$_POST['fylke']."',
+					oneliner = '".$_POST['shortText']."',
+					longtekst = '".$_POST['longText']."',
+					vann = ".$_POST['vann'].", 
+					strom = ".$_POST['strom'].", 
+					vei = ".$_POST['vei'].", 
+					alpint = ".$_POST['alpint'].", 
+					fiske = ".$_POST['fiske'].", 
+					jakt = ".$_POST['jakt'].", 
+					tur = ".$_POST['tur']."
+				WHERE omradeID = ".$_GET['omradeID']."
+					;
+				");
+				$stmt->execute();
+				
+				//after clicking update and updating database, displayes a div that fades out
+				echo '<div id="updated">OPPDATERT</div>';
+				echo '
+				<script>
+					$("#updated").fadeOut(1500);
+				</script>';
+			};
+
+			
 			?>
+			<form method="post" id="newOmradeForm" >
+				<?php
+				$stmt = $db->prepare("
+					SELECT *
+					FROM tomteomrade
+					WHERE omradeID = ".$_GET['omradeID']."
+					;");
+				$stmt->execute();
+				
+				while ($row = $stmt->fetch(PDO::FETCH_ASSOC)){
+					echo '<h3 class="topH3">'.$row['omradenavn'].'</h3>
+						<input type="text" name="navn" value="'.$row['omradenavn'].'" >
+						<input type="text" value="'.$row['oneliner'].'" name="shortText" >
+						<label>Header bilde</label>
+						<input type="file" placeholder="Header bilde..." name="headerPic">
+						<label>Karusell bilde</label>
+						<input type="file" placeholder="Karusell bilde..." name="karusellPic">
+						<select name="fylke" required>
+							<option value="0">Velg Fylke</option>';
+							
+							//statement to find all the fylker that TindeUtvikling owns
+							$fstmt = $db->prepare("
+								SELECT fylke
+								FROM fylke;");
+							$fstmt->execute();
+
+							while ($frow = $fstmt->fetch(PDO::FETCH_ASSOC)){
+								if ($frow['fylke'] == $row['fylke']){
+									echo '<option value="'.$frow['fylke'].'" selected>'.$frow['fylke'].'</option>';
+								} else {
+									echo '<option value="'.$frow['fylke'].'">'.$frow['fylke'].'</option>';
+								}
+								
+							}
+					echo '	
+						</select>
+
+
+						<textarea form="newOmradeForm" rows="10" name="longText">'.$row['longtekst'].'</textarea>
+
+						<!--Checkboxes, uses hidden checkbox with value 0 to return if checkbox wasnt clicked -->';
+					
+					if($row['vann'] == 1){
+						echo '<div class="fasiliteter mgLeft">
+							<label>Vann</label>
+							<input class="checkbox" type="hidden" name="vann" value="0">
+							<input class="checkbox" type="checkbox" name="vann" value="1" checked>
+						</div>';
+					} else {
+						echo '<div class="fasiliteter mgLeft">
+							<label>Vann</label>
+							<input class="checkbox" type="hidden" name="vann" value="0">
+							<input class="checkbox" type="checkbox" name="vann" value="1">
+						</div>';
+					}
+					
+					if($row['strom'] == 1){
+						echo '<div class="fasiliteter">
+							<label>Strøm</label>
+							<input class="checkbox" type="hidden" name="strom" value="0">
+							<input class="checkbox" type="checkbox" name="strom" value="1" checked>
+						</div>';
+					}else{
+						echo '<div class="fasiliteter">
+							<label>Strøm</label>
+							<input class="checkbox" type="hidden" name="strom" value="0">
+							<input class="checkbox" type="checkbox" name="strom" value="1">
+						</div>';
+					}
+					
+					if($row['vei'] == 1){
+						echo '<div class="fasiliteter">
+							<label>Vei</label>
+							<input class="checkbox" type="hidden" name="vei" value="0">
+							<input class="checkbox" type="checkbox" name="vei" value="1" checked>
+						</div>';
+					}else{
+						echo '<div class="fasiliteter">
+							<label>Vei</label>
+							<input class="checkbox" type="hidden" name="vei" value="0">
+							<input class="checkbox" type="checkbox" name="vei" value="1">
+						</div>';
+					}
+					
+					echo '<br>';
+					
+					if($row['alpint'] == 1){
+						echo '<div class="fasiliteter">
+							<label>Alpint</label>
+							<input class="checkbox" type="hidden" name="alpint" value="0">
+							<input class="checkbox" type="checkbox" name="alpint" value="1" checked>
+						</div>';
+					}else{
+						echo '<div class="fasiliteter">
+							<label>Alpint</label>
+							<input class="checkbox" type="hidden" name="alpint" value="0">
+							<input class="checkbox" type="checkbox" name="alpint" value="1">
+						</div>';
+					}
+					
+					if($row['alpint'] == 1){
+						echo '<div class="fasiliteter">
+							<label>Fiske</label>
+							<input class="checkbox" type="hidden" name="fiske" value="0">
+							<input class="checkbox" type="checkbox" name="fiske" value="1" checked>
+						</div>';
+					}else{
+						echo '<div class="fasiliteter">
+							<label>Fiske</label>
+							<input class="checkbox" type="hidden" name="fiske" value="0">
+							<input class="checkbox" type="checkbox" name="fiske" value="1">
+						</div>';
+					}
+					
+					if($row['jakt'] == 1){
+						echo '<div class="fasiliteter">
+							<label>Jakt</label>
+							<input class="checkbox" type="hidden" name="jakt" value="0">
+							<input class="checkbox" type="checkbox" name="jakt" value="1" checked>
+						</div>';
+					}else{
+						echo '<div class="fasiliteter">
+							<label>Jakt</label>
+							<input class="checkbox" type="hidden" name="jakt" value="0">
+							<input class="checkbox" type="checkbox" name="jakt" value="1">
+						</div>';
+					}
+					
+					if($row['tur'] == 1){
+						echo '<div class="fasiliteter">
+							<label>Tur</label>
+							<input class="checkbox" type="hidden" name="tur" value="0">
+							<input class="checkbox" type="checkbox" name="tur" value="1" checked>
+						</div>';
+					}else{
+						echo '<div class="fasiliteter">
+							<label>Tur</label>
+							<input class="checkbox" type="hidden" name="tur" value="0">
+							<input class="checkbox" type="checkbox" name="tur" value="1">
+						</div>';
+					}
+					?>
+						<br>
+						<label>Reguleringsplan</label>
+						<input type="file" name="regPlan">
+						<label>Reguleringskart</label>
+						<input type="file" name="regKart">
+						<label>Utskriftsvennlig versjon</label>
+						<input type="file" name="utskrift">
+						<?php
+						}
+						?>
+				
+				
+				<input type="submit" name="update" value="OPPDATER" id="createKnapp">
+			</form>
+			
         </div>
     </div>
 	<!--FOOTER-->

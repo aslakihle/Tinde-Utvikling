@@ -144,7 +144,7 @@ $query = "
 		stilling
 	)
 	VALUES (
-		'Gunhild Ihle',
+		'Gunhild Vike Nerås',
 		94736274,
 		'gunnhild@tinde.no',
 		'Selger'

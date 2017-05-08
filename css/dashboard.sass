@@ -33,9 +33,11 @@ hr
 
 .topH1
 	text-align: center
-	text-decoration: underline
+	font-family: $raleway
+	font-weight: $ralewaybold
+	margin-bottom: 5%
 
-.endreKnapp
+.endreForm
 	position: absolute
 	right: 2em
 	top: 2em
@@ -53,10 +55,30 @@ hr
 	cursor: pointer
 	font-size: 2em
 
-.endreKnappKnapp
+.endreKnapp
 	background-color: $blue
 	color: white
 	border: 0
 	box-sizing: border-box
 	padding: 1em
 	cursor: pointer
+
+.endreKnapp:hover, #newOmradeKnapp:hover
+	background-color: $blueDark
+
+.endreKnapp:active, #newOmradeKnapp:active
+	background-color: $blueLight
+
+.redColor
+	color:#e04747
+
+.noLedige
+	color:#e04747
+
+.ledige
+	color:#4fc63d
+
+.status
+	position: absolute
+	bottom: 1em
+	right: 1em
