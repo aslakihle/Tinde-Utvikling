@@ -17,14 +17,14 @@ require_once '../../connect.php';
   <!--Add the new slick-theme.css if you want the default styling-->
   <link rel="stylesheet" type="text/css" href="../../tools/slick/slick-theme.css">
   <!--Our Css-->
-  <link rel="stylesheet" href="../../css/etTomteOmrade.css">
+  <link rel="stylesheet" href="../../css/etTomteOmrade.css?<?php echo time(); ?>">
 </head>
 <body>
   <div class="menu">
     <ul>
       <li id="menuLogo"><a href="../../index.php">
-
-<? xml version="1.0" encoding="utf-8"?>
+<!-- får annoying error på xml tingen under her :( -->
+<?/* xml version="1.0" encoding="utf-8"*/?>
 <!-- Generator: Adobe Illustrator 21.0.0, SVG Export Plug-In . SVG Version: 6.00 Build 0)  -->
 <svg version="1.1" id="Layer_1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px"
 	 viewBox="0 0 225.5 95.4" style="enable-background:new 0 0 225.5 95.4;" xml:space="preserve">
@@ -102,12 +102,66 @@ require_once '../../connect.php';
         <a href="javascript:history.back()">
             <div class="backArrow">&#x2190; Tilbake</div>
         </a>
-        <button>1</button>
-        <button>2</button>
-        <button>3</button>
-        <button>4</button>
+        <?php
+		$currOmrade = $_GET['omrade'];
+		echo 'Current områdeID is: '.$currOmrade. '<br>';
 
-        <div id="map"></div>
+		if(isset($_GET['tomt']))
+		{
+			$currTomt = $_GET['tomt'];
+			echo 'Current tomtID is: '.$currTomt. '<br>';
+		}
+
+        $currTomt = 1;
+        ?>
+        <!--
+        <button value="1" onclick="hue(1)">1</button>
+        <button value="2" onclick="hue(2)">2</button>
+        <button value="3" onclick="hue(3)">3</button>
+        <button value="4" onclick="hue(4)">4</button>
+
+
+        <script>
+            function hue(id){
+            	var currTomt = id;
+            	var url = "?id=" . id;
+                window.history.pushState(url, NULL, url);
+            }
+        </script>
+-->
+        <!--
+        <script type="text/javascript">
+			function ChangeUrl(url) {
+				if (typeof (history.pushState) != "undefined") {
+					var obj = {Url: url };
+					history.pushState(obj, null, obj.Url);
+				} else {
+					alert("Browser does not support HTML5.");
+				}
+			}
+        </script>
+        -->
+        <?php
+        function editUrl($a) {
+            echo'
+            <script type="text/javascript">
+                if (typeof (history.pushState) != "undefined") {
+                    var obj = {Url: ' . $a . '};
+                    history.pushState(obj, null, obj.Url);
+                } else {
+                    alert("Browser does not support HTML5.");
+                }
+        </script>
+            ';
+        }
+        ?>
+
+
+        <input type="button" value="ID1" onclick="ChangeUrl('?omrade=<?php echo $currOmrade;?>&tomt=1');" />
+        <input type="button" value="ID2" onclick="ChangeUrl('?omrade=<?php echo $currOmrade;?>&tomt=2');" />
+        <input type="button" value="ID3" onclick="ChangeUrl('?omrade=<?php echo $currOmrade;?>&tomt=3');" />
+
+
 
 <!--
         <script>
@@ -147,17 +201,23 @@ require_once '../../connect.php';
 	-->
 					
 
-        </script>
+
 		<?php
-		$stmt = $db->prepare("
+
+		$mStmt = $db->prepare("
 			SELECT punkta1,punkta2,punktb1,punktb2,punktc1,punktc2,punktd1,punktd2 
 			FROM tomt 
-			WHERE tomteomradeID = 1
+			WHERE tomteomradeID = :current
 			");
-		$stmt->execute();
-		$plotArr = array();
+		$mStmt->bindParam(':current', $currOmrade );
+		$mStmt->execute();
+		$plotMapArr = array();
 
-		echo '<script>
+		while ($row = $mStmt->fetch(PDO::FETCH_ASSOC)) {
+		    $plotMapArr[] = $row;
+        }
+?>
+		<script>
 				function myMap() {
 					var mapProp= {
 						center:new google.maps.LatLng(62.251263, 9.681470),
@@ -167,7 +227,7 @@ require_once '../../connect.php';
 					var map=new google.maps.Map(document.getElementById("map"),mapProp);
 					
 					
-					
+					/*
 					function addPlot(a1, a2, b1, b2, c1, c2, d1, d2) {
 						var myCoordinates = [
 							new google.maps.LatLng(a1, a2),
@@ -186,210 +246,290 @@ require_once '../../connect.php';
 						var it = new google.maps.Polygon(polyOptions);
 						it.setMap(map);
 					}
+                    */
 
 
+                }
+		</script>
 
+
+<?php
+
+
+            echo'<script>
+                function addPlot(a1, a2, b1, b2, c1, c2, d1, d2) {
+                    var myCoordinates = [
+                        new google.maps.LatLng(a1, a2),
+                        new google.maps.LatLng(b1, b2),
+                        new google.maps.LatLng(c1, c2),
+                        new google.maps.LatLng(d1, d2)
+                    ];
+                    var polyOptions = {
+                        path: myCoordinates,
+                        strokeColor: "#FF0000",
+                        strokeOpacity: 0.8,
+                        strokeWeight: 2,
+                        fillColor: "#0000FF",
+                        fillOpacity: 0.6
+                    };
+                    var it = new google.maps.Polygon(polyOptions);
+                    it.setMap(map);
                 }';
+		    foreach ($plotMapArr as $row){
+				echo 'addPlot('.$row['punkta1'].','. $row['punkta2'].','. $row['punktb1'].','.$row['punktb2'].','. $row['punktc1'].','. $row['punktc2'].','. $row['punktd1'].','. $row['punktd2'] .');';
 
-		while ($row = $stmt->fetch(PDO::FETCH_ASSOC)){
+				/*
+				echo'
+				var myCoordinates = [
+					new google.maps.LatLng('.$row['punkta1'].', '.$row['punkta2'].'),
+					new google.maps.LatLng('.$row['punktb1'].', '.$row['punktb2'].'),
+					new google.maps.LatLng('.$row['punktc1'].', '.$row['punktc2'].'),
+					new google.maps.LatLng('.$row['punktd1'].', '.$row['punktd2'].')
+				];
+				var polyOptions = {
+					path: myCoordinates,
+							strokeColor: "#FF0000",
+							strokeOpacity: 0.8,
+							strokeWeight: 2,
+							fillColor: "#0000FF",
+							fillOpacity: 0.6
+						};
+						var it = new google.maps.Polygon(polyOptions);
+						it.setMap(map);
+				
+				
+				';
+*/
+
+
+		    }
+echo'</script>';
+?>
+
+
+
+        <?php
+		$oStmt = $db->prepare("
+					SELECT omradenavn, fylke, oneliner, longtekst
+					FROM tomteomrade
+					WHERE omradeID = :current
+					");
+		$oStmt->bindParam(':current', $currOmrade );
+		$oStmt->execute();
+        //Echo bilde path for now, fikser bilder i database senere
+		echo'<div class="headImgWrap"><img src="../../images/omrade1/main.jpg" alt="Bilde av X"></div>';
+		while($oRow = $oStmt->fetch(PDO::FETCH_ASSOC)) {
 			echo '
-                addPlot('.$row['punkta1'].','. $row['punkta2'].','. $row['punktb1'].','.$row['punktb2'].','. $row['punktc1'].','. $row['punktc2'].','. $row['punktd1'].','. $row['punktd2'] .');
-          
-			';
-
-		}
-		echo '</script>';
+        <div class="headImgTitleWrap">
+        <div class="headImgPlace">'.$oRow['fylke'].'</div>
+        <div class="headImgTitle">'.$oRow['omradenavn'].'</div>
+        <div class="headTextQuote">"'.$oRow['oneliner'].'"</div>
+        <div class="headText">'.$oRow['longtekst'].'</div>
+        </div>
+        ';
+        }
 		?>
-        <style>
-            #map {
-                width: 500px;
-                height: 500px;
-            }
 
-        </style>
 
-      <div class="headImgWrap"><img src="../../images/omrade1/main.jpg" alt="Bilde av X"></div>
-      <div class="headImgTitleWrap">
-        <div class="headImgPlace">Dovrefjell, Nord-Gudbrandsdal</div>
-        <div class="headImgTitle">Hjerkinnhø</div>
-        <div class="headTextQuote">"Storslagen utsikt på snaufjellet!"</div>
-        <div class="headText">Hjerkinnhø ligger i et område med historiske røtter. På hjerkinn lå en gammel skysstasjon(nå Hjerkinn fjellstue) med tradisjoner tilbake til midt på 1200-tallet. Pilegrimsleden og dne gamle kongeveien til Trondheim går like forbi hytteområdene og videre innover Dovrefjell. Her har du inngangen til snøhetta, villreinen og moskusens rike. Hjerkinn-Dovrefjell er hundesportens 'Mekka', med treningsfelt og jaktprøver for fuglehunder. Viewpoint Snøhetta er et attraktivt besøkspunkt og i nærområdet finner du mange natur- og aktivitetsmuligheter</div>
-      </div>
-      <div class="sliderWrap">
+<!-- Tar å prioriterer resten av funksjonalitet først, også fikser vi bilder i database siden når vi har bestemt oss for lagrings metode -->
+        <div class="sliderWrap">
         <div class="prev">
-          <div class="verticalCenter"><svg fill="#000000" height="24" viewBox="0 0 24 24" width="24" xmlns="http://www.w3.org/2000/svg">
-    <path d="M15.41 16.09l-4.58-4.59 4.58-4.59L14 5.5l-6 6 6 6z"/>
-    <path d="M0-.5h24v24H0z" fill="none"/>
-</svg>
-          </div>
+        <div class="verticalCenter"><svg fill="#000000" height="24" viewBox="0 0 24 24" width="24" xmlns="http://www.w3.org/2000/svg">
+        <path d="M15.41 16.09l-4.58-4.59 4.58-4.59L14 5.5l-6 6 6 6z"/>
+        <path d="M0-.5h24v24H0z" fill="none"/>
+        </svg>
+        </div>
         </div>
         <div class="next">
-          <div class="verticalCenter"><svg fill="#000000" height="24" viewBox="0 0 24 24" width="24" xmlns="http://www.w3.org/2000/svg">
-    <path d="M8.59 16.34l4.58-4.59-4.58-4.59L10 5.75l6 6-6 6z"/>
-    <path d="M0-.25h24v24H0z" fill="none"/>
-</svg>
-          </div>
+        <div class="verticalCenter"><svg fill="#000000" height="24" viewBox="0 0 24 24" width="24" xmlns="http://www.w3.org/2000/svg">
+        <path d="M8.59 16.34l4.58-4.59-4.58-4.59L10 5.75l6 6-6 6z"/>
+        <path d="M0-.25h24v24H0z" fill="none"/>
+        </svg>
+        </div>
         </div>
         <!--BILDER HER MÅ HA AVLANGT UTSEENDE-->
         <section class="regular slider">
-          <div class="slide"><img src="../../images/hytte1.jpg"></div>
-          <div class="slide"><img src="../../images/hytte3.jpg"></div>
-          <div class="slide"><img src="../../images/hytte4.jpg"></div>
-          <div class="slide"><img src="../../images/hytte5.jpg"></div>
+        <div class="slide"><img src="../../images/hytte1.jpg"></div>
+        <div class="slide"><img src="../../images/hytte3.jpg"></div>
+        <div class="slide"><img src="../../images/hytte4.jpg"></div>
+        <div class="slide"><img src="../../images/hytte5.jpg"></div>
         </section>
-      </div>
-      <div class="tomtMapTitle">Tomter</div>
-      <div class="tomtMapInfo1">
+        </div>
+
+
+
+        <div class="tomtMapTitle">Tomter</div>
+        <div class="tomtMapInfo1">
         <div class="ledigColor"></div>
         <div class="ledigText">Ledig tomt</div>
         <div class="solgtColor"></div>
         <div class="solgtText">Solgt tomt</div>
-      </div>
-      <div class="tomtMapInfo2">Klikk på tomt for mer info</div>
-      <div class="tomtMapWrap"><img src="../../images/omrade1/tomtekart.png">
-        <div class="popupBackground">
-          <div class="tomtPopup">
-            <div class="esc"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"><path d="M24 20.188l-8.315-8.209 8.2-8.282-3.697-3.697-8.212 8.318-8.31-8.203-3.666 3.666 8.321 8.24-8.206 8.313 3.666 3.666 8.237-8.318 8.285 8.203z"/></svg></div>
-            <div class="tomtHead">Tomt 1</div>
-            <div class="tomtAdress">Hjerkinnhøvegen 1, hus 3</div>
-            <div class="tomtDetails">Areal: 150m<sup>2</sup></div>
-            <div class="tomtDetails">Pris: 500 000 NOK</div>
-            <div class="tomtInfoTitle">Merk:</div>
-            <div class="tomtInfoText">Tomtene i dette feltet kan ikke bygges på før juni 2017.</div><a class="tomtBtn">SEND HENVENDELSE</a>
-          </div>
         </div>
-      </div>
-      <!--.mapTableWrap
-      .mapWrap
-      	#googleMap
-      -->
-      <div class="tableWrap"><a class="arrow" href=""><svg fill="#000000" height="24" viewBox="0 0 24 24" width="24" xmlns="http://www.w3.org/2000/svg">
-    <path d="M15.41 16.09l-4.58-4.59 4.58-4.59L14 5.5l-6 6 6 6z"/>
-    <path d="M0-.5h24v24H0z" fill="none"/>
-</svg></a>
+        <div class="tomtMapInfo2">Klikk på tomt for mer info</div>
+        <?php
+        $tStmt = $db->prepare("
+        SELECT tomtID, pris, areal, info, status
+        FROM tomt 
+        WHERE tomteomradeID = :current
+        ");
+        $tStmt->bindParam(':current', $currOmrade );
+        $tStmt->execute();
+        $plotArr = array();
+
+        while ($row = $tStmt->fetch(PDO::FETCH_ASSOC)) {
+            $plotArr[] = $row;
+        }
+
+        $tomtCount = 1;
+        foreach ($plotArr as $p)
+            echo'<input type="button" value="'.$tomtCount.'" onclick="ChangeUrl(\'?omrade='.$currOmrade.'&tomt='.$plotArr['tomtID'].'\');" />';
+            $tomtCount++
+        ?>
+        <div id="map"></div>
+
+
+        <div class="tomtPopup">
+        <div class="esc"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"><path d="M24 20.188l-8.315-8.209 8.2-8.282-3.697-3.697-8.212 8.318-8.31-8.203-3.666 3.666 8.321 8.24-8.206 8.313 3.666 3.666 8.237-8.318 8.285 8.203z"/></svg></div>
+        <div class="tomtHead">Tomt 1</div>
+        <div class="tomtAdress">Hjerkinnhøvegen 1, hus 3</div>
+        <div class="tomtDetails">Areal: 150m<sup>2</sup></div>
+        <div class="tomtDetails">Pris: 500 000 NOK</div>
+        <div class="tomtInfoTitle">Merk:</div>
+        <div class="tomtInfoText">Tomtene i dette feltet kan ikke bygges på før juni 2017.</div><a class="tomtBtn">SEND HENVENDELSE</a>
+        </div>
+
+
+        <!--.mapTableWrap
+        .mapWrap
+        #googleMap
+        -->
+        <div class="tableWrap"><a class="arrow" href=""><svg fill="#000000" height="24" viewBox="0 0 24 24" width="24" xmlns="http://www.w3.org/2000/svg">
+        <path d="M15.41 16.09l-4.58-4.59 4.58-4.59L14 5.5l-6 6 6 6z"/>
+        <path d="M0-.5h24v24H0z" fill="none"/>
+        </svg></a>
         <table>
-          <tr>
-            <td class="col">TOMT</td>
-            <td class="col">PRISANTYDNING</td>
-            <td class="col">AREAL</td>
-            <td class="col">STATUS</td>
-          </tr>
-          <tr>
-            <td>1</td>
-            <td>373 000 NOK</td>
-            <td>1150 m<sup>2</sup></td>
-            <td>Ledig</td>
-          </tr>
-          <tr>
-            <td>2</td>
-            <td>462 000 NOK</td>
-            <td>1920 m<sup>2</sup></td>
-            <td>Ledig</td>
-          </tr>
-          <tr>
-            <td>3</td>
-            <td>217 000 NOK</td>
-            <td>1160 m<sup>2</sup></td>
-            <td>Ledig</td>
-          </tr>
-          <tr>
-            <td>4</td>
-            <td>431 000 NOK</td>
-            <td>1240 m<sup>2</sup></td>
-            <td>Solgt</td>
-          </tr>
-          <tr>
-            <td>5</td>
-            <td>312 000 NOK</td>
-            <td>1640 m<sup>2</sup></td>
-            <td>Solgt</td>
-          </tr>
-          <tr>
-            <td>6</td>
-            <td>215 000 NOK</td>
-            <td>2102 m<sup>2</sup></td>
-            <td>Ledig</td>
-          </tr>
-          <tr>
-            <td>7</td>
-            <td>325 000 NOK</td>
-            <td>1170 m<sup>2</sup></td>
-            <td>Ledig</td>
-          </tr>
-          <tr>
-            <td>8</td>
-            <td>510 000 NOK</td>
-            <td>1370 m<sup>2</sup></td>
-            <td>Solgt</td>
-          </tr>
-          <tr>
-            <td>9</td>
-            <td>320 000 NOK</td>
-            <td>1680 m<sup>2</sup></td>
-            <td>Ledig</td>
-          </tr>
-          <tr>
-            <td>10</td>
-            <td>400 000 NOK</td>
-            <td>1600 m<sup>2</sup></td>
-            <td>Ledig</td>
-          </tr>
+        <tr>
+        <td class="col">TOMT</td>
+        <td class="col">PRISANTYDNING</td>
+        <td class="col">AREAL</td>
+        <td class="col">STATUS</td>
+        </tr>
+        <tr>
+        <td>1</td>
+        <td>373 000 NOK</td>
+        <td>1150 m<sup>2</sup></td>
+        <td>Ledig</td>
+        </tr>
+        <tr>
+        <td>2</td>
+        <td>462 000 NOK</td>
+        <td>1920 m<sup>2</sup></td>
+        <td>Ledig</td>
+        </tr>
+        <tr>
+        <td>3</td>
+        <td>217 000 NOK</td>
+        <td>1160 m<sup>2</sup></td>
+        <td>Ledig</td>
+        </tr>
+        <tr>
+        <td>4</td>
+        <td>431 000 NOK</td>
+        <td>1240 m<sup>2</sup></td>
+        <td>Solgt</td>
+        </tr>
+        <tr>
+        <td>5</td>
+        <td>312 000 NOK</td>
+        <td>1640 m<sup>2</sup></td>
+        <td>Solgt</td>
+        </tr>
+        <tr>
+        <td>6</td>
+        <td>215 000 NOK</td>
+        <td>2102 m<sup>2</sup></td>
+        <td>Ledig</td>
+        </tr>
+        <tr>
+        <td>7</td>
+        <td>325 000 NOK</td>
+        <td>1170 m<sup>2</sup></td>
+        <td>Ledig</td>
+        </tr>
+        <tr>
+        <td>8</td>
+        <td>510 000 NOK</td>
+        <td>1370 m<sup>2</sup></td>
+        <td>Solgt</td>
+        </tr>
+        <tr>
+        <td>9</td>
+        <td>320 000 NOK</td>
+        <td>1680 m<sup>2</sup></td>
+        <td>Ledig</td>
+        </tr>
+        <tr>
+        <td>10</td>
+        <td>400 000 NOK</td>
+        <td>1600 m<sup>2</sup></td>
+        <td>Ledig</td>
+        </tr>
         </table><a class="arrow" href=""><svg fill="#000000" height="24" viewBox="0 0 24 24" width="24" xmlns="http://www.w3.org/2000/svg">
-    <path d="M8.59 16.34l4.58-4.59-4.58-4.59L10 5.75l6 6-6 6z"/>
-    <path d="M0-.25h24v24H0z" fill="none"/>
-</svg></a>
-      </div>
-      <div class="fileWrap"><a class="oneFileWrap" href="">
-          <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"><path d="M12 21l-8-9h6v-12h4v12h6l-8 9zm9-1v2h-18v-2h-2v4h22v-4h-2z"/></svg>REGULERINGSPLAN</a><a class="oneFileWrap" href="">
-          <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"><path d="M12 21l-8-9h6v-12h4v12h6l-8 9zm9-1v2h-18v-2h-2v4h22v-4h-2z"/></svg>REGULERINGSKART</a><a class="oneFileWrap" href="">
-          <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"><path d="M16 18h-8v-1h8v1zm-2 1h-6v1h6v-1zm10-14v13h-4v6h-16v-6h-4v-13h4v-5h16v5h4zm-18 0h12v-3h-12v3zm12 10h-12v7h12v-7zm4-8h-20v9h2v-3h16v3h2v-9zm-1.5 1c-.276 0-.5.224-.5.5s.224.5.5.5.5-.224.5-.5-.224-.5-.5-.5z"/></svg>SKRIV UT OMRÅDE</a></div>
-      <div class="ansattWrap">
+        <path d="M8.59 16.34l4.58-4.59-4.58-4.59L10 5.75l6 6-6 6z"/>
+        <path d="M0-.25h24v24H0z" fill="none"/>
+        </svg></a>
+        </div>
+        <div class="fileWrap"><a class="oneFileWrap" href="">
+        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"><path d="M12 21l-8-9h6v-12h4v12h6l-8 9zm9-1v2h-18v-2h-2v4h22v-4h-2z"/></svg>REGULERINGSPLAN</a><a class="oneFileWrap" href="">
+        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"><path d="M12 21l-8-9h6v-12h4v12h6l-8 9zm9-1v2h-18v-2h-2v4h22v-4h-2z"/></svg>REGULERINGSKART</a><a class="oneFileWrap" href="">
+        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"><path d="M16 18h-8v-1h8v1zm-2 1h-6v1h6v-1zm10-14v13h-4v6h-16v-6h-4v-13h4v-5h16v5h4zm-18 0h12v-3h-12v3zm12 10h-12v7h12v-7zm4-8h-20v9h2v-3h16v3h2v-9zm-1.5 1c-.276 0-.5.224-.5.5s.224.5.5.5.5-.224.5-.5-.224-.5-.5-.5z"/></svg>SKRIV UT OMRÅDE</a></div>
+        <div class="ansattWrap">
         <div class="title">Kontaktpersoner</div>
         <div class="oneAnsattWrap"><img src="http://placehold.it/350x350">
-          <div class="ansattName">NAVN HER SOMERLITTLANGTjkfsdhkjgshdfjgkh</div>
-          <div class="ansattAnsvar">Ansvarsområde</div>
-          <div class="ansattPhone">123 12 123</div>
-          <div class="ansattEmail">epostsomerlittlang@tinde.no</div>
+        <div class="ansattName">NAVN HER SOMERLITTLANGTjkfsdhkjgshdfjgkh</div>
+        <div class="ansattAnsvar">Ansvarsområde</div>
+        <div class="ansattPhone">123 12 123</div>
+        <div class="ansattEmail">epostsomerlittlang@tinde.no</div>
         </div>
         <div class="oneAnsattWrap"><img src="http://placehold.it/350x350">
-          <div class="ansattName">NAAAVN HER</div>
-          <div class="ansattAnsvar">Ansvarsområde</div>
-          <div class="ansattPhone">123 12 123</div>
-          <div class="ansattEmail">epostsomerlittlang@tinde.no</div>
+        <div class="ansattName">NAAAVN HER</div>
+        <div class="ansattAnsvar">Ansvarsområde</div>
+        <div class="ansattPhone">123 12 123</div>
+        <div class="ansattEmail">epostsomerlittlang@tinde.no</div>
         </div>
         <div class="oneAnsattWrap"><img src="http://placehold.it/350x350">
-          <div class="ansattName">NAVN HER</div>
-          <div class="ansattAnsvar">Ansvarsområde</div>
-          <div class="ansattPhone">123 12 123</div>
-          <div class="ansattEmail">epostsomerlittlang@tinde.no</div>
+        <div class="ansattName">NAVN HER</div>
+        <div class="ansattAnsvar">Ansvarsområde</div>
+        <div class="ansattPhone">123 12 123</div>
+        <div class="ansattEmail">epostsomerlittlang@tinde.no</div>
         </div>
-      </div>
-      <!--.socialWrap
-      a.icon1(href="")
-      	include ../../images/svg/facebook.svg
-      a.icon2(href="")
-      	include ../../images/svg/twitter.svg
-      a.icon3(href="")
-      	include ../../images/svg/instagram.svg
-      -->
-    </div>
-  </div>
-</body>
-<div class="footer">
-  <div class="footerText">Innholdet er beskyttet etter åndsverksloven. Bruk av automatiserte tjenester (roboter, spidere, indeksering m.m.) samt andre fremgangsmåter for systematisk eller regelmessig bruk er ikke tillatt uten eksplisitt samtykke fra tinde.no. <br><br>©  2017 Tinde utvikling AS
-    <!--Google maps-->
-    <script async defer src="https://maps.googleapis.com/maps/api/js?key=AIzaSyAv-n8dxD2LyiLpKr2qg4vCbmtJFqPJnI8&callback=myMap"></script>
+        </div>
+        <!--.socialWrap
+        a.icon1(href="")
+        include ../../images/svg/facebook.svg
+        a.icon2(href="")
+        include ../../images/svg/twitter.svg
+        a.icon3(href="")
+        include ../../images/svg/instagram.svg
+        -->
+        </div>
+        </div>
+        </body>
+        <div class="footer">
+        <div class="footerText">Innholdet er beskyttet etter åndsverksloven. Bruk av automatiserte tjenester (roboter, spidere, indeksering m.m.) samt andre fremgangsmåter for systematisk eller regelmessig bruk er ikke tillatt uten eksplisitt samtykke fra tinde.no. <br><br>©  2017 Tinde utvikling AS
+        <!--Google maps-->
+        <script async defer src="https://maps.googleapis.com/maps/api/js?key=AIzaSyAv-n8dxD2LyiLpKr2qg4vCbmtJFqPJnI8&callback=myMap"></script>
 
-      <!--script type="text/javascript" src="../../js/googleMap.js"></script-->
-
-
-    <!--Slick stuff-->
-    <script src="https://code.jquery.com/jquery-2.2.0.min.js" type="text/javascript"></script>
-    <script type="text/javascript" src="../../tools/slick/slick.js"></script>
-    <script type="text/javascript" src="../../js/slick.js"></script>
+        <!--script type="text/javascript" src="../../js/googleMap.js"></script-->
 
 
-      <!--MenuStickScript-->
-    <script type="text/javascript" src="../../js/menuheader.js"></script>
-  </div>
-</div>
+        <!--Slick stuff-->
+        <script src="https://code.jquery.com/jquery-2.2.0.min.js" type="text/javascript"></script>
+        <script type="text/javascript" src="../../tools/slick/slick.js"></script>
+        <script type="text/javascript" src="../../js/slick.js"></script>
+
+
+        <!--MenuStickScript-->
+        <script type="text/javascript" src="../../js/menuheader.js"></script>
+        </div>
+        </div>

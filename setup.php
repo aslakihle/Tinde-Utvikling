@@ -70,6 +70,7 @@ $query =
 		pris INT(10),
 		areal INT(3),
 		info varchar(250),
+		status int(1),
 		punkta1 varchar(50),
 		punkta2 varchar(50),
 		punktb1 varchar(50),
@@ -144,7 +145,7 @@ $query = "
 		stilling
 	)
 	VALUES (
-		'Gunhild Ihle',
+		'Gunhild Vike Nerås',
 		94736274,
 		'gunnhild@tinde.no',
 		'Selger'
@@ -183,7 +184,7 @@ $query = "
 		VALUES ('Solberget', 'Gulbrandslia', 'Sol hele dagen!', 'Longtekst', 'Regulering', 'reguleringsKART', 'SKRIV UT?!?!', '10', '102.4', '15', '1', 1, 1, 0, 0, 0, 1, 1);
 		
 	INSERT INTO tomteomrade (omradenavn,fylke,oneliner,longtekst,regulering,reguleringskart,skrivut,maplong,maplat,mapzoom,ansattID,vann,strom,vei,alpint,fiske,jakt,tur)
-		VALUES ('Nidavik', 'Storehorn', 'Heisanhoppsan!', 'Longtekst', 'Regulering', 'reguleringsKART', 'SKRIV UT?!?!', '10', '102.4', '15', '1', 1, 1, 0, 0, 0, 1, 1);	
+		VALUES ('Hjerkinnhø', 'Storehorn', 'Storslagen utsikt på snaufjellet!', 'Hjerkinnhø ligger i et område med historiske røtter. På hjerkinn lå en gammel skysstasjon(nå Hjerkinn fjellstue) med tradisjoner tilbake til midt på 1200-tallet. Pilegrimsleden og dne gamle kongeveien til Trondheim går like forbi hytteområdene og videre innover Dovrefjell. Her har du inngangen til snøhetta, villreinen og moskusens rike. Hjerkinn-Dovrefjell er hundesportens Mekka med treningsfelt og jaktprøver for fuglehunder. Viewpoint Snøhetta er et attraktivt besøkspunkt og i nærområdet finner du mange natur- og aktivitetsmuligheter', 'Regulering', 'reguleringsKART', 'SKRIV UT?!?!', '9.681470', '62.251263', '16', '1', 1, 1, 0, 0, 0, 1, 1);	
 		
 	INSERT INTO tomteomrade (omradenavn,fylke,oneliner,longtekst,regulering,reguleringskart,skrivut,maplong,maplat,mapzoom,ansattID,vann,strom,vei,alpint,fiske,jakt,tur)
 		VALUES ('The place', 'Storehorn', 'rett og slett, stedet!', 'Longtekst', 'Regulering', 'reguleringsKART', 'SKRIV UT?!?!', '10', '102.4', '15', '1', 1, 1, 0, 0, 0, 1, 1);	
@@ -192,14 +193,70 @@ $query = "
 		VALUES ('Midnattsvika', 'Storehorn', 'Rett ved vannet!', 'Longtekst', 'Regulering', 'reguleringsKART', 'SKRIV UT?!?!', '10', '102.4', '15', '1', 0, 0, 0, 1, 1, 1, 1);		
 
 		
-	
-	INSERT INTO tomt (pris,areal,info,punkta1,punkta2,punktb1,punktb2,punktc1,punktc2,punktd1,punktd2,tomteomradeID)	
-		VALUES (1000000, 60, 'INFOOOOOOOO123',62.251333,9.676380,62.250644,9.676294,62.250614,9.677668,62.251203,9.677517, 1);
-
 		
-	INSERT INTO tomt (pris,areal,info,punkta1,punkta2,punktb1,punktb2,punktc1,punktc2,punktd1,punktd2,tomteomradeID)	
-		VALUES (1000000, 60, 'INFOOOOOOOO123',62.251203,9.677582,62.250634,9.677753,62.250644,9.678698,62.251163,9.678462, 1);
-			
+		
+	
+	INSERT INTO tomt (pris,areal,info,status,punkta1,punkta2,punktb1,punktb2,punktc1,punktc2,punktd1,punktd2,tomteomradeID)	
+		VALUES (700000, 1200, 'Denne tomten kan ikke bygges på før juli 2017.',0,62.251333,9.676380,62.250644,9.676294,62.250614,9.677668,62.251203,9.677517, 1);
+	
+	INSERT INTO tomt (pris,areal,info,status,punkta1,punkta2,punktb1,punktb2,punktc1,punktc2,punktd1,punktd2,tomteomradeID)	
+		VALUES (700000, 1200, 'Denne tomten kan ikke bygges på før juli 2017.',0,62.251333,9.676380,62.250644,9.676294,62.250614,9.677668,62.251203,9.677517, 1);
+	
+	INSERT INTO tomt (pris,areal,info,status,punkta1,punkta2,punktb1,punktb2,punktc1,punktc2,punktd1,punktd2,tomteomradeID)	
+		VALUES (700000, 1200, 'Denne tomten kan ikke bygges på før juli 2017.',1,62.251333,9.676380,62.250644,9.676294,62.250614,9.677668,62.251203,9.677517, 1);
+	
+	INSERT INTO tomt (pris,areal,info,status,punkta1,punkta2,punktb1,punktb2,punktc1,punktc2,punktd1,punktd2,tomteomradeID)	
+		VALUES (700000, 1200, 'Denne tomten kan ikke bygges på før juli 2017.',1,62.251333,9.676380,62.250644,9.676294,62.250614,9.677668,62.251203,9.677517, 1);
+	
+	INSERT INTO tomt (pris,areal,info,status,punkta1,punkta2,punktb1,punktb2,punktc1,punktc2,punktd1,punktd2,tomteomradeID)	
+		VALUES (700000, 1200, 'Denne tomten kan ikke bygges på før juli 2017.',0,62.251333,9.676380,62.250644,9.676294,62.250614,9.677668,62.251203,9.677517, 1);
+	
+	INSERT INTO tomt (pris,areal,info,status,punkta1,punkta2,punktb1,punktb2,punktc1,punktc2,punktd1,punktd2,tomteomradeID)	
+		VALUES (700000, 1200, 'Denne tomten kan ikke bygges på før juli 2017.',0,62.251333,9.676380,62.250644,9.676294,62.250614,9.677668,62.251203,9.677517, 1);
+	
+	INSERT INTO tomt (pris,areal,info,status,punkta1,punkta2,punktb1,punktb2,punktc1,punktc2,punktd1,punktd2,tomteomradeID)	
+		VALUES (700000, 1200, 'Denne tomten kan ikke bygges på før juli 2017.',0,62.251333,9.676380,62.250644,9.676294,62.250614,9.677668,62.251203,9.677517, 1);
+	
+	INSERT INTO tomt (pris,areal,info,status,punkta1,punkta2,punktb1,punktb2,punktc1,punktc2,punktd1,punktd2,tomteomradeID)	
+		VALUES (700000, 1200, 'Denne tomten kan ikke bygges på før juli 2017.',0,62.251333,9.676380,62.250644,9.676294,62.250614,9.677668,62.251203,9.677517, 1);
+	
+	INSERT INTO tomt (pris,areal,info,status,punkta1,punkta2,punktb1,punktb2,punktc1,punktc2,punktd1,punktd2,tomteomradeID)	
+		VALUES (700000, 1200, 'Denne tomten kan ikke bygges på før juli 2017.',0,62.251333,9.676380,62.250644,9.676294,62.250614,9.677668,62.251203,9.677517, 1);
+	
+	INSERT INTO tomt (pris,areal,info,status,punkta1,punkta2,punktb1,punktb2,punktc1,punktc2,punktd1,punktd2,tomteomradeID)	
+		VALUES (700000, 1200, 'Denne tomten kan ikke bygges på før juli 2017.',0,62.251333,9.676380,62.250644,9.676294,62.250614,9.677668,62.251203,9.677517, 1);
+	
+	INSERT INTO tomt (pris,areal,info,status,punkta1,punkta2,punktb1,punktb2,punktc1,punktc2,punktd1,punktd2,tomteomradeID)	
+		VALUES (700000, 1200, 'Denne tomten kan ikke bygges på før juli 2017.',1,62.251333,9.676380,62.250644,9.676294,62.250614,9.677668,62.251203,9.677517, 1);
+	
+	INSERT INTO tomt (pris,areal,info,status,punkta1,punkta2,punktb1,punktb2,punktc1,punktc2,punktd1,punktd2,tomteomradeID)	
+		VALUES (700000, 1200, 'Denne tomten kan ikke bygges på før juli 2017.',1,62.251333,9.676380,62.250644,9.676294,62.250614,9.677668,62.251203,9.677517, 1);
+	
+	INSERT INTO tomt (pris,areal,info,status,punkta1,punkta2,punktb1,punktb2,punktc1,punktc2,punktd1,punktd2,tomteomradeID)	
+		VALUES (700000, 1200, 'Denne tomten kan ikke bygges på før juli 2017.',0,62.251333,9.676380,62.250644,9.676294,62.250614,9.677668,62.251203,9.677517, 1);
+	
+	INSERT INTO tomt (pris,areal,info,status,punkta1,punkta2,punktb1,punktb2,punktc1,punktc2,punktd1,punktd2,tomteomradeID)	
+		VALUES (700000, 1200, 'Denne tomten kan ikke bygges på før juli 2017.',0,62.251333,9.676380,62.250644,9.676294,62.250614,9.677668,62.251203,9.677517, 1);
+	
+	INSERT INTO tomt (pris,areal,info,status,punkta1,punkta2,punktb1,punktb2,punktc1,punktc2,punktd1,punktd2,tomteomradeID)	
+		VALUES (700000, 1200, 'Denne tomten kan ikke bygges på før juli 2017.',0,62.251333,9.676380,62.250644,9.676294,62.250614,9.677668,62.251203,9.677517, 1);
+	
+	INSERT INTO tomt (pris,areal,info,status,punkta1,punkta2,punktb1,punktb2,punktc1,punktc2,punktd1,punktd2,tomteomradeID)	
+		VALUES (700000, 1200, 'Denne tomten kan ikke bygges på før juli 2017.',1,62.251333,9.676380,62.250644,9.676294,62.250614,9.677668,62.251203,9.677517, 1);
+	
+	INSERT INTO tomt (pris,areal,info,status,punkta1,punkta2,punktb1,punktb2,punktc1,punktc2,punktd1,punktd2,tomteomradeID)	
+		VALUES (700000, 1200, 'Denne tomten kan ikke bygges på før juli 2017.',0,62.251333,9.676380,62.250644,9.676294,62.250614,9.677668,62.251203,9.677517, 1);
+	
+	INSERT INTO tomt (pris,areal,info,status,punkta1,punkta2,punktb1,punktb2,punktc1,punktc2,punktd1,punktd2,tomteomradeID)	
+		VALUES (700000, 1200, 'Denne tomten kan ikke bygges på før juli 2017.',1,62.251333,9.676380,62.250644,9.676294,62.250614,9.677668,62.251203,9.677517, 1);
+	
+	INSERT INTO tomt (pris,areal,info,status,punkta1,punkta2,punktb1,punktb2,punktc1,punktc2,punktd1,punktd2,tomteomradeID)	
+		VALUES (700000, 1200, 'Denne tomten kan ikke bygges på før juli 2017.',0,62.251333,9.676380,62.250644,9.676294,62.250614,9.677668,62.251203,9.677517, 1);
+	
+	INSERT INTO tomt (pris,areal,info,status,punkta1,punkta2,punktb1,punktb2,punktc1,punktc2,punktd1,punktd2,tomteomradeID)	
+		VALUES (8500000, 1400, 'Denne tomten kan ikke bygges på før juli 2017.',0,62.251333,9.676380,62.250644,9.676294,62.250614,9.677668,62.251203,9.677517, 1);
+	
+	 
 	INSERT INTO bildetype
 	VALUE ('Header');
 	

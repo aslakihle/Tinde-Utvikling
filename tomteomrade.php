@@ -103,7 +103,7 @@ require_once 'connect.php';
 							$bstmt->fetch(PDO::FETCH_ASSOC);*/
 							echo '<div class="nyttOmrade" id="tomteomrade'.$tRow['omradeID'].'">';
 							echo '
-							<a href="tomteomrader/tomteomrade'.$tRow['omradeID'].'/tomteomrade'.$tRow['omradeID'].'.php" >
+							<a href="tomteomrader/tomteomrade1/tomteomrade1.php?omrade='.$tRow['omradeID'].'" >
 							<div class="omradeBox">
 								<img class="omradeImg" src="images/hytte'.$tRow['omradeID'].'.jpg" alt="hytte">
 									<div class="stedText">
