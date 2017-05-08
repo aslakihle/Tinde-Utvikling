@@ -434,7 +434,7 @@
 	
 	<!--FOOTER-->
 	<div class="footer">
-        <img src="/images/footerbilde.png" alt="FooterIMG">
+        <img src="images/footerbilde.png" alt="FooterIMG">
 		<div class="footerText">Innholdet er beskyttet etter åndsverksloven. Bruk av automatiserte tjenester (roboter, spidere, indeksering m.m.) samt andre fremgangsmåter for systematisk eller regelmessig bruk er ikke tillatt uten eksplisitt samtykke fra tinde.no. <br><br>©  2017 Tinde utvikling AS</div>
 	</div>
 	
