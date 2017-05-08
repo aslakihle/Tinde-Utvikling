@@ -2,7 +2,7 @@
 require_once '../../connect.php';
 ?>
 <!DOCTYPE html>
-<html lang="en"></html>
+<html lang="en">
 <head>
   <meta charset="utf-8">
   <title>Tinde Utvikling - TomteOmraade</title>
@@ -318,7 +318,7 @@ foreach ($plotArr as $p) {
         <div class="tomtPopup" id="t'.$p['tomtID'].'">
             
             <div class="tomtHead">Tomt '.$tomtCount.'</div>
-            <div class="tomtDetails">Areal: '.$p['areal'].'<sup>2</sup></div>
+            <div class="tomtDetails">Areal: '.$p['areal'].'m<sup>2</sup></div>
             <div class="tomtDetails">Pris: '.$p['pris'].' NOK</div>
             <div class="tomtInfoTitle">Merk:</div>
             <div class="tomtInfoText">'.$p['info'].'</div>
@@ -476,7 +476,10 @@ echo'
   </div>
         <div class="footer">
         <div class="footerText">Innholdet er beskyttet etter åndsverksloven. Bruk av automatiserte tjenester (roboter, spidere, indeksering m.m.) samt andre fremgangsmåter for systematisk eller regelmessig bruk er ikke tillatt uten eksplisitt samtykke fra tinde.no. <br><br>©  2017 Tinde utvikling AS
-</body>
+
+        </div>
+            <img src="../../images/footerbilde.png" alt="FooterIMG">
+        </div>
         <!--Google maps-->
         <script async defer src="https://maps.googleapis.com/maps/api/js?key=AIzaSyAv-n8dxD2LyiLpKr2qg4vCbmtJFqPJnI8&callback=myMap"></script>
         <!--script type="text/javascript" src="../../js/googleMap.js"></script-->
@@ -492,5 +495,6 @@ echo'
 
         <!--MenuStickScript-->
         <script type="text/javascript" src="../../js/menuheader.js"></script>
+</body>
+</html>
 
-        </div>

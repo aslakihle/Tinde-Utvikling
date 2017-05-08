@@ -519,6 +519,7 @@ require_once 'connect.php';
     <!-- FOOTER -->
     <div class="footer">
         <div class="footerText">Innholdet er beskyttet etter åndsverksloven. Bruk av automatiserte tjenester (roboter, spidere, indeksering m.m.) samt andre fremgangsmåter for systematisk eller regelmessig bruk er ikke tillatt uten eksplisitt samtykke fra tinde.no. <br><br>©  2017 Tinde utvikling AS</div>
+        <img src="images/footerbilde.png" alt="FooterIMG">
     </div>
     <script type="text/javascript" src="js/menuheader.js"></script>
     

@@ -18,7 +18,7 @@
     <meta name="theme-color" content="#ffffff">
     <title>Tinde Utvikling - TomteOmraade</title>
     <!--Our Css-->
-    <link rel="stylesheet" href="css/kontakt.css">
+    <link rel="stylesheet" href="css/kontakt.css?<?php echo time(); ?>">
   </head>
   <body>
     <div class="menu">
@@ -164,6 +164,7 @@
     </div>
     <div class="footer">
       <div class="footerText">Innholdet er beskyttet etter åndsverksloven. Bruk av automatiserte tjenester (roboter, spidere, indeksering m.m.) samt andre fremgangsmåter for systematisk eller regelmessig bruk er ikke tillatt uten eksplisitt samtykke fra tinde.no. <br><br>©  2017 Tinde utvikling AS</div>
+        <img src="images/footerbilde.png" alt="FooterIMG">
     </div>
     <!--Google maps-->
     <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyAv-n8dxD2LyiLpKr2qg4vCbmtJFqPJnI8&amp;callback=myMap"></script>

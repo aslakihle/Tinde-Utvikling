@@ -1,18 +1,22 @@
 @import "_vars"
 .footer
-	//	margin-top: 2em
-	//width: auto
-	//background-color: $primaryColor
-	//height: 300px
-	//background-image: url(/images/footerbilde.png)
-	//color: white
-
-	
-
+	position: relative
+	background-color: red
+	width: 100%
+	img
+		width: 100%
+		float: left
+		z-index: -50
+		
 .footerText
 	box-sizing: border-box
 	padding-left: 20%
 	padding-right: 20%
 	padding-top: 4%
+	position: absolute
+	z-index: 100
+	top: 190px
+	color: $bgc
+	left: 0
 	text-align: center
 	font-size: 1.4em
