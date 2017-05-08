@@ -28,12 +28,12 @@ if (isset($_POST['create'])){
 		status,
 		tomteomradeID)
 	VALUES (
-		'".$_POST['adresse']."',
-		".$_POST['areal'].",
-		".$_POST['pris'].",
-		'".$_POST['merknad']."',
+		'".htmlentities($_POST['adresse'])."',
+		".htmlentities($_POST['areal']).",
+		".htmlentities($_POST['pris']).",
+		'".htmlentities($_POST['merknad'])."',
 		0,
-		".$_GET['omradeID']."
+		".htmlentities($_GET['omradeID'])."
 		);
 	");
 	$stmt->execute();
@@ -116,10 +116,15 @@ if (isset($_POST['create'])){
 			
 			<form method="post" id="newTomtForm" >
 				<div class="borderdiv">
-					<input type="text" placeholder="Adresse..." name="adresse" required>
-					<input type="number" placeholder="Areal (km&sup2;)..." name="areal" required>
-					<input type="number" placeholder="Prisantydning" max="10000000" min="1000000" name="pris" required>
-					<textarea form="newTomtForm" rows="4" placeholder="Merknad..." name="merknad" required></textarea>
+					<label>Adresse</label>
+					<input type="text" placeholder="" name="adresse" required autofocus>
+					
+					<label>Areal (km&sup2;)</label>
+					<input type="number" placeholder="" name="areal" required>
+					<label>Prisantydning</label>
+					<input type="number" placeholder="" max="10000000" min="1000000" name="pris" required>
+					<label>Merknad/Info om tomten</label>
+					<textarea form="newTomtForm" rows="4" placeholder="" name="merknad" required></textarea>
 				</div>
 				<input type="submit" name="create" value="LAGRE TOMT" id="createKnapp">
 			</form>
@@ -129,19 +134,21 @@ if (isset($_POST['create'])){
         	<div id="tomtliste">
         		<h3>Tomteliste</h3>
 				<?php
+				
+				$omradeID = htmlentities($_GET['omradeID']);
 				//statement to find name of logged in ansatt
 				$stmt = $db->prepare("
 					SELECT adresse, status
 					FROM tomt t
 					INNER JOIN tomteomrade tom
 					ON t.tomteomradeID = tom.omradeID
-					WHERE t.tomteomradeID = ".$_GET['omradeID']."
+					WHERE t.tomteomradeID = ".$omradeID."
 					;");
 				$stmt->execute();
 
 				//finds and prints logged in ansatt
 				while ($row = $stmt->fetch(PDO::FETCH_ASSOC)){
-					echo '<a class="" href="cmsDashboard.php">'.$row['adresse'].' ';
+					echo '<a class="" href="cmsDashboard.php">'.htmlentities($row['adresse']).' ';
 						if($row['status']==0){
 							echo '<span class="span ledig" title="Ledig"></span>';
 						} else {

@@ -131,17 +131,40 @@ if (isset($_POST['nyTomt'])){
 								<input type="submit" value="LEGG TIL TOMT" class="endreKnapp">
 							</form>
 						';
-					if ($status > 2){
-						echo '<div class="noLedige status">
-						0/13 tomter ledige.
-						</div>';
-						$status ++;
-					} else {
-						echo '<div class="ledige status">
-						10/15 tomter ledige.
-						</div>';
-						$status ++;
+					$statusstmt = $db->prepare("
+						SELECT status
+						FROM tomt t
+						INNER JOIN tomteomrade tom
+						ON t.tomteomradeID = tom.omradeID
+						WHERE t.tomteomradeID = ".$row['omradeID']."
+						;");
+					$statusstmt->execute();
+					//counts how many rows has statuses (all within a tomteomrade), basicly the number of how many tomter and area got
+					$numRowsTomter = $statusstmt->rowCount();
+					
+					//variables
+					$avalibleTomter = $numRowsTomter;
+					$allTomter = $numRowsTomter;
+					
+					//checks through all the statuses and if the area got a sold tomt it reduses avalible tomts by one.
+					while ($statusrow = $statusstmt->fetch(PDO::FETCH_ASSOC)){
+						if($statusrow['status'] == 1){
+					 		$avalibleTomter --;
+						}
 					}
+					
+					//if tomteområde does not have any tomts or avalibel tomts display in red, if not then in in green
+					if (($avalibleTomter && $allTomter) == 0){
+						echo '<div class="noLedige status">
+							'.$avalibleTomter.'/'.$allTomter.' tomter ledige.
+						</div>';
+					}else{
+						echo '
+						<div class="ledige status">
+							'.$avalibleTomter.'/'.$allTomter.' tomter ledige.
+						</div>';
+					}
+				
 					echo '
 							<!-- INFO -->
 							<div>

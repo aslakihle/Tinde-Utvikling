@@ -4,6 +4,8 @@ require_once 'connect.php';
 //variable to change which ansatt is logged in, with ID
 $loggedInID = 1;
 
+$error = '';
+
 function redirect($url){
 	header("Location: $url");
 }
@@ -19,49 +21,57 @@ if (isset($_POST['endre'])){
 
 //LAGING av nytt område
 if (isset($_POST['create'])){
-	$stmt = $db->prepare("
-	INSERT INTO tomteomrade (
-		omradenavn,
-		fylke,
-		oneliner,
-		longtekst,
-		regulering,
-		reguleringskart,
-		skrivut,
-		maplong,
-		maplat,
-		mapzoom,
-		ansattID,
-		vann, 
-		strom, 
-		vei, 
-		alpint, 
-		fiske, 
-		jakt, 
-		tur)
-	VALUES (
-		'".$_POST['navn']."',
-		'".$_POST['fylke']."',
-		'".$_POST['shortText']."',
-		'".$_POST['longText']."',
-		'Regulering',
-		'reguleringsKART',
-		'SKRIV UT?!?!',
-		'10',
-		'102.4',
-		'15',
-		'".$loggedInID."',
-		".$_POST['vann'].",
-		".$_POST['strom'].", 
-		".$_POST['vei'].", 
-		".$_POST['alpint'].",
-		".$_POST['fiske'].",
-		".$_POST['jakt'].", 
-		".$_POST['tur'].");
-	");
-	$stmt->execute();
-	//tar deg til dashboardet etter det er lagd
-	redirect("cmsDashboard.php");
+	echo $_POST['fylke'];
+	if(!$_POST['fylke'] == 0){
+		
+	
+		
+		$stmt = $db->prepare("
+		INSERT INTO tomteomrade (
+			omradenavn,
+			fylke,
+			oneliner,
+			longtekst,
+			regulering,
+			reguleringskart,
+			skrivut,
+			maplong,
+			maplat,
+			mapzoom,
+			ansattID,
+			vann, 
+			strom, 
+			vei, 
+			alpint, 
+			fiske, 
+			jakt, 
+			tur)
+		VALUES (
+			'".htmlentities($_POST['navn'])."',
+			'".htmlentities($_POST['fylke'])."',
+			'".htmlentities($_POST['shortText'])."',
+			'".htmlentities($_POST['longText'])."',
+			'Regulering',
+			'reguleringsKART',
+			'SKRIV UT?!?!',
+			'10',
+			'102.4',
+			'15',
+			'".$loggedInID."',
+			".htmlentities($_POST['vann']).",
+			".htmlentities($_POST['strom']).", 
+			".htmlentities($_POST['vei']).", 
+			".htmlentities($_POST['alpint']).",
+			".htmlentities($_POST['fiske']).",
+			".htmlentities($_POST['jakt']).", 
+			".htmlentities($_POST['tur']).");
+		");
+		$stmt->execute();
+		//tar deg til dashboardet etter det er lagd
+		redirect("cmsDashboard.php");
+		}else{
+		$error= '<h3 style="text-align: center;">Område ikke lagd, <br> Du må huske å velge et fylke!</h3>';
+	}
 };
 ?>
 <!DOCTYPE html>
@@ -139,14 +149,23 @@ if (isset($_POST['create'])){
 			
 			<form method="post" id="newOmradeForm" >
 				<div class="borderdiv">
+				<?php
 				
-				<input type="text" placeholder="Navn på område..." name="navn" required>
-				<input type="text" placeholder="Beskrivende setning..." name="shortText" required>
+				echo $error;	
+				?>
+				<label>Navn på området</label>
+				<input type="text" placeholder="" name="navn" required autofocus>
+				
+				<label>Beskrivende setning(one-liner)</label>
+				<input type="text" placeholder="" name="shortText" required>
+				
 				<label>Header bilde</label>
 				<input class="fileUp" type="file" placeholder="Header bilde..." name="headerPic">
 				<label>Karusell bilde</label>
 				<input class="fileUp" type="file" placeholder="Karusell bilde..." name="karusellPic">
-				<select name="fylke" required>
+				
+				<label>Fylke</label>
+				<select name="fylke">
 					<option value="0">Velg Fylke</option>
 					<?php
 					//statement to find all the fylker that TindeUtvikling owns
@@ -162,8 +181,8 @@ if (isset($_POST['create'])){
 					?>
 				</select>
 				
-				
-				<textarea form="newOmradeForm" rows="10" placeholder="Beskriv området (brødtext)..." name="longText" required></textarea>
+				<label>Beskriv området (brødtext)</label>
+				<textarea form="newOmradeForm" rows="10" placeholder="" name="longText" required></textarea>
 				
 				<!--Checkboxes, uses hidden checkbox with value 0 to return if checkbox wasn't clicked -->
 				<h4 style="text-align:center;">Fasiliteter</h4>

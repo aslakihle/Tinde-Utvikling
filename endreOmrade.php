@@ -101,18 +101,18 @@ if (isset($_POST['nyTomt'])){
 			if (isset($_POST['update'])){
 				$stmt = $db->prepare("
 				UPDATE tomteomrade
-				SET omradenavn = '".$_POST['navn']."',
-					fylke = '".$_POST['fylke']."',
-					oneliner = '".$_POST['shortText']."',
-					longtekst = '".$_POST['longText']."',
-					vann = ".$_POST['vann'].", 
-					strom = ".$_POST['strom'].", 
-					vei = ".$_POST['vei'].", 
-					alpint = ".$_POST['alpint'].", 
-					fiske = ".$_POST['fiske'].", 
-					jakt = ".$_POST['jakt'].", 
-					tur = ".$_POST['tur']."
-				WHERE omradeID = ".$_GET['omradeID']."
+				SET omradenavn = '".htmlentities($_POST['navn'])."',
+					fylke = '".htmlentities($_POST['fylke'])."',
+					oneliner = '".htmlentities($_POST['shortText'])."',
+					longtekst = '".htmlentities($_POST['longText'])."',
+					vann = ".htmlentities($_POST['vann']).", 
+					strom = ".htmlentities($_POST['strom']).", 
+					vei = ".htmlentities($_POST['vei']).", 
+					alpint = ".htmlentities($_POST['alpint']).", 
+					fiske = ".htmlentities($_POST['fiske']).", 
+					jakt = ".htmlentities($_POST['jakt']).", 
+					tur = ".htmlentities($_POST['tur'])."
+				WHERE omradeID = ".htmlentities($_GET['omradeID'])."
 					;
 				");
 				$stmt->execute();
@@ -133,18 +133,21 @@ if (isset($_POST['nyTomt'])){
 				$stmt = $db->prepare("
 					SELECT *
 					FROM tomteomrade
-					WHERE omradeID = ".$_GET['omradeID']."
+					WHERE omradeID = ".htmlentities($_GET['omradeID'])."
 					;");
 				$stmt->execute();
 				
 				while ($row = $stmt->fetch(PDO::FETCH_ASSOC)){
 					echo '<h3 class="topH3">'.$row['omradenavn'].'</h3>
-						<input type="text" name="navn" value="'.$row['omradenavn'].'" >
+						<label>Navn på området</label>
+						<input type="text" name="navn" value="'.$row['omradenavn'].'" autofocus>
+						<label>Beskrivende setning(one-liner)</label>
 						<input type="text" value="'.$row['oneliner'].'" name="shortText" >
 						<label>Header bilde</label>
 						<input class="fileUp" type="file" placeholder="Header bilde..." name="headerPic">
 						<label>Karusell bilde</label>
 						<input class="fileUp" type="file" placeholder="Karusell bilde..." name="karusellPic">
+						<label>Fylke</label>
 						<select name="fylke" required>
 							<option value="0">Velg Fylke</option>';
 							
@@ -165,7 +168,7 @@ if (isset($_POST['nyTomt'])){
 					echo '	
 						</select>
 
-
+						<label>Beskrivelse av området (brødtext)</label>
 						<textarea form="newOmradeForm" rows="10" name="longText">'.$row['longtekst'].'</textarea>
 
 						<!--Checkboxes, uses hidden checkbox with value 0 to return if checkbox wasnt clicked -->
@@ -299,7 +302,7 @@ if (isset($_POST['nyTomt'])){
 					FROM tomt t
 					INNER JOIN tomteomrade tom
 					ON t.tomteomradeID = tom.omradeID
-					WHERE t.tomteomradeID = ".$_GET['omradeID']."
+					WHERE t.tomteomradeID = ".htmlentities($_GET['omradeID'])."
 					;");
 				$stmt->execute();
 
