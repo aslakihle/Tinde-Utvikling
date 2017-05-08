@@ -96,7 +96,8 @@ if (isset($_POST['nyTomt'])){
 				SET adresse = '".htmlentities($_POST['adresse'])."',
 					areal = '".htmlentities($_POST['areal'])."',
 					pris = '".htmlentities($_POST['pris'])."',
-					info = '".htmlentities($_POST['merknad'])."'
+					info = '".htmlentities($_POST['merknad'])."',
+					status = ".$_POST['status']."
 				WHERE tomtID = ".htmlentities($_GET['tomtID'])."
 					;
 				");
@@ -139,6 +140,21 @@ if (isset($_POST['nyTomt'])){
 							<label>Merknad/Info om tomten</label>
 							<textarea form="newTomtForm" rows="4" placeholder="" name="merknad">'.$row['info'].'</textarea>
 						';
+						
+						
+					if($row['status'] == 0){
+						echo '<div class="statusBox">
+							<label>Status (checkmark = solgt)</label>
+							<input class="checkbox" type="hidden" name="status" value="0">
+							<input class="checkbox" type="checkbox" name="status" value="1">
+						</div>';
+					}else{
+						echo '<div class="statusBox">
+							<label>Status (checkmark = solgt)</label>
+							<input class="checkbox" type="hidden" name="status" value="0">
+							<input class="checkbox" type="checkbox" name="status" value="1" checked>
+						</div>';
+					}
 					}
 					?>
 					
