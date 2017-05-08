@@ -132,6 +132,7 @@ if (isset($_POST['create'])){
 					INNER JOIN tomteomrade tom
 					ON t.tomteomradeID = tom.omradeID
 					WHERE t.tomteomradeID = ".htmlentities($_GET['omradeID'])."
+					ORDER BY adresse ASC
 					;");
 				$stmt->execute();
 

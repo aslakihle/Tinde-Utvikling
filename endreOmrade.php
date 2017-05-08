@@ -294,6 +294,7 @@ if (isset($_POST['nyTomt'])){
 					INNER JOIN tomteomrade tom
 					ON t.tomteomradeID = tom.omradeID
 					WHERE t.tomteomradeID = ".htmlentities($_GET['omradeID'])."
+					ORDER BY adresse ASC
 					;");
 				$stmt->execute();
 
