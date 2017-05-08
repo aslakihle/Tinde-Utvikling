@@ -8,10 +8,6 @@ function redirect($url){
 	header("Location: $url");
 }
 
-if(isset($_POST['newOmrade'])){
-	redirect("nyttOmrade.php");
-}
-
 //LAGING av nytt område
 if (isset($_POST['create'])){
 	$stmt = $db->prepare("

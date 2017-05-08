@@ -8,11 +8,6 @@ function redirect($url){
 	header("Location: $url");
 }
 
-if(isset($_POST['newOmrade'])){
-	redirect("nyttOmrade.php");
-}
-
-
 if (isset($_POST['nyTomt'])){
 	redirect("leggTilTomt.php?omradeID=".$_GET['omradeID']);
 };
