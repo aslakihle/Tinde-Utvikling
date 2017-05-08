@@ -1,0 +1,84 @@
+@import "sassImports/_vars"
+@import "sassImports/_main"
+@import "sassImports/_header"
+@import "sassImports/_menu"
+@import "sassImports/_footer"
+
+
+hr
+	border: 0
+	height: 1px 
+	background-image: -webkit-linear-gradient(left, #f0f0f0, $blue, #f0f0f0)
+	background-image: -moz-linear-gradient(left, #f0f0f0, $blue, #f0f0f0)
+	background-image: -ms-linear-gradient(left, #f0f0f0, $blue, #f0f0f0)
+	background-image: -o-linear-gradient(left, #f0f0f0, $blue, #f0f0f0)
+	margin-bottom: 1.5em
+	margin-top: 1.5em
+
+
+.tomteomrade
+	position: relative
+	box-sizing: border-box
+	padding: 2em
+	border: 1px solid $blue
+	//height: 20em
+	margin-bottom: 1em
+	display: inline-block
+	width: 49%
+.tomteomrade:nth-child(even)
+	float: right
+
+.fylke
+	margin-top: 2em
+
+.topH1
+	text-align: center
+	font-family: $raleway
+	font-weight: $ralewaybold
+	margin-bottom: 5%
+
+.endreForm
+	position: absolute
+	right: 2em
+	top: 2em
+
+#newOmrade
+	margin-bottom: 2em
+
+#newOmradeKnapp
+	background-color: $blue
+	color: white
+	border: 0
+	width: 100%
+	box-sizing: border-box
+	padding: 1em
+	cursor: pointer
+	font-size: 2em
+
+.endreKnapp
+	background-color: $blue
+	color: white
+	border: 0
+	box-sizing: border-box
+	padding: 1em
+	cursor: pointer
+
+.endreKnapp:hover, #newOmradeKnapp:hover
+	background-color: $blueDark
+
+.endreKnapp:active, #newOmradeKnapp:active
+	background-color: $blueLight
+
+.redColor
+	color:#e04747
+
+.noLedige
+	color:#e04747
+
+.ledige
+	color:#4fc63d
+
+.status
+	position: absolute
+	bottom: 1em
+	right: 1em

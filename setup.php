@@ -169,28 +169,29 @@ $query = "
 		1, 1, 1, 1, 0, 0, 1);
 		
 	INSERT INTO tomteomrade (omradenavn,fylke,oneliner,longtekst,regulering,reguleringskart,skrivut,maplong,maplat,mapzoom,ansattID,vann,strom,vei,alpint,fiske,jakt,tur)
-		VALUES ('Gunnhilda', 'Jotunheimen', 'Det er her det skjer', 'Longtekst', 'Regulering', 'reguleringsKART', 'SKRIV UT?!?!', '10', '102.4', '15', '1', 0, 0, 1, 1, 1, 1, 1);
+		VALUES ('Gunnhilda', 'Jotunheimen', 'Det er her det skjer', 'Longtekst', 'Regulering', 'reguleringsKART', 'SKRIV UT?!?!', '10', '102.4', '15', '2', 0, 0, 1, 1, 1, 1, 1);
 	
 	INSERT INTO tomteomrade (omradenavn,fylke,oneliner,longtekst,regulering,reguleringskart,skrivut,maplong,maplat,mapzoom,ansattID,vann,strom,vei,alpint,fiske,jakt,tur)
 		VALUES ('Snilsefjell', 'Jotunheimen', 'Åløøøsåfett', 'Longtekst', 'Regulering', 'reguleringsKART', 'SKRIV UT?!?!', '10', '102.4', '15', '1', 1, 1, 0, 1, 0, 1, 1);
 		
 	INSERT INTO tomteomrade (omradenavn,fylke,oneliner,longtekst,regulering,reguleringskart,skrivut,maplong,maplat,mapzoom,ansattID,vann,strom,vei,alpint,fiske,jakt,tur)
-		VALUES ('Brunnvika', 'Rogaland', 'Brunnvika er best!', 'Longtekst', 'Regulering', 'reguleringsKART', 'SKRIV UT?!?!', '10', '102.4', '15', '1', 1, 1, 0, 0, 0, 1, 1);
+		VALUES ('Brunnvika', 'Rogaland', 'Brunnvika er best!', 'Longtekst', 'Regulering', 'reguleringsKART', 'SKRIV UT?!?!', '10', '102.4', '15', '3', 1, 1, 0, 0, 0, 1, 1);
 		
 	INSERT INTO tomteomrade (omradenavn,fylke,oneliner,longtekst,regulering,reguleringskart,skrivut,maplong,maplat,mapzoom,ansattID,vann,strom,vei,alpint,fiske,jakt,tur)
-		VALUES ('Galhøspissland', 'Jotunheimen', 'Rett ved norges høyeste!', 'Longtekst', 'Regulering', 'reguleringsKART', 'SKRIV UT?!?!', '10', '102.4', '15', '1', 1, 1, 0, 0, 0, 1, 1);
+		VALUES ('Galhøspissland', 'Jotunheimen', 'Rett ved norges høyeste!', 'Longtekst', 'Regulering', 'reguleringsKART', 'SKRIV UT?!?!', '10', '102.4', '15', '2', 1, 1, 0, 0, 0, 1, 1);
 	
 	INSERT INTO tomteomrade (omradenavn,fylke,oneliner,longtekst,regulering,reguleringskart,skrivut,maplong,maplat,mapzoom,ansattID,vann,strom,vei,alpint,fiske,jakt,tur)
 		VALUES ('Solberget', 'Gulbrandslia', 'Sol hele dagen!', 'Longtekst', 'Regulering', 'reguleringsKART', 'SKRIV UT?!?!', '10', '102.4', '15', '1', 1, 1, 0, 0, 0, 1, 1);
 		
 	INSERT INTO tomteomrade (omradenavn,fylke,oneliner,longtekst,regulering,reguleringskart,skrivut,maplong,maplat,mapzoom,ansattID,vann,strom,vei,alpint,fiske,jakt,tur)
+
 		VALUES ('Hjerkinnhø', 'Storehorn', 'Storslagen utsikt på snaufjellet!', 'Hjerkinnhø ligger i et område med historiske røtter. På hjerkinn lå en gammel skysstasjon(nå Hjerkinn fjellstue) med tradisjoner tilbake til midt på 1200-tallet. Pilegrimsleden og dne gamle kongeveien til Trondheim går like forbi hytteområdene og videre innover Dovrefjell. Her har du inngangen til snøhetta, villreinen og moskusens rike. Hjerkinn-Dovrefjell er hundesportens Mekka med treningsfelt og jaktprøver for fuglehunder. Viewpoint Snøhetta er et attraktivt besøkspunkt og i nærområdet finner du mange natur- og aktivitetsmuligheter', 'Regulering', 'reguleringsKART', 'SKRIV UT?!?!', '9.681470', '62.251263', '16', '1', 1, 1, 0, 0, 0, 1, 1);	
 		
 	INSERT INTO tomteomrade (omradenavn,fylke,oneliner,longtekst,regulering,reguleringskart,skrivut,maplong,maplat,mapzoom,ansattID,vann,strom,vei,alpint,fiske,jakt,tur)
-		VALUES ('The place', 'Storehorn', 'rett og slett, stedet!', 'Longtekst', 'Regulering', 'reguleringsKART', 'SKRIV UT?!?!', '10', '102.4', '15', '1', 1, 1, 0, 0, 0, 1, 1);	
+		VALUES ('The place', 'Storehorn', 'rett og slett, stedet!', 'Longtekst', 'Regulering', 'reguleringsKART', 'SKRIV UT?!?!', '10', '102.4', '15', '2', 1, 1, 0, 0, 0, 1, 1);	
 		
 	INSERT INTO tomteomrade (omradenavn,fylke,oneliner,longtekst,regulering,reguleringskart,skrivut,maplong,maplat,mapzoom,ansattID,vann,strom,vei,alpint,fiske,jakt,tur)
-		VALUES ('Midnattsvika', 'Storehorn', 'Rett ved vannet!', 'Longtekst', 'Regulering', 'reguleringsKART', 'SKRIV UT?!?!', '10', '102.4', '15', '1', 0, 0, 0, 1, 1, 1, 1);		
+		VALUES ('Midnattsvika', 'Storehorn', 'Rett ved vannet!', 'Longtekst', 'Regulering', 'reguleringsKART', 'SKRIV UT?!?!', '10', '102.4', '15', '2', 0, 0, 0, 1, 1, 1, 1);		
 
 		
 		
