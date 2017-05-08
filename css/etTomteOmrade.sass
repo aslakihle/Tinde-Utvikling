@@ -172,69 +172,66 @@ body
 	font-size: 1.4em
 	margin-right: 0.5em
 
-.tomtMapWrap
-	width: 57%
-	margin-left: 3%
-	margin-top: .5em
-	position: relative
-	top: 0
-	left: 0
-	img
-		width: 100%
+
 		
+#mapWrap
+	width: 46%
+	background-color: blue
+	padding: 0 2%
+	
+#map
+	width: 100%
+	height: 400px
+	
 		
 //Specific tomt
 
-.tomtMapWrap
+
+.tomtPopup
 	
-	.tomtPopup
-		margin: 2% 25%
-		background-color: red
-		width: 46%
-		height: 90%
-		z-index: 100
+	background-color: red
+	width: 46%
+	height: 90%
+	z-index: 100
+	display: inline-block
+	.tomtHead, .tomtAdress, .tomtDetails, .tomtInfoTitle, .tomtInfoText
+		color: black
+		width: 94%
+		margin: 0 3%
+	.tomtHead, .tomtAdress
+		text-align: center
+	.tomtHead
+		font-weight: $osbold
+		font-size: 2em
+		margin-top: 0
+	.tomtAdress
+		margin-top: -2%
+		margin-bottom: 3%
+	.tomtInfoTitle
+		margin-top: 3%
+	.tomtBtn
+		display: block
+		float: right
+		background-color: $blue
+		position: absolute
+		bottom: 0
+		right: 0
+		margin: 4%
+		padding: 1em
+		color: $bgc
+		border-radius: 3px
+	.esc
 		position: absolute
 		top: 0
-		left: 0
-		border-radius: 3px
-		.tomtHead, .tomtAdress, .tomtDetails, .tomtInfoTitle, .tomtInfoText
-			color: black
-			width: 94%
-			margin: 0 3%
-		.tomtHead, .tomtAdress
-			text-align: center
-		.tomtHead
-			font-weight: $osbold
-			font-size: 2em
-			margin-top: 0
-		.tomtAdress
-			margin-top: -2%
-			margin-bottom: 3%
-		.tomtInfoTitle
-			margin-top: 3%
-		.tomtBtn
-			display: block
-			float: right
-			background-color: $blue
-			position: absolute
-			bottom: 0
-			right: 0
-			margin: 4%
-			padding: 1em
-			color: $bgc
-			border-radius: 3px
-		.esc
-			position: absolute
-			top: 0
-			right: 0
-			width: 2em
-			margin: 3%
-			padding: 0
-			
-			svg
-				width: 100%
-				height: 100%
-					
+		right: 0
+		width: 2em
+		margin: 3%
+		padding: 0
+		
+		svg
+			width: 100%
+			height: 100%
+				
 //Table
 
 .tableWrap
@@ -385,7 +382,5 @@ body
 		
 		
 	// MAP LEK
-#map
-	width: 500px
-	height: 500px
+
 	

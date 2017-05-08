@@ -218,16 +218,16 @@ require_once '../../connect.php';
         }
 ?>
 		<script>
+
 				function myMap() {
 					var mapProp= {
-						center:new google.maps.LatLng(62.251263, 9.681470),
+						center:new google.maps.LatLng(62.251378, 9.680572),
 						zoom: 16,
 						mapTypeId: "terrain"
 					};
 					var map=new google.maps.Map(document.getElementById("map"),mapProp);
-					
-					
-					/*
+
+
 					function addPlot(a1, a2, b1, b2, c1, c2, d1, d2) {
 						var myCoordinates = [
 							new google.maps.LatLng(a1, a2),
@@ -246,69 +246,62 @@ require_once '../../connect.php';
 						var it = new google.maps.Polygon(polyOptions);
 						it.setMap(map);
 					}
-                    */
-
-
-                }
-		</script>
 
 
 <?php
+                        /*
+					foreach ($plotMapArr as $row) {
+						echo '
+                        var myCoordinates = [
+                            new google.maps.LatLng(' . $row['punkta1'] . ', ' . $row['punkta2'] . '),
+                            new google.maps.LatLng(' . $row['punktb1'] . ', ' . $row['punktb2'] . '),
+                            new google.maps.LatLng(' . $row['punktc1'] . ', ' . $row['punktc2'] . '),
+                            new google.maps.LatLng(' . $row['punktd1'] . ', ' . $row['punktd2'] . ')
+                        ];
+                        var polyOptions = {
+                            path: myCoordinates,
+                            strokeColor: "#FF0000",
+                            strokeOpacity: 0.8,
+                            strokeWeight: 2,
+                            fillColor: "#0000FF",
+                            fillOpacity: 0.6
+                        };
+                        var it = new google.maps.Polygon(polyOptions);
+                        it.setMap(map);
+    
+    
+                        ';
 
-
-            echo'<script>
-                function addPlot(a1, a2, b1, b2, c1, c2, d1, d2) {
-                    var myCoordinates = [
-                        new google.maps.LatLng(a1, a2),
-                        new google.maps.LatLng(b1, b2),
-                        new google.maps.LatLng(c1, c2),
-                        new google.maps.LatLng(d1, d2)
-                    ];
-                    var polyOptions = {
-                        path: myCoordinates,
-                        strokeColor: "#FF0000",
-                        strokeOpacity: 0.8,
-                        strokeWeight: 2,
-                        fillColor: "#0000FF",
-                        fillOpacity: 0.6
-                    };
-                    var it = new google.maps.Polygon(polyOptions);
-                    it.setMap(map);
-                }';
-		    foreach ($plotMapArr as $row){
-				echo 'addPlot('.$row['punkta1'].','. $row['punkta2'].','. $row['punktb1'].','.$row['punktb2'].','. $row['punktc1'].','. $row['punktc2'].','. $row['punktd1'].','. $row['punktd2'] .');';
-
-				/*
-				echo'
-				var myCoordinates = [
-					new google.maps.LatLng('.$row['punkta1'].', '.$row['punkta2'].'),
-					new google.maps.LatLng('.$row['punktb1'].', '.$row['punktb2'].'),
-					new google.maps.LatLng('.$row['punktc1'].', '.$row['punktc2'].'),
-					new google.maps.LatLng('.$row['punktd1'].', '.$row['punktd2'].')
-				];
-				var polyOptions = {
-					path: myCoordinates,
-							strokeColor: "#FF0000",
-							strokeOpacity: 0.8,
-							strokeWeight: 2,
-							fillColor: "#0000FF",
-							fillOpacity: 0.6
-						};
-						var it = new google.maps.Polygon(polyOptions);
-						it.setMap(map);
-				
-				
-				';
-*/
-
-
-		    }
-echo'</script>';
+                        }
+ */
 ?>
 
+					<?php
 
 
-        <?php
+
+					foreach ($plotMapArr as $row) {
+						echo 'addPlot(' . $row['punkta1'] . ',' . $row['punkta2'] . ',' . $row['punktb1'] . ',' . $row['punktb2'] . ',' . $row['punktc1'] . ',' . $row['punktc2'] . ',' . $row['punktd1'] . ',' . $row['punktd2'] . ');';
+
+					}
+
+
+
+
+					?>
+
+
+                }
+
+
+
+
+
+
+
+
+        </script>
+<?php
 		$oStmt = $db->prepare("
 					SELECT omradenavn, fylke, oneliner, longtekst
 					FROM tomteomrade
@@ -323,11 +316,12 @@ echo'</script>';
         <div class="headImgTitleWrap">
         <div class="headImgPlace">'.$oRow['fylke'].'</div>
         <div class="headImgTitle">'.$oRow['omradenavn'].'</div>
-        <div class="headTextQuote">"'.$oRow['oneliner'].'"</div>
+        <div class="headTextQuote">'.$oRow['oneliner'].'</div>
         <div class="headText">'.$oRow['longtekst'].'</div>
         </div>
         ';
         }
+
 		?>
 
 
@@ -367,10 +361,11 @@ echo'</script>';
         </div>
         <div class="tomtMapInfo2">Klikk på tomt for mer info</div>
         <?php
+
         $tStmt = $db->prepare("
         SELECT tomtID, pris, areal, info, status
         FROM tomt 
-        WHERE tomteomradeID = :current
+        WHERE tomteomradeID = :current;
         ");
         $tStmt->bindParam(':current', $currOmrade );
         $tStmt->execute();
@@ -380,29 +375,34 @@ echo'</script>';
             $plotArr[] = $row;
         }
 
-        $tomtCount = 1;
-        foreach ($plotArr as $p)
-            echo'<input type="button" value="'.$tomtCount.'" onclick="ChangeUrl(\'?omrade='.$currOmrade.'&tomt='.$plotArr['tomtID'].'\');" />';
-            $tomtCount++
+        /*
+        echo("<pre>");
+		print_r($plotArr);
+		echo("</pre>");
+        */
+		$tomtCount = 1;
+        foreach ($plotArr as $p) {
+			echo '<input type="button" value="' . $tomtCount . '" class="tomtBtns" id="' . $tomtCount . '" );" />';
+			$tomtCount++;
+        }
+
         ?>
-        <div id="map"></div>
-
-
+        <div id="mapWrap">
+            <div id="map"></div>
+        </div>
         <div class="tomtPopup">
-        <div class="esc"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"><path d="M24 20.188l-8.315-8.209 8.2-8.282-3.697-3.697-8.212 8.318-8.31-8.203-3.666 3.666 8.321 8.24-8.206 8.313 3.666 3.666 8.237-8.318 8.285 8.203z"/></svg></div>
-        <div class="tomtHead">Tomt 1</div>
-        <div class="tomtAdress">Hjerkinnhøvegen 1, hus 3</div>
-        <div class="tomtDetails">Areal: 150m<sup>2</sup></div>
-        <div class="tomtDetails">Pris: 500 000 NOK</div>
-        <div class="tomtInfoTitle">Merk:</div>
-        <div class="tomtInfoText">Tomtene i dette feltet kan ikke bygges på før juni 2017.</div><a class="tomtBtn">SEND HENVENDELSE</a>
+            <div class="esc"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"><path d="M24 20.188l-8.315-8.209 8.2-8.282-3.697-3.697-8.212 8.318-8.31-8.203-3.666 3.666 8.321 8.24-8.206 8.313 3.666 3.666 8.237-8.318 8.285 8.203z"/></svg></div>
+            <div class="tomtHead">Tomt 1</div>
+            <div class="tomtAdress">Hjerkinnhøvegen 1, hus 3</div>
+            <div class="tomtDetails">Areal: 150m<sup>2</sup></div>
+            <div class="tomtDetails">Pris: 500 000 NOK</div>
+            <div class="tomtInfoTitle">Merk:</div>
+            <div class="tomtInfoText">Tomtene i dette feltet kan ikke bygges på før juni 2017.</div>
+            <a class="tomtBtn">SEND HENVENDELSE</a>
         </div>
 
 
-        <!--.mapTableWrap
-        .mapWrap
-        #googleMap
-        -->
+
         <div class="tableWrap"><a class="arrow" href=""><svg fill="#000000" height="24" viewBox="0 0 24 24" width="24" xmlns="http://www.w3.org/2000/svg">
         <path d="M15.41 16.09l-4.58-4.59 4.58-4.59L14 5.5l-6 6 6 6z"/>
         <path d="M0-.5h24v24H0z" fill="none"/>
@@ -518,6 +518,7 @@ echo'</script>';
         <div class="footer">
         <div class="footerText">Innholdet er beskyttet etter åndsverksloven. Bruk av automatiserte tjenester (roboter, spidere, indeksering m.m.) samt andre fremgangsmåter for systematisk eller regelmessig bruk er ikke tillatt uten eksplisitt samtykke fra tinde.no. <br><br>©  2017 Tinde utvikling AS
         <!--Google maps-->
+
         <script async defer src="https://maps.googleapis.com/maps/api/js?key=AIzaSyAv-n8dxD2LyiLpKr2qg4vCbmtJFqPJnI8&callback=myMap"></script>
 
         <!--script type="text/javascript" src="../../js/googleMap.js"></script-->
