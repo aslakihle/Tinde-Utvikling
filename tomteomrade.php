@@ -113,7 +113,7 @@ require_once 'connect.php';
 										<div>"'.$tRow['oneliner'].'" </div>
 										<ul>
 											<li><b>Pris:</b> 1.5m <b>-</b> 2m</li>
-											<li><b>Areal:</b> 400km^2 <b>-</b> 1000km^2</li>
+											<li><b>Areal:</b> 400km&sup2; <b>-</b> 1000km&sup2;</li>
 										</ul>
 									</div>
 								</div>

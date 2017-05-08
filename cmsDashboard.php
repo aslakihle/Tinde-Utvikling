@@ -16,6 +16,10 @@ if(isset($_POST['newOmrade'])){
 if (isset($_POST['endre'])){
 	redirect('endreOmrade.php?omradeID='.intval($_POST['endre']));
 };
+
+if (isset($_POST['nyTomt'])){
+	redirect('leggTilTomt.php?omradeID='.intval($_POST['nyTomt']));
+};
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -93,6 +97,8 @@ if (isset($_POST['endre'])){
 			<form method="post" id="newOmrade">
 				<input type="submit" name="newOmrade" value="NYTT TOMTEOMRÅDE" id="newOmradeKnapp">
 			</form>
+			
+			<div id="allOmrader">
 			<!--OUTPUT OF Tomteområder-->
 			<?php
 			$stmt = $db->prepare("
@@ -120,24 +126,51 @@ if (isset($_POST['endre'])){
 								<input class="endreKnapp" type="hidden" name="endre" value="'.intval($row['omradeID']).'">
 								<input type="submit" value="ENDRE" class="endreKnapp">
 							</form>
+							<form method="post" class="tomtForm">
+								<input class="endreKnapp" type="hidden" name="nyTomt" value="'.intval($row['omradeID']).'">
+								<input type="submit" value="LEGG TIL TOMT" class="endreKnapp">
+							</form>
 						';
-					if ($status > 2){
-						echo '<div class="noLedige status">
-						0/13 tomter ledige.
-						</div>';
-						$status ++;
-					} else {
-						echo '<div class="ledige status">
-						10/15 tomter ledige.
-						</div>';
-						$status ++;
+					$statusstmt = $db->prepare("
+						SELECT status
+						FROM tomt t
+						INNER JOIN tomteomrade tom
+						ON t.tomteomradeID = tom.omradeID
+						WHERE t.tomteomradeID = ".$row['omradeID']."
+						;");
+					$statusstmt->execute();
+					//counts how many rows has statuses (all within a tomteomrade), basicly the number of how many tomter and area got
+					$numRowsTomter = $statusstmt->rowCount();
+					
+					//variables
+					$avalibleTomter = $numRowsTomter;
+					$allTomter = $numRowsTomter;
+					
+					//checks through all the statuses and if the area got a sold tomt it reduses avalible tomts by one.
+					while ($statusrow = $statusstmt->fetch(PDO::FETCH_ASSOC)){
+						if($statusrow['status'] == 1){
+					 		$avalibleTomter --;
+						}
 					}
+					
+					//if tomteområde does not have any tomts or avalibel tomts display in red, if not then in in green
+					if (($avalibleTomter && $allTomter) == 0){
+						echo '<div class="noLedige status">
+							'.$avalibleTomter.'/'.$allTomter.' tomter ledige.
+						</div>';
+					}else{
+						echo '
+						<div class="ledige status">
+							'.$avalibleTomter.'/'.$allTomter.' tomter ledige.
+						</div>';
+					}
+				
 					echo '
 							<!-- INFO -->
 							<div>
 								Prisklasse: 1.2 - 4.3 mill
 								<br>
-								Areal: 25km2 - 30 km2
+								Areal: 25km&sup2; - 30 km&sup2;
 								<br>
 							</div>
 							<!-- FYLKE -->
@@ -148,6 +181,7 @@ if (isset($_POST['endre'])){
 				}
 			}
 			?>
+       		</div>
         </div>
     </div>
 	<!--FOOTER-->

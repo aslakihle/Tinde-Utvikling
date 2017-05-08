@@ -4,8 +4,6 @@ require_once 'connect.php';
 //variable to change which ansatt is logged in, with ID
 $loggedInID = 1;
 
-$error = '';
-
 function redirect($url){
 	header("Location: $url");
 }
@@ -21,57 +19,26 @@ if (isset($_POST['endre'])){
 
 //LAGING av nytt område
 if (isset($_POST['create'])){
-	echo $_POST['fylke'];
-	if(!$_POST['fylke'] == 0){
-		
-	
-		
-		$stmt = $db->prepare("
-		INSERT INTO tomteomrade (
-			omradenavn,
-			fylke,
-			oneliner,
-			longtekst,
-			regulering,
-			reguleringskart,
-			skrivut,
-			maplong,
-			maplat,
-			mapzoom,
-			ansattID,
-			vann, 
-			strom, 
-			vei, 
-			alpint, 
-			fiske, 
-			jakt, 
-			tur)
-		VALUES (
-			'".htmlentities($_POST['navn'])."',
-			'".htmlentities($_POST['fylke'])."',
-			'".htmlentities($_POST['shortText'])."',
-			'".htmlentities($_POST['longText'])."',
-			'Regulering',
-			'reguleringsKART',
-			'SKRIV UT?!?!',
-			'10',
-			'102.4',
-			'15',
-			'".$loggedInID."',
-			".htmlentities($_POST['vann']).",
-			".htmlentities($_POST['strom']).", 
-			".htmlentities($_POST['vei']).", 
-			".htmlentities($_POST['alpint']).",
-			".htmlentities($_POST['fiske']).",
-			".htmlentities($_POST['jakt']).", 
-			".htmlentities($_POST['tur']).");
-		");
-		$stmt->execute();
-		//tar deg til dashboardet etter det er lagd
-		redirect("cmsDashboard.php");
-		}else{
-		$error= '<h3 style="text-align: center;">Område ikke lagd, <br> Du må huske å velge et fylke!</h3>';
-	}
+	$stmt = $db->prepare("
+	INSERT INTO tomt (
+		adresse,
+		pris,
+		areal,
+		info,
+		status,
+		tomteomradeID)
+	VALUES (
+		'".htmlentities($_POST['adresse'])."',
+		".htmlentities($_POST['areal']).",
+		".htmlentities($_POST['pris']).",
+		'".htmlentities($_POST['merknad'])."',
+		0,
+		".htmlentities($_GET['omradeID'])."
+		);
+	");
+	$stmt->execute();
+	//tar deg til dashboardet etter det er lagd
+	redirect("leggTilTomt.php?omradeID=".$_GET['omradeID']);
 };
 ?>
 <!DOCTYPE html>
@@ -144,104 +111,57 @@ if (isset($_POST['create'])){
    
     <!--main-->
     <div class="main">
-        <div class="content">
-			<h1 class="topH1">NYTT TOMTEOMRÅDE</h1>
+    	<div class="content">
+			<h1 class="topH1">LEGG TIL TOMT</h1>
 			
-			<form method="post" id="newOmradeForm" >
+			<form method="post" id="newTomtForm" >
 				<div class="borderdiv">
-				<?php
-				
-				echo $error;	
-				?>
-				<label>Navn på området</label>
-				<input type="text" placeholder="" name="navn" required autofocus>
-				
-				<label>Beskrivende setning(one-liner)</label>
-				<input type="text" placeholder="" name="shortText" required>
-				
-				<label>Header bilde</label>
-				<input class="fileUp" type="file" placeholder="Header bilde..." name="headerPic">
-				<label>Karusell bilde</label>
-				<input class="fileUp" type="file" placeholder="Karusell bilde..." name="karusellPic">
-				
-				<label>Fylke</label>
-				<select name="fylke">
-					<option value="0">Velg Fylke</option>
-					<?php
-					//statement to find all the fylker that TindeUtvikling owns
-					$stmt = $db->prepare("
-						SELECT fylke
-						FROM fylke;");
-					$stmt->execute();
+					<label>Adresse</label>
+					<input type="text" placeholder="" name="adresse" required autofocus>
 					
-					//goes through all fylkes and for each fylke prints a new optiontag, with value and name as fylkename
-					while ($row = $stmt->fetch(PDO::FETCH_ASSOC)){
-						echo '<option value="'.$row['fylke'].'">'.$row['fylke'].'</option>';
-					}
-					?>
-				</select>
-				
-				<label>Beskriv området (brødtext)</label>
-				<textarea form="newOmradeForm" rows="10" placeholder="" name="longText" required></textarea>
-				
-				<!--Checkboxes, uses hidden checkbox with value 0 to return if checkbox wasn't clicked -->
-				<h4 style="text-align:center;">Fasiliteter</h4>
-				<div id="failiteterBox">
-					<div class="fasiliteter">
-						<label>Vann</label>
-						<input class="checkbox" type="hidden" name="vann" value="0">
-						<input class="checkbox" type="checkbox" name="vann" value="1">
-					</div>
-
-					<div class="fasiliteter">
-						<label>Strøm</label>
-						<input class="checkbox" type="hidden" name="strom" value="0">
-						<input class="checkbox" type="checkbox" name="strom" value="1">
-					</div>
-
-					<div class="fasiliteter">
-						<label>Vei</label>
-						<input class="checkbox" type="hidden" name="vei" value="0">
-						<input class="checkbox" type="checkbox" name="vei" value="1">
-					</div>
-					<br>
-					<div class="fasiliteter">
-						<label>Alpint</label>
-						<input class="checkbox" type="hidden" name="alpint" value="0">
-						<input class="checkbox" type="checkbox" name="alpint" value="1">
-					</div>
-
-					<div class="fasiliteter">
-						<label>Fiske</label>
-						<input class="checkbox" type="hidden" name="fiske" value="0">
-						<input class="checkbox" type="checkbox" name="fiske" value="1">
-					</div>
-
-					<div class="fasiliteter">
-						<label>Jakt</label>
-						<input class="checkbox" type="hidden" name="jakt" value="0">
-						<input class="checkbox" type="checkbox" name="jakt" value="1">
-					</div>
-
-					<div class="fasiliteter">
-						<label>Tur</label>
-						<input class="checkbox" type="hidden" name="tur" value="0">
-						<input class="checkbox" type="checkbox" name="tur" value="1">
-					</div>
+					<label>Areal (km&sup2;)</label>
+					<input type="number" placeholder="" name="areal" required>
+					<label>Prisantydning</label>
+					<input type="number" placeholder="" max="10000000" min="1000000" name="pris" required>
+					<label>Merknad/Info om tomten</label>
+					<textarea form="newTomtForm" rows="4" placeholder="" name="merknad" required></textarea>
 				</div>
-				
-				<br>
-				<label>Reguleringsplan</label>
-				<input class="fileUp" class="fileUp" class="fileUp" type="file" name="regPlan">
-				<label>Reguleringskart</label>
-				<input class="fileUp" class="fileUp" type="file" name="regKart">
-				<label>Utskriftsvennlig versjon</label>
-				<input class="fileUp" type="file" name="utskrift">
-				</div>
-				<input type="submit" name="create" value="PUBLISER" id="createKnapp">
+				<input type="submit" name="create" value="LAGRE TOMT" id="createKnapp">
 			</form>
 			
         </div>
+		<div id="allTomts">
+        	<div id="tomtliste">
+        		<h3>Tomteliste</h3>
+				<?php
+				
+				$omradeID = htmlentities($_GET['omradeID']);
+				//statement to find name of logged in ansatt
+				$stmt = $db->prepare("
+					SELECT adresse, status
+					FROM tomt t
+					INNER JOIN tomteomrade tom
+					ON t.tomteomradeID = tom.omradeID
+					WHERE t.tomteomradeID = ".$omradeID."
+					;");
+				$stmt->execute();
+
+				//finds and prints logged in ansatt
+				while ($row = $stmt->fetch(PDO::FETCH_ASSOC)){
+					echo '<a class="" href="cmsDashboard.php">'.htmlentities($row['adresse']).' ';
+						if($row['status']==0){
+							echo '<span class="span ledig" title="Ledig"></span>';
+						} else {
+							echo '<span class="span solgt" title="Solgt"></span>';
+						}
+							echo '</a>';
+				}
+			 	
+				?>
+				
+				
+    		</div>
+   		</div>
     </div>
 	<!--FOOTER-->
 	<!--<div class="footer">

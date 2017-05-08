@@ -67,6 +67,7 @@ $query =
 	
 	CREATE TABLE IF NOT EXISTS tomt(
 		tomtID INT AUTO_INCREMENT PRIMARY KEY,
+		adresse varchar(30),
 		pris INT(10),
 		areal INT(3),
 		info varchar(250),
@@ -197,72 +198,52 @@ $query = "
 		
 		
 	
-	INSERT INTO tomt (pris,areal,info,status,punkta1,punkta2,punktb1,punktb2,punktc1,punktc2,punktd1,punktd2,tomteomradeID)	
-		VALUES (810000, 1160, 'Denne tomten kan ikke bygges på før juli 2017.',0,62.251253,9.677067,
+
+	INSERT INTO tomt (adresse,pris,areal,info,status,punkta1,punkta2,punktb1,punktb2,punktc1,punktc2,punktd1,punktd2,tomteomradeID)	
+		VALUES ('Hjorteveien 1', 700000, 1200, 'Denne tomten kan ikke bygges på før juli 2017.',0,62.251253,9.677067,
 62.250723,9.676960,62.250713,9.677968,62.251153,9.677925, 7);
 	
-	INSERT INTO tomt (pris,areal,info,status,punkta1,punkta2,punktb1,punktb2,punktc1,punktc2,punktd1,punktd2,tomteomradeID)	
-		VALUES (735000, 1110, 'Denne tomten kan ikke bygges på før juli 2017.',1,62.251173,9.677968,62.250733,9.677989,62.250733,9.678998,62.251193,9.678998, 7);
+	INSERT INTO tomt (adresse, pris,areal,info,status,punkta1,punkta2,punktb1,punktb2,punktc1,punktc2,punktd1,punktd2,tomteomradeID)	
+		VALUES ('Hjorteveien 2', 700000, 1200, 'Denne tomten kan ikke bygges på før juli 2017.',1,62.251173,9.677968,62.250733,9.677989,62.250733,9.678998,62.251193,9.678998, 7);
 	
-	INSERT INTO tomt (pris,areal,info,status,punkta1,punkta2,punktb1,punktb2,punktc1,punktc2,punktd1,punktd2,tomteomradeID)	
-		VALUES (760000, 1220, 'Denne tomten kan ikke bygges på før juli 2017.',0,62.251193,9.679019,
-62.250763,9.679019,
-62.250763,9.680049,
-62.251293,9.680028, 7);
+	INSERT INTO tomt (adresse,pris,areal,info,status,punkta1,punkta2,punktb1,punktb2,punktc1,punktc2,punktd1,punktd2,tomteomradeID)	
+		VALUES ('Hjorteveien 3', 700000, 1200, 'Denne tomten kan ikke bygges på før juli 2017.',0,62.251193,9.679019,62.250763,9.679019,62.250763,9.680049,62.251293,9.680028, 7);
 	
-	INSERT INTO tomt (pris,areal,info,status,punkta1,punkta2,punktb1,punktb2,punktc1,punktc2,punktd1,punktd2,tomteomradeID)	
-		VALUES (730000, 1240, 'Denne tomten kan ikke bygges på før juli 2017.',0,62.251323,9.680114,
-62.250873,9.680071,
-62.250893,9.681058,
-62.251413,9.681015, 7);
+
+	INSERT INTO tomt (adresse,pris,areal,info,status,punkta1,punkta2,punktb1,punktb2,punktc1,punktc2,punktd1,punktd2,tomteomradeID)	
+		VALUES ('Hjorteveien 4', 700000, 1200, 'Denne tomten kan ikke bygges på før juli 2017.',1,62.251323,9.680114,62.250873,9.680071,62.250893,9.681058,62.251413,9.681015, 7);
 	
-	INSERT INTO tomt (pris,areal,info,status,punkta1,punkta2,punktb1,punktb2,punktc1,punktc2,punktd1,punktd2,tomteomradeID)	
-		VALUES (750000, 1300, 'Denne tomten kan ikke bygges på før juli 2017.',1,62.251353,9.677110,
-62.251253,9.677904,
-62.251713,9.677882,
-62.251772,9.677110, 7);
+
+	INSERT INTO tomt (adresse,pris,areal,info,status,punkta1,punkta2,punktb1,punktb2,punktc1,punktc2,punktd1,punktd2,tomteomradeID)	
+		VALUES ('Hjorteveien 5', 700000, 1200, 'Denne tomten kan ikke bygges på før juli 2017.',0,62.251353,9.677110,62.251253,9.677904,62.251713,9.677882,62.251772,9.677110, 7);
 	
-	INSERT INTO tomt (pris,areal,info,status,punkta1,punkta2,punktb1,punktb2,punktc1,punktc2,punktd1,punktd2,tomteomradeID)	
-		VALUES (770000, 1200, 'Denne tomten kan ikke bygges på før juli 2017.',0,62.251283,9.677925,
-62.251283,9.678998,
-62.251732,9.678998,
-62.251713,9.677904, 7);
+
+	INSERT INTO tomt (adresse,pris,areal,info,status,punkta1,punkta2,punktb1,punktb2,punktc1,punktc2,punktd1,punktd2,tomteomradeID)	
+		VALUES ('Hjorteveien 6', 700000, 1200, 'Denne tomten kan ikke bygges på før juli 2017.',0,62.251283,9.677925,62.251283,9.678998,62.251732,9.678998,62.251713,9.677904, 7);
 	
-	INSERT INTO tomt (pris,areal,info,status,punkta1,punkta2,punktb1,punktb2,punktc1,punktc2,punktd1,punktd2,tomteomradeID)	
-		VALUES (780000, 1200, 'Denne tomten kan ikke bygges på før juli 2017.',1,62.251293,9.679041,
-62.251393,9.679942,
-62.251772,9.679942,
-62.251732,9.679084, 7);
+
+	INSERT INTO tomt (adresse,pris,areal,info,status,punkta1,punkta2,punktb1,punktb2,punktc1,punktc2,punktd1,punktd2,tomteomradeID)	
+		VALUES ('Hjorteveien 7', 700000, 1200, 'Denne tomten kan ikke bygges på før juli 2017.',1,62.251293,9.679041,62.251393,9.679942,62.251772,9.679942,62.251732,9.679084, 7);
 	
-	INSERT INTO tomt (pris,areal,info,status,punkta1,punkta2,punktb1,punktb2,punktc1,punktc2,punktd1,punktd2,tomteomradeID)	
-		VALUES (700000, 1300, 'Denne tomten kan ikke bygges på før juli 2017.',0,62.251413,9.680028,
-62.251513,9.680972,
-62.251852,9.680929,
-62.251832,9.680028, 7);
+
+	INSERT INTO tomt (adresse,pris,areal,info,status,punkta1,punkta2,punktb1,punktb2,punktc1,punktc2,punktd1,punktd2,tomteomradeID)	
+		VALUES ('Hjorteveien 8', 700000, 1200, 'Denne tomten kan ikke bygges på før juli 2017.',0,62.251413,9.680028,62.251513,9.680972,62.251852,9.680929,62.251832,9.680028, 7);
 	
-	INSERT INTO tomt (pris,areal,info,status,punkta1,punkta2,punktb1,punktb2,punktc1,punktc2,punktd1,punktd2,tomteomradeID)	
-		VALUES (740000, 1400, 'Denne tomten kan ikke bygges på før juli 2017.',0,62.251433,9.681079,
-62.250913,9.681144,
-62.250933,9.682174,
-62.251473,9.682088,7);
+
+	INSERT INTO tomt (adresse,pris,areal,info,status,punkta1,punkta2,punktb1,punktb2,punktc1,punktc2,punktd1,punktd2,tomteomradeID)	
+		VALUES ('Hjorteveien 9', 700000, 1200, 'Denne tomten kan ikke bygges på før juli 2017.',0,62.251433,9.681079,62.250913,9.681144,62.250933,9.682174,62.251473,9.682088,7);
 	
-	INSERT INTO tomt (pris,areal,info,status,punkta1,punkta2,punktb1,punktb2,punktc1,punktc2,punktd1,punktd2,tomteomradeID)	
-		VALUES (750000, 1250, 'Denne tomten kan ikke bygges på før juli 2017.',0,62.251473,9.682109,
-62.250973,9.682195,
-62.250973,9.683397,
-62.251483,9.683375,7);
+
+	INSERT INTO tomt (adresse,pris,areal,info,status,punkta1,punkta2,punktb1,punktb2,punktc1,punktc2,punktd1,punktd2,tomteomradeID)	
+		VALUES ('Hjorteveien 10', 700000, 1200, 'Denne tomten kan ikke bygges på før juli 2017.',0,62.251473,9.682109,62.250973,9.682195,62.250973,9.683397,62.251483,9.683375,7);
 	
-	INSERT INTO tomt (pris,areal,info,status,punkta1,punkta2,punktb1,punktb2,punktc1,punktc2,punktd1,punktd2,tomteomradeID)	
-		VALUES (690000, 1220, 'Denne tomten kan ikke bygges på før juli 2017.',1,62.251533,9.681058,
-62.251593,9.682002,
-62.252012,9.681938,
-62.251962,9.681058,7);
+
+	INSERT INTO tomt (adresse,pris,areal,info,status,punkta1,punkta2,punktb1,punktb2,punktc1,punktc2,punktd1,punktd2,tomteomradeID)	
+		VALUES ('Hjorteveien 11', 700000, 1200, 'Denne tomten kan ikke bygges på før juli 2017.',1,62.251533,9.681058,62.251593,9.682002,62.252012,9.681938,62.251962,9.681058,7);
 	
-	INSERT INTO tomt (pris,areal,info,status,punkta1,punkta2,punktb1,punktb2,punktc1,punktc2,punktd1,punktd2,tomteomradeID)	
-		VALUES (710000, 1190, 'Denne tomten kan ikke bygges på før juli 2017.',0,62.251633,9.682045,
-62.251633,9.683290,
-62.252092,9.683225,
-62.252072,9.682002,7);
+
+	INSERT INTO tomt (adresse,pris,areal,info,status,punkta1,punkta2,punktb1,punktb2,punktc1,punktc2,punktd1,punktd2,tomteomradeID)	
+		VALUES ('Hjorteveien 12', 700000, 1200, 'Denne tomten kan ikke bygges på før juli 2017.',0,62.251633,9.682045,62.251633,9.683290,62.252092,9.683225,62.252072,9.682002,7);
 	
 	 
 	INSERT INTO bildetype
