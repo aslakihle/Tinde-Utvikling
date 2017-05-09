@@ -1,3 +1,6 @@
+<?php
+require_once 'connect.php';
+?>
 <!DOCTYPE html>
 <html lang="en">
   <head>
@@ -97,69 +100,51 @@
     <div class="header"></div>
     <div class="main">
       <div class="content">
+
+
         <div class="omWrap">
           <div class="title">Om Tinde</div>
           <div class="omText">Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</div>
         </div>
-        <div class="ansattWrap">
-          <div class="title">Ansatte</div>
-          <div class="oneAnsattWrap"><img src="http://placehold.it/350x350">
-            <div class="ansattName">Navn her</div>
-            <div class="ansattAnsvar">Ansvarsområde</div>
-            <div class="ansattEmail">epostsomerlittlang@tinde.no</div>
+
+          <div class="formWrap">
+              <form action="">
+                  <div class="title">Kontakt oss</div>
+                  <!--input.inputDrop(type="dropdown")-->
+                  <div class="inputEmail">Din epost
+                      <input placeholder="epost@gmail.com">
+                  </div>
+                  <div class="inputPhone">Ditt telefonnummer
+                      <input placeholder="ex. 483 72 913">
+                  </div>
+                  <div class="inputContent">Din melding
+                      <textarea placeholder="Skriv din melding her.."></textarea>
+                  </div>
+                  <input class="hue" type="submit" value="SEND HENDVENDELSE">
+              </form>
           </div>
-          <div class="oneAnsattWrap"><img src="http://placehold.it/350x350">
-            <div class="ansattName">Navn her</div>
-            <div class="ansattAnsvar">Ansvarsområde</div>
-            <div class="ansattEmail">epostsomerlittlang@tinde.no</div>
+          <div class="ansattWrap">
+              <div class="title">Ansatte</div>
+		  <?php
+
+
+		  $aStmt = $db->prepare("SELECT ansattnavn, tlf, epost, stilling
+        FROM ansatt
+        ");
+		  $aStmt->execute();
+		  while ($aRow = $aStmt->fetch(PDO::FETCH_ASSOC)) {
+			  echo'
+                <div class="oneAnsattWrap">
+                    <div class="ansattName">'.$aRow['ansattnavn'].'</div>
+                    <div class="ansattAnsvar">'.$aRow['stilling'].'</div>
+                    <div class="ansattPhone">'.$aRow['tlf'].'</div>
+                    <div class="ansattEmail">'.$aRow['epost'].'</div>
+              </div>';
+		  }
+		  ?>
           </div>
-          <div class="oneAnsattWrap"><img src="http://placehold.it/350x350">
-            <div class="ansattName">Navn her</div>
-            <div class="ansattAnsvar">Ansvarsområde</div>
-            <div class="ansattEmail">epostsomerlittlang@tinde.no</div>
-          </div>
-          <div class="oneAnsattWrap"><img src="http://placehold.it/350x350">
-            <div class="ansattName">Navn her</div>
-            <div class="ansattAnsvar">Ansvarsområde</div>
-            <div class="ansattEmail">epostsomerlittlang@tinde.no</div>
-          </div>
-          <div class="oneAnsattWrap"><img src="http://placehold.it/350x350">
-            <div class="ansattName">Navn her</div>
-            <div class="ansattAnsvar">Ansvarsområde</div>
-            <div class="ansattEmail">epostsomerlittlang@tinde.no</div>
-          </div>
-          <div class="oneAnsattWrap"><img src="http://placehold.it/350x350">
-            <div class="ansattName">Navn her</div>
-            <div class="ansattAnsvar">Ansvarsområde</div>
-            <div class="ansattEmail">epostsomerlittlang@tinde.no</div>
-          </div>
-          <div class="oneAnsattWrap"><img src="http://placehold.it/350x350">
-            <div class="ansattName">Navn her</div>
-            <div class="ansattAnsvar">Ansvarsområde</div>
-            <div class="ansattEmail">epostsomerlittlang@tinde.no</div>
-          </div>
-          <div class="oneAnsattWrap"><img src="http://placehold.it/350x350">
-            <div class="ansattName">Navn her</div>
-            <div class="ansattAnsvar">Ansvarsområde</div>
-            <div class="ansattEmail">epostsomerlittlang@tinde.no</div>
-          </div>
-        </div>
-        <div class="formWrap">
-          <form action="">
-            <div class="title">Kontakt oss</div>
-            <!--input.inputDrop(type="dropdown")-->
-            <div class="inputEmail">Din epost
-              <input placeholder="epost@gmail.com">
-            </div>
-            <div class="inputPhone">Ditt telefonnummer
-              <input placeholder="ex. 483 72 913">
-            </div>
-            <div class="inputContent">Din melding
-              <textarea placeholder="Skriv din melding her.."></textarea>
-            </div>
-            <input class="hue" type="submit" value="SEND HENDVENDELSE">
-          </form>
-        </div>
+
+
       </div>
     </div>
     <div class="footer">
