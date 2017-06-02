@@ -283,19 +283,19 @@
 				<h1>Spørsmål?</h1>
 				<div class="sprsmBox">Vi i Tinde vet at det finnes like mange tinder som det er mennesker. Derfor har Tinde utviklet en lang rekke omteområder, alle med hver sine særtrekk og egenskaper. Slik blir din hyttetomt spesielt for deg og dine – et sted der du kan dyrke de gode opplevelsene i livet.</div>
 				
-				<div class="sprsmValg">
+				<a href="kontakt.php" class="sprsmValg">
 					<div class="bildeBox">
-						<div class="skalVareBilde"></div>
+						<img src="images/selger.png">
 					</div>
 					<div class="sprmsValgText">Finn selger<br> i ditt område</div>
-				</div>
+				</a>
 				
-				<div class="sprsmValg">
+				<a href="kontakt.php" class="sprsmValg">
 					<div class="bildeBox">
-						<div class="skalVareBilde"></div>
+						<img src="images/henvendelse.png">
 					</div>
 					<div class="sprmsValgText">Send oss <br>en hendvendelse</div>
-				</div>
+				</a>
 			</div>
 			
 			<!-- Sosiale medierbox-->
@@ -304,13 +304,13 @@
 				
 				<div class="sosmCont">
 					<div class="bildeBox">
-						<div class="skalVareBilde">FACEBOOK</div>
+						<img src="images/facebook.png">
 					</div>
 				</div>
 				
 				<div class="sosmCont">
 					<div class="bildeBox bb2">
-						<div class="skalVareBilde">INSTAGRAM</div>
+						<img src="images/instagram_icon.png">
 					</div>
 				</div>
 				<div class="sosmText">Vi i Tinde vet at det finnes like mange tinder som det er mennesker. Derfor har Tinde utviklet en lang rekke <span class="spanBlue">FACEBOOK</span> omteområder, alle med hver sine <span class="spanBlue">INSTAGRAM</span> særtrekk og egenskaper. Slik blir din hyttetomt spesielt for deg og dine – et sted der du kan dyrke de gode opplevelsene i livet.</div>

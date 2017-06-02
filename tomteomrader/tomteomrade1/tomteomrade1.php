@@ -328,7 +328,7 @@ foreach ($plotArr as $p) {
         }
         else {
 			echo'
-            <a class="tomtBtn">SEND HENVENDELSE</a>
+            <a class="tomtBtn" href="../../kontakt.php">SEND HENVENDELSE</a>
        
         ';
 
@@ -453,7 +453,7 @@ echo'
                     <div class="ansattAnsvar">'.$aRow['stilling'].'</div>
                     <div class="ansattPhone">'.$aRow['tlf'].'</div>
                     <div class="ansattEmail">'.$aRow['epost'].'</div>
-                    <a class="kontaktBtn" href="">KONTAKT</a>
+                    <a class="kontaktBtn" href="../../kontakt.php">KONTAKT</a>
               </div>';
         }
 ?>
